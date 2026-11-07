@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% block head %}{% if busy %}<meta http-equiv="refresh" content="30">{% endif %}{% endblock %}
 {% block main %}
 <div class="stack">
-  <h1>Couldn't show that train</h1>
+  <h1>{{ "Realtime Trains is busy" if busy else "Couldn't show that train" }}</h1>
   <p class="problem" role="alert">{{ error }}</p>
+  {% if busy %}<p class="hint">This page tries again by itself every 30 seconds.</p>{% endif %}
   <p><a href="/">Search again</a></p>
 </div>
 {% endblock %}

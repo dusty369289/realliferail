@@ -169,7 +169,7 @@ def test_board_is_cached_for_a_minute(web, core, clock):
 def test_live_polling_slows_when_allowance_is_low(web, core):
     href = first_train(web)
     sim = core.client._t
-    sim.limit_hour = len(sim.requests) + 21  # its next answer says 20 calls are left this hour
+    sim.limit_hour = len(sim.requests) + 21  # all made "now", so its next answer says 20 are left this hour
     r = web.get(href.split("?")[0] + "/live")
     assert 'data-refresh="120"' in r.text
 
@@ -191,3 +191,15 @@ def test_untrusted_text_is_escaped(clock):
     r = TestClient(create_app(c)).get("/board", params={"station": "RDG"})
     assert "<script>alert(1)</script>" not in r.text
     assert "&lt;script&gt;" in r.text
+
+
+def test_out_of_allowance_is_busy_not_missing(web, core):
+    href = first_train(web)
+    core.budget.observe(429, {"retry-after": "60"})
+    core.client._cache.clear()
+    r = web.get(href)
+    assert r.status_code == 503
+    assert "Realtime Trains is busy" in text(r)
+    assert 'http-equiv="refresh"' in r.text
+    b = web.get("/board", params={"station": "WAT"})
+    assert b.status_code == 503 and "tries again by itself" in text(b)

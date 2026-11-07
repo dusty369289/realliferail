@@ -13,7 +13,7 @@ from ..domain.engine import Timeline, build
 from ..domain.models import Board, BoardRow
 from ..domain.parse import parse_board, parse_service
 from ..sources.budget import Budget
-from ..sources.rtt import AuthError, Fetched, RttClient, RttError, TokenInfo
+from ..sources.rtt import AuthError, BusyError, Fetched, RttClient, RttError, TokenInfo
 from ..sources.simulator import SimTransport
 from ..sources.stations import Station, StationIndex
 from ..sources.transport import HttpTransport, Transport
@@ -168,4 +168,4 @@ def from_environment(demo: bool | None = None) -> Realliferail:
     return Realliferail(token=token, demo=demo or token is None)
 
 
-__all__ = ["AuthError", "BoardResult", "Realliferail", "RttError", "ServiceResult", "from_environment"]
+__all__ = ["AuthError", "BoardResult", "BusyError", "Realliferail", "RttError", "ServiceResult", "from_environment"]

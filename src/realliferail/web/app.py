@@ -14,7 +14,7 @@ from fastapi.templating import Jinja2Templates
 
 from ..domain.engine import Shown, State, stop_summary
 from ..domain.models import Kind, TimeSource
-from ..services.app import Realliferail, RttError
+from ..services.app import BusyError, Realliferail, RttError
 
 HERE = Path(__file__).parent
 LONDON = ZoneInfo("Europe/London")
@@ -102,9 +102,12 @@ def create_app(core: Realliferail) -> FastAPI:
         except ValueError:
             error = "That time isn't valid. Use 24-hour time like 17:45."
         result = None
+        busy = False
         if error is None:
             try:
                 result = core.board(station, when, window, to or None, mode)
+            except BusyError as e:
+                error, busy = str(e), True
             except RttError as e:
                 error = str(e)
         base = {"station": station, "to": to, "mode": mode, "window": window}
@@ -120,9 +123,10 @@ def create_app(core: Realliferail) -> FastAPI:
         return page(
             request,
             "board.html",
-            status=200 if result else 400,
+            status=200 if result else (503 if busy else 400),
             result=result,
             error=error,
+            busy=busy,
             q=base | {"time": time, "day": day},
             nav=nav,
             live=live,
@@ -132,6 +136,8 @@ def create_app(core: Realliferail) -> FastAPI:
     def train(request: Request, uid: str, at: str = "", to: str = ""):
         try:
             res = core.service(uid)
+        except BusyError as e:
+            return page(request, "error.html", status=503, error=str(e), busy=True)
         except RttError as e:
             return page(request, "error.html", status=404, error=str(e))
         return page(

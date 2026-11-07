@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block title %}{% if result %}{{ result.board.station_name }} · {% endif %}Real Life Rail{% endblock %}
-{% block head %}{% if live and result %}<meta name="refresh-hint" content="60">{% endif %}{% endblock %}
+{% block head %}{% if busy %}<meta http-equiv="refresh" content="30">{% endif %}{% endblock %}
 {% block main %}
 {% if error %}
 <div class="stack">
   <h1>Find trains</h1>
   <p class="problem" role="alert">{{ error }}</p>
+  {% if busy %}<p class="hint">This page tries again by itself every 30 seconds.</p>{% endif %}
   {% include "_search_form.html" %}
 </div>
 {% else %}

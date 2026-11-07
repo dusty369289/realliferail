@@ -20,6 +20,10 @@ class AuthError(RttError):
     pass
 
 
+class BusyError(RttError):
+    """Not the user's fault and not permanent: out of allowance, asked to wait, or RTT unreachable. Try again soon."""
+
+
 @dataclass(frozen=True, slots=True)
 class Fetched:
     body: Any  # None for "no services" (204)
@@ -73,7 +77,7 @@ class RttClient:
         try:
             r = self._t.get(path, params, token)
         except TransportError as e:
-            raise RttError(f"Couldn't reach Realtime Trains ({e}).") from e
+            raise BusyError(f"Couldn't reach Realtime Trains ({e}).") from e
         self.budget.observe(r.status, r.headers)
         return r
 
@@ -132,8 +136,8 @@ class RttClient:
                     return Fetched(cached.body, cached.fetched_at, stale=True, note="Saving the hourly allowance")
                 st = self.budget.state()
                 if st.blocked_until:
-                    raise RttError(f"Realtime Trains asked us to wait until {st.blocked_until:%H:%M:%S}.")
-                raise RttError("The Realtime Trains allowance is used up for now. Try again in a few minutes.")
+                    raise BusyError(f"Realtime Trains asked us to wait until {st.blocked_until:%H:%M:%S}.")
+                raise BusyError("The Realtime Trains allowance is used up for now. Try again in a few minutes.")
             try:
                 r = self._raw(path, params, self._bearer())
             except RttError:
@@ -149,7 +153,7 @@ class RttClient:
                     return Fetched(
                         cached.body, cached.fetched_at, stale=True, note="Realtime Trains asked us to slow down"
                     )
-                raise RttError("Realtime Trains asked us to slow down. Try again shortly.")
+                raise BusyError("Realtime Trains asked us to slow down. Try again shortly.")
             if r.status == 204:
                 f = Fetched(None, now)
             elif r.status == 200:
@@ -162,7 +166,7 @@ class RttClient:
             else:
                 if cached:
                     return Fetched(cached.body, cached.fetched_at, stale=True, note=f"Realtime Trains error {r.status}")
-                raise RttError(f"Realtime Trains had a problem (HTTP {r.status}).")
+                raise BusyError(f"Realtime Trains had a problem (HTTP {r.status}).")
             self._cache[key] = f
             if len(self._cache) > 500:
                 oldest = sorted(self._cache.items(), key=lambda kv: kv[1].fetched_at)[:100]
