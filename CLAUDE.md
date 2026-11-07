@@ -58,7 +58,10 @@ No HTTP outside `sources/transport.py`. No raw colours outside `web/static/css/t
   once the section has taken longer than booked plus 2 minutes.
 - **Our estimate** carries the current delay forward. A late train can win back booked allowances (performance,
   engineering, pathing) and extra dwell time, but never leaves an advertised stop before its public time. Our estimate is used only
-  where RTT gives no forecast, and it's labelled "est".
+  where RTT gives no forecast, or where RTT's forecast is **impossible**: earlier than the train could get there from
+  where it is now, even winning back every second of slack. Either way it's labelled "est".
+- **Where it lost time:** the section between two reported points where lateness grew most, shown once it's 2 min or
+  more. Passing points make this finer than station to station.
 - **Polling:** the page moves the marker every second, and asks our server again when the last answer says to
   (`data-refresh`). That's every 15 to 120 s: `3600 / (hour left - 10)`, with a floor of 30 s, from `Budget.refresh_interval`. The server
   re-fetches a train at most that often. Background refreshes never touch the last 10 calls of the hour, which are kept

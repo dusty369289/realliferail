@@ -104,6 +104,18 @@ appear without detailed mode. Whether *every* timing point appears on free token
 7. `realtimeAdvertisedLateness` can be negative (-1, early against the public time while on time against the working timetable).
 8. `query.detailed: false` is echoed back.
 
+## Insights we draw from it
+
+- **Position between reports**: last reported timing point, plus elapsed time against the working-timetable section
+  time. Free-tier boards and services include working-timetable times (half minutes) **[observed]**, which makes this possible.
+- **Held trains**: a section taking 2 min longer than expected is flagged, and the marker holds short of the next point.
+- **Where time was lost**: lateness at each reported pass, compared section by section.
+- **Recovery**: on service queries `allowances` (engineering, pathing, performance, in seconds) say how much slack is
+  booked in each section, so a late train's likely catch-up can be estimated **[spec, untested on free]**.
+- **Your stop**: minutes and stops away, platform and whether it's confirmed (`platform.actual`), and live status
+  (`APPROACHING`, `AT_PLATFORM`, `DEPART_READY`).
+- **Stale forecasts**: a forecast earlier than the train could physically reach a point is replaced by ours.
+
 ## What this API cannot give us
 
 - **Signals and berths.** RTT builds passing points from Network Rail train describer (TD) berth steps internally
