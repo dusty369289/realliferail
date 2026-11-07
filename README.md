@@ -4,7 +4,7 @@ Where your train really is, between stations.
 
 Type a station and a time, pick a train, and see its whole run. That includes every stop **and every timing point it
 passes through** (junctions and the stations it runs past), with the booked, reported and expected time at each one. A
-blue bar shows where the train is *now*. Between reports it moves along the line at the booked speed for that section,
+yellow train-front panel shows where the train is *now*. Between reports it moves along the line at the booked speed for that section,
 and it holds short of the next point until that point is reported. A train held at a signal therefore shows as held, not
 as if it had arrived.
 
@@ -39,34 +39,71 @@ uv run realliferail serve            # http://127.0.0.1:8765, demo mode until yo
 The token stays on the server. RTT's terms forbid putting it in an app, and it never reaches the browser (a test
 checks this).
 
-## On your Android phone
+## On your Android phone (daily commuting)
 
-1. On the PC: `uv run realliferail serve --lan`. It prints an address like `http://192.168.0.186:8765`.
-2. Fedora's firewall blocks that port by default. Open it once:
-   ```sh
-   sudo firewall-cmd --permanent --add-port=8765/tcp && sudo firewall-cmd --reload
-   ```
-3. On the phone (same Wi-Fi), open that address in Chrome. Then tap ⋮ and choose **Add to Home screen**.
+The app runs on your PC, and the phone opens it. To use it on the train, away from home Wi-Fi, the phone has to reach the
+PC from anywhere, safely. **Tailscale** (free for personal use) does this: a private network between your own devices,
+with a real HTTPS address, so Chrome installs it as a proper app. Nothing is opened to the internet.
 
-Over plain `http://` on a local address, Chrome adds a shortcut rather than a full app, because installing needs
-HTTPS. The pages work the same either way. For the full app (its own window, icon and offline page), either:
-- use [Tailscale](https://tailscale.com/) and run `tailscale serve 8765`, which gives an `https://…ts.net` address that
-  also works away from home, **or**
-- in Chrome on the phone, open `chrome://flags`, enable *Insecure origins treated as secure*, and add
-  `http://192.168.0.186:8765`.
+**Once, on the PC** (no sudo needed; Tailscale runs in userspace mode):
+```sh
+cd ~/Projects/realliferail
+./scripts/phone-setup.sh
+```
+It installs two systemd user services: the app, and Tailscale. They start at boot and restart if they stop. It then
+prints a Tailscale sign-in link. Open it and sign in (Google is fine). At the end it prints your app's address, e.g.
+`https://realliferail.tail1234.ts.net`.
 
-To keep it running all the time, there's a systemd user service in `scripts/realliferail.service`. Its header comments
-give the commands.
+**Once, on the phone:**
+1. Install **Tailscale** from the Play Store and sign in with the same account. Leave it connected (it's light on battery).
+2. Open the printed `https://…ts.net` address in **Chrome**, then tap ⋮ and choose **Install app**.
+3. Open it from the home screen: its own window, icon and offline page. Save your commute (search with "Calling at",
+   then **Save this journey**). From then on it's one tap, and **Return** gives you the way home.
+
+**Every day:** tap your journey and tap your train. The big number counts down to your departure. The yellow panel shows the train
+on the line, junction by junction. If you leave the app and come back, it catches up at once. The home screen offers
+"Carry on tracking" for the train you were following.
+
+The PC has to be on (or asleep with wake-on-LAN). Any always-on Linux box works the same way, e.g. a Raspberry Pi.
+
+**Just at home**, without Tailscale: `uv run realliferail serve --lan`, open the port once
+(`sudo firewall-cmd --permanent --add-port=8765/tcp && sudo firewall-cmd --reload`), and browse to the printed
+`http://192.168.…:8765`. Over plain http, Chrome only adds a home-screen shortcut, not a full app.
+
+## How often it updates, and what refresh costs
+
+Realtime Trains allows 10 calls a minute and 100 an hour on Free and Hobbyist. The server keeps every answer and shares it
+between all your devices and tabs:
+- A train page asks again every 40 s or so (`3600 / (calls left this hour - 10)`, never under 30 s), slows down when
+  the hour runs low, and stops while the app is in the background. It catches up as soon as you come back.
+- **Refresh** gets a new answer only if the current one is over 15 s old. Pressing it again and again costs nothing. It
+  says "Already up to date (8 s old)".
+- Boards are kept for a minute. The last 10 calls of each hour are kept for searches, never spent on background updates.
+- If the allowance does run out, pages show the last answer marked as stale, or a "busy" page that retries by itself.
+  They never show "not found".
+
+## Plans
+
+**Settings** in the app takes the key (it's checked with RTT before it's saved, and never shown again in full). It
+shows which plan it is, and the app adapts:
+
+| | Free | Hobbyist (£4/month) | Team and up |
+|---|---|---|---|
+| Live times | to the minute | **to the quarter minute** (berth steps) | same |
+| Passing points and the train between stations | yes | yes, more precise | same |
+| Headcodes, unit numbers and class, branding | | yes | yes |
+| Empty stock and staff-only moves (off by default) | | yes | yes |
+| Update interval | about 40 s | about 40 s | faster, from the bigger allowance |
 
 ## Reading the train page
 
 | You see | It means |
 |---|---|
-| **14:41** in bold | Reported by RTT. Reports are to the minute. |
+| **14:41** in bold | Reported by RTT: to the minute on Free, to the quarter minute (14:41¼) with detailed mode. |
 | 14:41 | RTT's forecast. |
-| 14:41 <sup>est</sup> in grey | Our estimate, where RTT gives none. It carries the delay forward, lets a late train win back booked recovery time, and never leaves a stop early. |
+| *14:41* <sup>est</sup> in grey italic | Our estimate, where RTT gives none. It carries the delay forward, lets a late train win back booked recovery time, and never leaves a stop early. |
 | small grey rows | Timing points it passes without stopping. Their booked times are working-timetable times, which can be on the half minute (½). |
-| blue bar | Where we think the train is now. |
+| yellow panel | Where we think the train is now (it's the front of a train). |
 | +3 / −1 | Minutes late / early. |
 
 The panel at the top says what's happening in a sentence, such as *"Passed Twyford 14:52 (2 min late). Next: Reading,

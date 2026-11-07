@@ -1,0 +1,16 @@
+# Tailscale without root (userspace networking), so your phone can reach Real Life Rail from anywhere with HTTPS.
+# Installed by scripts/phone-setup.sh. Talk to it with:
+#   tailscale --socket=$XDG_RUNTIME_DIR/realliferail-tailscale/tailscaled.sock status
+[Unit]
+Description=Tailscale (userspace) for Real Life Rail
+After=network-online.target
+
+[Service]
+RuntimeDirectory=realliferail-tailscale
+StateDirectory=realliferail-tailscale
+ExecStart=/home/linuxbrew/.linuxbrew/bin/tailscaled --tun=userspace-networking --statedir=%S/realliferail-tailscale --socket=%t/realliferail-tailscale/tailscaled.sock
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

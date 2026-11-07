@@ -52,5 +52,28 @@ Newest last. Add to this whenever a choice is made, with the reason.
 - **Phone targets are 44 px**, enforced by the browser matrix. The nav links were 37 px.
 - **The service worker caches only the app shell, never train data.** A stale time shown as current would be worse than
   the offline page.
-- **Each UI test gets a fresh allowance.** All of them run in one frozen simulated minute, so the real 10-a-minute
+- **Each UI test gets a fresh allowance (see the next section too).** All of them run in one frozen simulated minute, so the real 10-a-minute
   limit would correctly trip a few tests in. Resetting it per test is a test fixture, not a looser limit.
+
+## 2026-11-07 afternoon: the owner's Hobbyist token
+
+- **The token is a refresh token.** The app swaps it for a short-life access token, and keeps that (with the entitlements)
+  in `~/.config/realliferail/access.json` (0600), so a restart costs no calls instead of 3.
+- **The key is entered in Settings** and stored in `~/.config/realliferail/settings.json` (0600), outside the repo. It's
+  checked with RTT before it's saved, and never shown back except for its last 5 characters. Precedence: settings, then
+  `RTT_TOKEN` in the environment, then `.env`.
+- **Settings can only be changed from this machine, private networks or the tailnet** (100.64/10), and cross-site posts are
+  refused. Chosen over a password, because the app has no accounts and the server is personal.
+- **Tiers are worked out from entitlements and the limits RTT reports**, not from names: `allowDetailed` means Hobbyist
+  features, a full-allocation entitlement or over 100 an hour means Team or above, and nothing means Free.
+- **Refresh is free when it would be wasteful.** A forced refresh only refetches an answer older than 15 s. The page says
+  "Already up to date" without any request. Two devices on the same train still share one call.
+- **Empty stock, staff-only calls and set-down-only "departures" are hidden** on boards by default. Detailed boards are
+  full of them. "Show all" brings them back.
+- **New look ("Platform")** from British rail signage, after the owner said the first one was boxy and AI-like. See
+  `docs/design.md`.
+- **Our estimates round to the minute.** Only RTT's own times get quarter-minute fractions. Ours don't have that precision.
+- **Phones reach it through Tailscale in userspace mode** (no root, no firewall change, HTTPS so the PWA installs),
+  set up by `scripts/phone-setup.sh` as systemd user services. Chosen over opening a port to the internet (unsafe, and
+  the RTT allowance would be anyone's) and over a paid host (the owner said don't spend). Termux on the phone wasn't
+  tried, because the app needs Python 3.14.
