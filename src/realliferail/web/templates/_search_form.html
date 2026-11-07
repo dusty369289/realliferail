@@ -1,0 +1,37 @@
+{% set q = q or {} %}
+<form class="search stack" action="/board" method="get" role="search" autocomplete="off">
+  <div class="field">
+    <label for="station">Station</label>
+    <div class="suggest" data-suggest>
+      <input id="station" name="station" type="text" inputmode="search" required
+             placeholder="e.g. Reading or RDG" value="{{ q.station or '' }}"
+             aria-autocomplete="list" aria-controls="station-list" aria-expanded="false" enterkeyhint="search">
+      <ul class="suggest__list" id="station-list" role="listbox" hidden></ul>
+    </div>
+  </div>
+  <div class="cluster search__row">
+    <div class="field field--time">
+      <label for="time">Time</label>
+      <input id="time" name="time" type="time" value="{{ q.time or '' }}" aria-describedby="time-hint">
+    </div>
+    <div class="field field--day">
+      <label for="day">Day</label>
+      <input id="day" name="day" type="date" value="{{ q.day or '' }}">
+    </div>
+  </div>
+  <p class="hint" id="time-hint">Leave time empty for trains leaving now.</p>
+  <div class="field">
+    <label for="to">Calling at <span class="hint">(optional)</span></label>
+    <div class="suggest" data-suggest>
+      <input id="to" name="to" type="text" inputmode="search" placeholder="Any station"
+             value="{{ q.to or '' }}" aria-autocomplete="list" aria-controls="to-list" aria-expanded="false">
+      <ul class="suggest__list" id="to-list" role="listbox" hidden></ul>
+    </div>
+  </div>
+  <fieldset class="cluster mode">
+    <legend class="visually-hidden">Show</legend>
+    <label><input type="radio" name="mode" value="dep" {% if q.mode != 'arr' %}checked{% endif %}> Departures</label>
+    <label><input type="radio" name="mode" value="arr" {% if q.mode == 'arr' %}checked{% endif %}> Arrivals</label>
+  </fieldset>
+  <button class="button" type="submit">Find trains</button>
+</form>

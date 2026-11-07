@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="stack home">
+  <h1>Where are you catching a train?</h1>
+  {% include "_search_form.html" %}
+  <section class="recent" data-recent hidden aria-labelledby="recent-h">
+    <h2 id="recent-h" class="label">Recent</h2>
+    <ul class="recent__list cluster"></ul>
+  </section>
+</div>
+{% endblock %}

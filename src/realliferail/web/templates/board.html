@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}{% if result %}{{ result.board.station_name }} · {% endif %}Real Life Rail{% endblock %}
+{% block head %}{% if live and result %}<meta name="refresh-hint" content="60">{% endif %}{% endblock %}
+{% block main %}
+{% if error %}
+<div class="stack">
+  <h1>Find trains</h1>
+  <p class="problem" role="alert">{{ error }}</p>
+  {% include "_search_form.html" %}
+</div>
+{% else %}
+{% set b = result.board %}
+{% set arr = result.mode == 'arr' %}
+<div class="stack board" data-board {% if live %}data-live-board="60"{% endif %}
+     data-station="{{ result.station.name if result.station else b.station_name }}"
+     data-crs="{{ result.station.crs if result.station else (b.station_crs or '') }}">
+  <header class="board__head">
+    <h1>{{ b.station_name }}</h1>
+    <p class="board__sub">
+      {{ 'Arrivals' if arr else 'Departures' }}{% if result.to %} calling at {{ result.to.name }}{% endif %},
+      {{ b.time_from|hm }} to {{ b.time_to|hm }}{% if b.time_from.date() != now.date() %} on {{ b.time_from.strftime('%a %-d %b') }}{% endif %}
+    </p>
+    <p class="cluster board__nav">
+      <a href="{{ nav.earlier }}">Earlier</a>
+      <a href="{{ nav.later }}">Later</a>
+      <a href="{{ nav.switch }}">{{ 'Departures' if arr else 'Arrivals' }}</a>
+      <a href="/?{{ 'station=' ~ (q.station|urlencode) }}">Change</a>
+    </p>
+  </header>
+  {% if b.status.message %}<p class="banner" role="note">{{ b.status.message }}</p>{% endif %}
+  {% if result.fetched.stale %}<p class="hint">Showing the answer from {{ ago((now - result.fetched.fetched_at).total_seconds()) }}. {{ result.fetched.note }}.</p>{% endif %}
+  {% if not result.rows %}
+  <p class="empty">No {{ 'arrivals' if arr else 'departures' }} in this hour{% if result.to %} calling at {{ result.to.name }}{% endif %}. Try <a href="{{ nav.later }}">later</a>.</p>
+  {% else %}
+  <ol class="trains" aria-label="Trains">
+    {% for r in result.rows %}
+    {% set t = r.arrival if arr else r.departure %}
+    {% set live_t = t.actual or t.forecast or t.estimate %}
+    {% set mins = ((live_t - t.booked).total_seconds() // 60)|int if (live_t and t.booked) else 0 %}
+    <li class="trains__row{% if r.cancelled %} is-cancelled{% endif %}">
+      <a class="trains__link" href="/train/{{ r.unique_id }}?at={{ (result.station.crs if result.station else b.station_crs) or '' }}{% if result.to %}&to={{ result.to.crs }}{% endif %}">
+        <span class="trains__when">
+        <span class="trains__time tnum">{{ t.booked|hm }}</span>
+        <span class="trains__live tnum {% if r.cancelled %}is-cancelled{% elif mins >= 5 %}is-very-late{% elif mins >= 2 %}is-late{% endif %}">
+          {%- if r.cancelled %}Cancelled
+          {%- elif t.actual %}{{ 'Arr' if arr else 'Left' }} {{ t.actual|hm }}
+          {%- elif live_t and mins >= 1 %}Exp {{ live_t|hm }}
+          {%- elif live_t %}On time
+          {%- else %}<span class="muted">No report</span>{% endif -%}
+        </span>
+        </span>
+        <span class="trains__dest">
+          <span class="trains__place">{{ r.origin if arr else r.destination }}</span>
+          <span class="trains__meta">{{ r.operator_name }}{% if r.headcode %} · {{ r.headcode }}{% endif %}{% if r.vehicles %} · {{ r.vehicles }} coaches{% endif %}{% if r.status == 'APPROACHING' %} · Approaching{% elif r.status in ('AT_PLATFORM', 'DEPART_PREPARING', 'DEPART_READY') %} · At platform{% endif %}</span>
+        </span>
+        <span class="trains__plat tnum{% if r.platform_changed %} is-changed{% endif %}" {% if r.platform %}aria-label="Platform {{ r.platform }}{% if not r.platform_confirmed %}, not confirmed{% endif %}"{% endif %}>
+          {%- if r.platform %}<span class="trains__plat-label" aria-hidden="true">Plat</span>{{ r.platform }}{% if not r.platform_confirmed %}<span class="muted" aria-hidden="true">?</span>{% endif %}{% endif -%}
+        </span>
+      </a>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+  <p class="hint board__foot">Updated {{ result.fetched.fetched_at|hm }}{% if live %}, refreshes every minute{% endif %}. Platform with a ? isn't confirmed yet.</p>
+</div>
+{% endif %}
+{% endblock %}

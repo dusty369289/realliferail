@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% set s = tl.service %}
+{% block title %}{{ s.origins[0].time|hm if s.origins and s.origins[0].time else '' }} {{ s.origin_name }} to {{ s.destination_name }} · Real Life Rail{% endblock %}
+{% block head %}<script src="/static/js/live.js?v={{ VERSION }}" defer></script>{% endblock %}
+{% block main %}
+<article class="stack train" data-train data-uid="{{ uid }}" data-at="{{ at }}" data-to="{{ to }}">
+  <header class="train__head">
+    <p class="label">{{ s.operator_name }}{% if s.headcode %} · {{ s.headcode }}{% endif %}{% if s.vehicles %} · {{ s.vehicles }} coaches{% endif %}{% if s.leading_class %} · Class {{ s.leading_class }}{% endif %}</p>
+    <h1>{% if s.origins and s.origins[0].time %}<span class="tnum">{{ s.origins[0].time|hm }}</span> {% endif %}{{ s.origin_name }} to {{ s.destination_name }}</h1>
+    {% if s.units %}<p class="hint">Units {{ s.units|join(', ') }}</p>{% endif %}
+    {% if s.mode != 'TRAIN' %}<p class="banner" role="note">This is a {{ s.mode|replace('_', ' ')|lower }}, not a train.</p>{% endif %}
+  </header>
+  <div class="cluster train__tools">
+    <label class="check"><input type="checkbox" data-toggle-passes checked> Passing points</label>
+    <button type="button" class="linkish" data-jump>Jump to train</button>
+  </div>
+  <div data-live-region>
+    {% include "_route.html" %}
+  </div>
+  <details class="legend">
+    <summary>How to read this</summary>
+    <dl class="legend__list">
+      <dt><span class="src-actual tnum">14:41</span></dt><dd>Reported by Realtime Trains. Reports are to the minute.</dd>
+      <dt><span class="src-forecast tnum">14:41</span></dt><dd>Realtime Trains’ forecast.</dd>
+      <dt><span class="src-est tnum">14:41<span class="est">est</span></span></dt><dd>Our estimate, where Realtime Trains gives none. It carries the delay forward and allows for booked recovery time.</dd>
+      <dt><span class="tick" aria-hidden="true"></span> Small rows</dt><dd>Timing points the train passes without stopping: junctions and stations it runs through. Booked times there are working-timetable times, which can be on the half minute (½). Signals aren't in Realtime Trains' data.</dd>
+      <dt><span class="train-swatch" aria-hidden="true"></span> Blue bar</dt><dd>Where we think the train is now. Between reports it moves at the booked speed for that section and stops short of the next point until that point is reported.</dd>
+    </dl>
+  </details>
+</article>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e0f11">
+  <meta name="color-scheme" content="dark light">
+  <title>{% block title %}Real Life Rail{% endblock %}</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/static/icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+  <link rel="stylesheet" href="/static/css/app.css?v={{ VERSION }}">
+  <link rel="preload" href="/static/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/app.js?v={{ VERSION }}" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="topbar__logo" href="/">Real Life Rail</a>
+    <nav class="topbar__nav" aria-label="Main">
+      <a href="/" {% if request.url.path == "/" %}aria-current="page"{% endif %}>Search</a>
+      <a href="/about" {% if request.url.path == "/about" %}aria-current="page"{% endif %}>About</a>
+    </nav>
+  </header>
+  {% if demo %}
+  <p class="banner banner--demo" role="note"><strong>Demo data.</strong> These trains are simulated. Add your Realtime Trains token to see real ones. <a href="/about">How</a></p>
+  {% endif %}
+  {% if budget.remaining.hour <= 15 and not demo %}
+  <p class="banner" role="note">Only {{ budget.remaining.hour }} Realtime Trains calls left this hour, so pages update less often.</p>
+  {% endif %}
+  <main id="main" class="wrap">{% block main %}{% endblock %}</main>
+  <footer class="footer wrap">
+    <p>Data from <a href="https://www.realtimetrains.co.uk/">Realtime Trains</a>{% if demo %} (simulated){% endif %}. Not affiliated.</p>
+  </footer>
+</body>
+</html>

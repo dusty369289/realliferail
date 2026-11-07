@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}About · Real Life Rail{% endblock %}
+{% block main %}
+<div class="stack prose">
+  <h1>About</h1>
+  <p>Real Life Rail shows where your train is between stations. Realtime Trains records the time each train passes every timing point: stations, junctions and the stations it runs through. Between those reports, this app places the train on the line at the booked speed for that section.</p>
+
+  <h2>Data source</h2>
+  {% if demo %}
+  <p class="banner banner--demo"><strong>Demo mode.</strong> No Realtime Trains token is set, so every train here is simulated on two real routes: Paddington to Oxford, and Waterloo to Woking.</p>
+  <p>To see real trains:</p>
+  <ol class="steps">
+    <li>Sign in at <a href="https://api-portal.rtt.io">api-portal.rtt.io</a> and request a token. The free plan is enough.</li>
+    <li>On the computer running this server, put <code>RTT_TOKEN=your-token</code> in a file called <code>.env</code> in the project folder.</li>
+    <li>Restart the server.</li>
+  </ol>
+  {% else %}
+  <dl class="facts">
+    <dt>Token</dt><dd>{% if token_error %}<span class="problem">{{ token_error }}</span>{% elif info %}Working ({{ info.kind }} token){% else %}Not checked yet{% endif %}</dd>
+    {% if info %}
+    <dt>API version</dt><dd>{{ info.api_version or 'unknown' }}</dd>
+    <dt>Detailed mode</dt><dd>{{ 'On' if info.detailed else 'Off (it comes with the paid plans)' }}</dd>
+    <dt>Entitlements</dt><dd>{{ info.entitlements|join(', ') or 'none (free plan)' }}</dd>
+    {% if info.history_days %}<dt>History</dt><dd>Last {{ info.history_days }} days</dd>{% endif %}
+    {% endif %}
+  </dl>
+  {% endif %}
+
+  <h2>Allowance</h2>
+  <p>Realtime Trains limits how often this server can ask. Answers are shared by everyone using this server and kept for a minute (boards) or 30 seconds (trains).</p>
+  <dl class="facts tnum">
+    <dt>This minute</dt><dd>{{ budget.remaining.minute }} of {{ budget.limits.minute }} left</dd>
+    <dt>This hour</dt><dd>{{ budget.remaining.hour }} of {{ budget.limits.hour }} left</dd>
+    <dt>Today</dt><dd>{{ budget.remaining.day }} of {{ budget.limits.day }} left</dd>
+    <dt>Calls since start</dt><dd>{{ budget.calls_made }}</dd>
+  </dl>
+
+  <h2>Limits, plainly</h2>
+  <ul class="bullets">
+    <li>Signals and track circuits aren't in Realtime Trains' data, only timing points. Between two timing points, where the train is shown is our estimate.</li>
+    <li>Reports are to the minute, so a train can be up to a minute ahead of or behind where the bar shows it.</li>
+    <li>Times marked <span class="src-est">est</span> are ours. Everything else comes from Realtime Trains.</li>
+  </ul>
+  <p class="hint">Station list: <a href="https://github.com/davwheat/uk-railway-stations">uk-railway-stations</a> (ODbL), from Trainline EU's data.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% set p = tl.position %}
+{% set s = tl.service %}
+<section class="live" aria-labelledby="live-h"
+  data-state="{{ p.state }}"
+  data-from="{{ p.from_index if p.from_index is not none else '' }}"
+  data-to="{{ p.to_index if p.to_index is not none else '' }}"
+  data-since="{{ (p.since.timestamp() * 1000)|int if p.since else '' }}"
+  data-expected="{{ (p.expected.timestamp() * 1000)|int if p.expected else '' }}"
+  data-fraction="{{ '%.3f'|format(p.fraction) }}"
+  data-hold="0.95"
+  data-refresh="{{ res.refresh_after|int }}"
+  data-fetched="{{ (res.fetched.fetched_at.timestamp() * 1000)|int }}">
+  <div class="live__status" role="status">
+    <h2 id="live-h" class="visually-hidden">Where the train is</h2>
+    <p class="live__headline state-{{ p.state }}">{{ p.headline }}</p>
+    {% for sm, verb in ((stop, 'leaves'), (off, 'reaches')) if sm %}
+    <p class="live__stop">
+      {%- if sm.status == 'cancelled' %}<span class="problem">It no longer stops at {{ sm.name }}.</span>
+      {%- elif sm.status == 'here' %}<strong>It's at {{ sm.name }} now</strong>{% if sm.platform %}, platform {{ sm.platform }}{% endif %}.
+      {%- elif sm.status == 'gone' %}It has {{ 'left' if verb == 'leaves' else 'reached' }} {{ sm.name }}{% if sm.shown and sm.shown.source == TimeSource.ACTUAL %} ({{ sm.shown.time|hm }}){% endif %}.
+      {%- else %}It {{ verb }} <strong>{{ sm.name }}</strong> at <strong class="tnum {{ delay_class(sm.shown) }}">{{ sm.shown.time|hm if sm.shown else '?' }}</strong>
+        {%- if sm.minutes is not none %}, in {{ sm.minutes }} min{% endif %}
+        {%- if sm.calls_between %}, {{ sm.calls_between }} stop{{ 's' if sm.calls_between != 1 }} away{% endif %}
+        {%- if sm.platform and verb == 'leaves' %}, platform {{ sm.platform }}{% if not sm.platform_confirmed %} (not confirmed){% endif %}{% endif %}.
+      {%- endif -%}
+    </p>
+    {% endfor %}
+    <p class="live__age hint"><span data-age>Updated {{ ago((tl.now - res.fetched.fetched_at).total_seconds()) }}</span>{% if res.fetched.stale %} ({{ res.fetched.note }}){% endif %}</p>
+  </div>
+  {% if s.reasons %}
+  <ul class="reasons">
+    {% for r in s.reasons %}<li>{{ 'Cancelled' if r.kind == 'CANCEL' else 'Delayed' }} because of {{ r.text[:1]|lower ~ r.text[1:] }}.</li>{% endfor %}
+  </ul>
+  {% endif %}
+  <div class="route-wrap">
+  <ol class="route" aria-label="Route">
+    {% for v in tl.points %}
+    {% set pt = v.point %}
+    {% set main = v.passing if pt.kind == Kind.PASS else (v.departure or v.arrival) %}
+    {% set is_at = at and (pt.crs == at or pt.tiploc == at) %}
+    {% set is_to = to and (pt.crs == to or pt.tiploc == to) %}
+    <li class="route__pt {{ 'is-pass' if pt.kind == Kind.PASS else 'is-call' }}{% if v.reported %} is-reported{% endif %}{% if pt.cancelled %} is-cancelled{% endif %}{% if is_at %} is-at{% endif %}{% if is_to %} is-to{% endif %}{% if not pt.public and pt.kind == Kind.CALL %} is-operational{% endif %}"
+        data-index="{{ v.index }}" {% if is_at %}id="your-stop"{% endif %}>
+      <span class="route__mark" aria-hidden="true"></span>
+      <span class="route__name">
+        <span class="route__place">{{ pt.name }}</span>
+        <span class="route__meta">
+          {%- if pt.cancelled %}<span class="problem">{{ 'Diverted away' if pt.display == 'DIVERTED' else 'Cancelled here' }}</span>
+          {%- else -%}
+          {%- if pt.kind == Kind.CALL and pt.platform %}Plat {{ pt.platform }}{% if pt.platform_changed %} <span class="is-changed">changed</span>{% endif %}{% endif -%}
+          {%- if pt.kind == Kind.CALL and v.arrival and v.departure and v.arrival.booked and v.departure.booked and (v.departure.booked - v.arrival.booked).total_seconds() >= 120 %} · arr {{ v.arrival.time|hm }}{% endif -%}
+          {%- if pt.request_stop %} · Request stop{% endif -%}
+          {%- if not pt.public and pt.kind == Kind.CALL %} · Not for passengers{% endif -%}
+          {%- if pt.status == 'APPROACHING' %} · Approaching{% elif pt.status == 'AT_PLATFORM' %} · At platform{% elif pt.status == 'DEPART_READY' %} · Ready to leave{% elif pt.status == 'DEPARTING' %} · Leaving{% endif -%}
+          {%- endif -%}
+        </span>
+      </span>
+      {% if main %}
+      <span class="route__booked tnum">{{ main.booked|hmh if pt.kind == Kind.PASS else main.booked|hm }}</span>
+      <span class="route__live tnum {{ delay_class(main) }} src-{{ 'actual' if main.source == TimeSource.ACTUAL else ('est' if main.source == TimeSource.OUR_ESTIMATE else ('booked' if main.source == TimeSource.BOOKED else 'forecast')) }}">
+        {%- if pt.cancelled %}
+        {%- elif main.source == TimeSource.BOOKED %}
+        {%- elif main.source == TimeSource.OUR_ESTIMATE and not main.changed %}
+        {%- else %}{{ main.time|hm }}{% if main.source == TimeSource.OUR_ESTIMATE %}<span class="est">est</span>{% endif %}
+          {%- if main.delay_min %}<span class="route__delay">{{ '+' if main.delay_min > 0 else '−' }}{{ main.delay_min|abs }}</span>{% endif %}
+        {%- endif -%}
+      </span>
+      {% else %}
+      <span class="route__booked"></span><span class="route__live"></span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  <div class="route__train" data-train-marker hidden aria-hidden="true"></div>
+  </div>
+</section>

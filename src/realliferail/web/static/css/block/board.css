@@ -1,0 +1,26 @@
+.board__head { display: grid; gap: var(--s-1); }
+.board__sub { color: var(--muted); }
+.board__nav { margin-top: var(--s-2); }
+.board__nav a { min-height: var(--tap); display: inline-flex; align-items: center; }
+
+.trains { border-top: 1px solid var(--line); }
+.trains__row { border-bottom: 1px solid var(--line); }
+.trains__link {
+  display: grid; grid-template-columns: 5rem 1fr 3rem; gap: 0 var(--s-3);
+  align-items: baseline; padding: var(--s-3) 0; text-decoration: none; min-height: 3.5rem;
+}
+.trains__link:hover .trains__place { text-decoration: underline; }
+.trains__time { font-weight: 600; font-size: var(--t-md); }
+.trains__when { display: grid; }
+.trains__live { font-size: var(--t-xs); }
+.trains__dest { display: grid; min-width: 0; }
+.trains__place { font-weight: 500; overflow-wrap: anywhere; }
+.trains__meta { color: var(--muted); font-size: var(--t-xs); }
+.trains__plat { text-align: right; font-size: var(--t-md); font-weight: 500; }
+.trains__plat-label { display: block; font-size: var(--t-xs); color: var(--muted); font-weight: 400; }
+.is-cancelled .trains__time, .is-cancelled .trains__place { text-decoration: line-through; color: var(--muted); }
+.board__foot { padding-top: var(--s-2); }
+
+@media (max-width: 380px) {
+  .trains__link { grid-template-columns: 4.5rem 1fr 2.5rem; gap: 0 var(--s-2); }
+}
