@@ -3,7 +3,9 @@
 {% block title %}{{ s.origins[0].time|hm if s.origins and s.origins[0].time else '' }} {{ s.origin_name }} to {{ s.destination_name }} · Real Life Rail{% endblock %}
 {% block head %}<script src="/static/js/live.js?v={{ VERSION }}" defer></script>{% endblock %}
 {% block main %}
-<article class="stack train" data-train data-uid="{{ uid }}" data-at="{{ at }}" data-to="{{ to }}">
+<article class="stack train" data-train data-uid="{{ uid }}" data-at="{{ at }}" data-to="{{ to }}"
+  data-title="{{ (s.origins[0].time|hm ~ ' ') if s.origins and s.origins[0].time else '' }}{{ s.origin_name }} to {{ s.destination_name }}"
+  data-day="{{ s.run_date.isoformat() }}" data-ends="{{ (s.destinations[0].time.timestamp() * 1000)|int if s.destinations and s.destinations[0].time else '' }}">
   <header class="train__head">
     <p class="label">{{ s.operator_name }}{% if s.headcode %} · {{ s.headcode }}{% endif %}{% if s.vehicles %} · {{ s.vehicles }} coaches{% endif %}{% if s.leading_class %} · Class {{ s.leading_class }}{% endif %}{% if s.branding %} · {{ s.branding }}{% endif %}</p>
     <h1>{% if s.origins and s.origins[0].time %}<span class="tnum">{{ s.origins[0].time|hm }}</span> {% endif %}{{ s.origin_name }} to {{ s.destination_name }}</h1>

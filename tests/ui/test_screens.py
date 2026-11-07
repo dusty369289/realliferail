@@ -85,6 +85,7 @@ PAGES = {
     "train-not-started": lambda core: find_train(core, State.NOT_STARTED, "RDG"),
     "train-arrived": lambda core: find_train(core, State.ARRIVED),
     "about": lambda core: "/about",
+    "settings": lambda core: "/settings",
     "missing-train": lambda core: "/train/Z1:2026-11-07",
 }
 
@@ -195,3 +196,40 @@ def test_service_worker_registers(server, make_page):
     page.goto(server + "/")
     # 127.0.0.1 is a secure context, so the worker registers there (on a LAN address over http it can't)
     assert page.evaluate("navigator.serviceWorker.ready.then(r => !!r.active)")
+
+
+def test_save_a_journey_and_use_it_both_ways(server, make_page):
+    page = make_page()
+    page.goto(server + "/board?station=RDG&to=PAD")
+    page.click("[data-save-journey]")
+    assert "home screen" in page.inner_text("[data-save-note]")
+    page.goto(server + "/")
+    go = page.locator(".journeys__go").first
+    assert go.inner_text() == "Reading → London Paddington"
+    shoot(page, "home-with-journeys--phone-412--dark")
+    page.locator(".journeys__back").first.click()
+    page.wait_for_selector(".board")
+    assert page.locator("h1").inner_text() == "London Paddington"
+    assert "calling at Reading" in page.inner_text(".board__sub")
+    common_checks(page)
+
+
+def test_carry_on_tracking_card(server, core, make_page, moment):
+    page = open_train(server, core, make_page, moment)
+    title = page.get_attribute("[data-train]", "data-title")
+    page.goto(server + "/")
+    card = page.locator("[data-tracking]")
+    assert card.is_visible() and title in card.inner_text()
+    card.locator("a").click()
+    page.wait_for_selector(".route")
+    common_checks(page)
+
+
+def test_refresh_button_does_not_refetch_fresh_data(server, core, make_page, moment):
+    page = open_train(server, core, make_page, moment)
+    hits = []
+    page.on("request", lambda r: hits.append(r.url) if "/live" in r.url else None)
+    for _ in range(5):
+        page.click("[data-refresh-now]")
+    assert "Already up to date" in page.inner_text("[data-refresh-note]")
+    assert hits == []

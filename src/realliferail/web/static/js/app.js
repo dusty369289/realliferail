@@ -83,6 +83,72 @@ function recent() {
   box.hidden = false;
 }
 
+// ---- journeys: saved on this phone only ----
+function journeys() {
+  const board = document.querySelector("[data-board]");
+  const save = document.querySelector("[data-save-journey]");
+  let list = store.get("rlr.journeys", []);
+  if (board && save) {
+    const j = { from: board.dataset.crs, fromName: board.dataset.station, to: board.dataset.toCrs, toName: board.dataset.toName };
+    const note = document.querySelector("[data-save-note]");
+    const has = () => list.some((x) => x.from === j.from && x.to === j.to);
+    if (has()) { save.textContent = "Saved. Remove this journey"; }
+    save.addEventListener("click", () => {
+      if (has()) {
+        list = list.filter((x) => !(x.from === j.from && x.to === j.to));
+        save.textContent = "Save this journey"; note.textContent = "Removed.";
+      } else {
+        list = [j, ...list].slice(0, 8);
+        save.textContent = "Saved. Remove this journey"; note.textContent = "It's on the home screen now.";
+      }
+      store.set("rlr.journeys", list);
+    });
+  }
+  const box = document.querySelector("[data-journeys]");
+  if (!box || list.length === 0) return;
+  const link = (from, to, label) => {
+    const a = document.createElement("a");
+    a.href = `/board?station=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
+    a.textContent = label;
+    return a;
+  };
+  box.querySelector("ul").replaceChildren(...list.map((j) => {
+    const li = document.createElement("li");
+    li.className = "journeys__item";
+    const there = link(j.from, j.to, `${j.fromName} → ${j.toName}`);
+    there.className = "journeys__go";
+    const back = link(j.to, j.from, "Return");
+    back.className = "journeys__back";
+    back.setAttribute("aria-label", `Return: ${j.toName} to ${j.fromName}`);
+    li.append(there, back);
+    return li;
+  }));
+  box.hidden = false;
+}
+
+// ---- the train you were last following, so reopening the app takes you back to it ----
+function tracking() {
+  const train = document.querySelector("[data-train]");
+  if (train) {
+    const ends = Number(train.dataset.ends) || 0;
+    store.set("rlr.tracking", {
+      href: location.pathname + location.search, title: train.dataset.title, ends, seen: Date.now(),
+    });
+    return;
+  }
+  const box = document.querySelector("[data-tracking]");
+  const t = store.get("rlr.tracking", null);
+  if (!box || !t) return;
+  // offer it until half an hour after the train is due to finish (or 3 hours after it was opened)
+  const until = t.ends ? t.ends + 30 * 60e3 : t.seen + 3 * 3600e3;
+  if (Date.now() > until) return;
+  const a = box.querySelector("a");
+  a.href = t.href;
+  box.querySelector(".tracking__title").textContent = t.title;
+  box.querySelector(".tracking__sub").textContent = "Tap to see where it is now";
+  box.hidden = false;
+}
+
 function liveBoard() {
   const board = document.querySelector("[data-live-board]");
   if (!board) return;
@@ -93,5 +159,7 @@ function liveBoard() {
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-suggest]").forEach(suggest);
   recent();
+  journeys();
+  tracking();
   liveBoard();
 });

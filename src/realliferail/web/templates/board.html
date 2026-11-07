@@ -13,6 +13,7 @@
 {% set b = result.board %}
 {% set arr = result.mode == 'arr' %}
 <div class="stack board" data-board {% if live %}data-live-board="60"{% endif %}
+     {% if result.to %}data-to-name="{{ result.to.name }}" data-to-crs="{{ result.to.crs }}"{% endif %}
      data-station="{{ result.station.name if result.station else b.station_name }}"
      data-crs="{{ result.station.crs if result.station else (b.station_crs or '') }}">
   <header class="board__head">
@@ -28,6 +29,10 @@
       <a href="{{ nav.switch }}">{{ 'Departures' if arr else 'Arrivals' }}</a>
       <a href="/?{{ 'station=' ~ (q.station|urlencode) }}">Change</a>
     </p>
+    {% if result.to and result.station %}
+    <p class="board__save"><button type="button" class="linkish" data-save-journey>Save this journey</button>
+      <span class="hint" data-save-note role="status" aria-live="polite"></span></p>
+    {% endif %}
   </header>
   {% if b.status.message %}<p class="banner" role="note">{{ b.status.message }}</p>{% endif %}
   {% if result.fetched.stale %}<p class="hint">Showing the answer from {{ ago((now - result.fetched.fetched_at).total_seconds()) }}. {{ result.fetched.note }}.</p>{% endif %}

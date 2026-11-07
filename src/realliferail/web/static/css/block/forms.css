@@ -1,6 +1,6 @@
 .field { display: flex; flex-direction: column; gap: var(--s-1); }
 .field label { font-size: var(--t-sm); color: var(--muted); }
-.field input[type="text"], .field input[type="time"], .field input[type="date"] {
+.field input[type="text"], .field input[type="time"], .field input[type="date"], .field input[type="password"] {
   min-height: var(--tap); padding: var(--s-2) var(--s-3);
   background: var(--control); border: 1px solid var(--control-line); border-radius: var(--radius);
   font-size: 1rem; width: 100%;
@@ -34,3 +34,11 @@
   display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 var(--s-3);
   border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none;
 }
+
+.tracking__link { display: grid; gap: var(--s-1); padding: var(--s-3); border: 1px solid var(--line); border-left: 3px solid var(--train); border-radius: var(--radius); text-decoration: none; min-height: var(--tap); }
+.tracking__title { font-weight: 600; }
+.journeys__list { display: grid; gap: var(--s-2); }
+.journeys__item { display: flex; gap: var(--s-2); }
+.journeys__go { flex: 1; display: flex; align-items: center; min-height: var(--tap); padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; font-weight: 500; }
+.journeys__back { display: inline-flex; align-items: center; min-height: var(--tap); padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--muted); }
+.board__save { display: flex; gap: var(--s-3); align-items: center; flex-wrap: wrap; }

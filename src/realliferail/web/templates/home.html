@@ -1,10 +1,19 @@
 {% extends "base.html" %}
 {% block main %}
 <div class="stack home">
+  <section class="tracking" data-tracking hidden aria-labelledby="tracking-h">
+    <h2 id="tracking-h" class="label">Carry on tracking</h2>
+    <a class="tracking__link" href="#"><span class="tracking__title"></span><span class="tracking__sub hint"></span></a>
+  </section>
+  <section class="journeys" data-journeys hidden aria-labelledby="journeys-h">
+    <h2 id="journeys-h" class="label">My journeys</h2>
+    <ul class="journeys__list"></ul>
+  </section>
   <h1>Where are you catching a train?</h1>
   {% include "_search_form.html" %}
+  <p class="hint">Tip: put a station in “Calling at” and you can save the journey for one-tap use, both ways.</p>
   <section class="recent" data-recent hidden aria-labelledby="recent-h">
-    <h2 id="recent-h" class="label">Recent</h2>
+    <h2 id="recent-h" class="label">Recent stations</h2>
     <ul class="recent__list cluster"></ul>
   </section>
 </div>
