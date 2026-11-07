@@ -92,6 +92,7 @@ def serve(
         log_level="warning",
         proxy_headers=hosted,
         forwarded_allow_ips="*" if hosted else None,
+        server_header=False,  # don't tell the internet what serves it
     )
 
 
