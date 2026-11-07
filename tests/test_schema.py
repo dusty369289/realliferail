@@ -21,8 +21,21 @@ from tests.conftest import FIXTURES, Clock, at, fixture_json
 SPEC = Path(__file__).resolve().parents[1] / "docs" / "rtt-openapi.yml"
 
 
+# Where real answers disagree with the spec, seen in recordings. Each is listed in docs/rtt-api.md. Adding one here
+# needs a recording that shows it, so the spec isn't loosened by guesswork.
+OBSERVED = {
+    # 2026-11-07, real_service_*: allocationItems[].stockType is "unit", the spec says "UNIT"
+    "stockType": ["unit", "loco", "wagon", "carriage", "set"],
+}
+
+
 def _fix(node):
     if isinstance(node, dict):
+        props = node.get("properties")
+        if isinstance(props, dict):
+            for key, extra in OBSERVED.items():
+                if isinstance(props.get(key), dict) and "enum" in props[key]:
+                    props[key]["enum"] = [*props[key]["enum"], *extra]
         one = node.get("oneOf")
         if (
             "enum" in node

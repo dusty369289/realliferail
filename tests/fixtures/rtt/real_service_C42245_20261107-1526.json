@@ -1,0 +1,1575 @@
+{
+ "systemStatus": {
+  "realtimeNetworkRail": "OK",
+  "rttCore": "OK"
+ },
+ "query": {
+  "uniqueIdentity": "gb-nr:C42245:2026-11-07",
+  "detailed": true
+ },
+ "service": {
+  "scheduleMetadata": {
+   "uniqueIdentity": "gb-nr:C42245:2026-11-07",
+   "namespace": "gb-nr",
+   "identity": "C42245",
+   "departureDate": "2026-11-07",
+   "operator": {
+    "code": "GW",
+    "name": "Great Western Railway"
+   },
+   "modeType": "TRAIN",
+   "inPassengerService": true,
+   "trainReportingIdentity": "1D27",
+   "stpIndicator": "WTT",
+   "runsAsRequired": false
+  },
+  "locations": [
+   {
+    "temporalData": {
+     "departure": {
+      "scheduleInternal": "2026-11-07T14:58:00",
+      "scheduleAdvertised": "2026-11-07T14:58:00",
+      "realtimeActual": "2026-11-07T14:58:00",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_PICK_UP",
+     "realtimeCallType": "ADVERTISED_PICK_UP",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "3",
+      "actual": "3"
+     },
+     "line": {
+      "planned": "URL",
+      "actual": "UOR"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Oxford",
+     "shortCodes": [
+      "OXF"
+     ],
+     "longCodes": [
+      "OXFD"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:00:00",
+      "realtimeActual": "2026-11-07T14:59:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "actual": "UO"
+     },
+     "path": {
+      "actual": "UOR"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Hinksey North",
+     "longCodes": [
+      "HINKN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:00:45",
+      "realtimeActual": "2026-11-07T15:00:45",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Hinksey South",
+     "longCodes": [
+      "HINKSYS"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:01:30",
+      "realtimeActual": "2026-11-07T15:01:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0,
+     "allowances": {
+      "engineering": 60
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Kennington Jn",
+     "longCodes": [
+      "KNNGTNJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:03:45",
+      "realtimeActual": "2026-11-07T15:03:15",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Radley",
+     "shortCodes": [
+      "RAD"
+     ],
+     "longCodes": [
+      "RDLEY"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:05:30",
+      "realtimeActual": "2026-11-07T15:05:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Culham",
+     "shortCodes": [
+      "CUM"
+     ],
+     "longCodes": [
+      "CULHAM"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:06:15",
+      "realtimeActual": "2026-11-07T15:06:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "1"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Appleford",
+     "shortCodes": [
+      "APF"
+     ],
+     "longCodes": [
+      "APPLEFD"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:06:45",
+      "realtimeActual": "2026-11-07T15:06:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Appleford L.C.",
+     "longCodes": [
+      "APPLEFX"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:07:30",
+      "realtimeActual": "2026-11-07T15:07:15",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "actual": "UA"
+     },
+     "path": {
+      "actual": "UO"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0,
+     "allowances": {
+      "pathing": 210
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Didcot North Jn",
+     "longCodes": [
+      "DIDCTNJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:12:00",
+      "realtimeActual": "2026-11-07T15:11:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "ML",
+      "actual": "UM"
+     },
+     "path": {
+      "actual": "UA"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Didcot East Jn",
+     "longCodes": [
+      "DIDCTEJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:12:45",
+      "realtimeActual": "2026-11-07T15:12:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Moreton Cutting",
+     "longCodes": [
+      "MRTNCUT"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:14:30",
+      "realtimeActual": "2026-11-07T15:15:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Cholsey",
+     "shortCodes": [
+      "CHO"
+     ],
+     "longCodes": [
+      "CHOLSEY"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:17:00",
+      "realtimeActual": "2026-11-07T15:16:45",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0,
+     "allowances": {
+      "engineering": 60
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Goring & Streatley",
+     "shortCodes": [
+      "GOR"
+     ],
+     "longCodes": [
+      "GORASTR"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:19:00",
+      "realtimeActual": "2026-11-07T15:18:45",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Pangbourne",
+     "shortCodes": [
+      "PAN"
+     ],
+     "longCodes": [
+      "PANGBRN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:21:00",
+      "realtimeActual": "2026-11-07T15:19:45",
+      "realtimeInternalLateness": -1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Tilehurst",
+     "shortCodes": [
+      "TLH"
+     ],
+     "longCodes": [
+      "TILHRST"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:21:15",
+      "realtimeActual": "2026-11-07T15:20:00",
+      "realtimeInternalLateness": -1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Tilehurst East Jn.",
+     "longCodes": [
+      "TILHEJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:22:30",
+      "realtimeActual": "2026-11-07T15:21:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reading High Level Jn",
+     "longCodes": [
+      "RDNGHLJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:23:00",
+      "realtimeActual": "2026-11-07T15:22:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reading Main Line West",
+     "longCodes": [
+      "RDNGMLW"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T15:24:00",
+      "scheduleAdvertised": "2026-11-07T15:24:00",
+      "realtimeActual": "2026-11-07T15:23:00",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T15:27:00",
+      "scheduleAdvertised": "2026-11-07T15:27:00",
+      "realtimeForecast": "2026-11-07T15:27:00",
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false,
+     "status": "AT_PLATFORM"
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "10",
+      "actual": "10"
+     },
+     "line": {
+      "planned": "UML",
+      "forecast": "UML"
+     },
+     "path": {
+      "actual": "UM"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reading",
+     "shortCodes": [
+      "RDG"
+     ],
+     "longCodes": [
+      "RDNGSTN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:27:30",
+      "realtimeForecast": "2026-11-07T15:27:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reading Main Line East",
+     "longCodes": [
+      "RDNGMLE"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:28:00",
+      "realtimeForecast": "2026-11-07T15:28:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Kennet Bridge Jn",
+     "longCodes": [
+      "RDNGKBJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:30:15",
+      "realtimeForecast": "2026-11-07T15:30:15",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Twyford West",
+     "longCodes": [
+      "TWYFDW"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:31:00",
+      "realtimeForecast": "2026-11-07T15:31:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "2",
+      "forecast": "2"
+     },
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Twyford",
+     "shortCodes": [
+      "TWY"
+     ],
+     "longCodes": [
+      "TWYFORD"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:31:30",
+      "realtimeForecast": "2026-11-07T15:31:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Ruscombe",
+     "longCodes": [
+      "RUSCOMB"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:34:30",
+      "realtimeForecast": "2026-11-07T15:34:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "2",
+      "forecast": "2"
+     },
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Maidenhead",
+     "shortCodes": [
+      "MAI"
+     ],
+     "longCodes": [
+      "MDNHEAD"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:34:45",
+      "realtimeForecast": "2026-11-07T15:34:45",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Maidenhead East",
+     "longCodes": [
+      "MDNHDE"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:35:15",
+      "realtimeForecast": "2026-11-07T15:35:15",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Taplow",
+     "shortCodes": [
+      "TAP"
+     ],
+     "longCodes": [
+      "TAPLOW"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:36:00",
+      "realtimeForecast": "2026-11-07T15:36:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Burnham",
+     "shortCodes": [
+      "BNM"
+     ],
+     "longCodes": [
+      "BNHAM"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:37:00",
+      "realtimeForecast": "2026-11-07T15:37:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Slough West",
+     "longCodes": [
+      "SLOUGHW"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:37:30",
+      "realtimeForecast": "2026-11-07T15:37:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "3",
+      "forecast": "3"
+     },
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Slough",
+     "shortCodes": [
+      "SLO"
+     ],
+     "longCodes": [
+      "SLOUGH"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:38:00",
+      "realtimeForecast": "2026-11-07T15:38:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Dolphin Jn",
+     "longCodes": [
+      "DOLPHNJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:38:30",
+      "realtimeForecast": "2026-11-07T15:38:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Langley",
+     "shortCodes": [
+      "LNY"
+     ],
+     "longCodes": [
+      "LANGLEY"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:39:00",
+      "realtimeForecast": "2026-11-07T15:39:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Iver",
+     "shortCodes": [
+      "IVR"
+     ],
+     "longCodes": [
+      "IVER"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:39:45",
+      "realtimeForecast": "2026-11-07T15:39:45",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "West Drayton Jcn",
+     "longCodes": [
+      "WDRYJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:39:45",
+      "realtimeForecast": "2026-11-07T15:39:45",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "West Drayton",
+     "shortCodes": [
+      "WDT"
+     ],
+     "longCodes": [
+      "WDRYTON"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:40:00",
+      "realtimeForecast": "2026-11-07T15:40:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "West Drayton East",
+     "longCodes": [
+      "WDRYE"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:40:15",
+      "realtimeForecast": "2026-11-07T15:40:15",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Stockley Bridge Jn",
+     "longCodes": [
+      "STKYBJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:40:30",
+      "realtimeForecast": "2026-11-07T15:40:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "path": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Stockley Junction",
+     "longCodes": [
+      "STKYJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:41:00",
+      "realtimeForecast": "2026-11-07T15:41:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0,
+     "allowances": {
+      "pathing": 60
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Heathrow Airport Jn",
+     "longCodes": [
+      "HTRWAJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:41:00",
+      "realtimeForecast": "2026-11-07T15:41:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Hayes & Harlington",
+     "shortCodes": [
+      "HAY"
+     ],
+     "longCodes": [
+      "HAYESAH"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:42:00",
+      "realtimeForecast": "2026-11-07T15:42:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Southall West Jn",
+     "longCodes": [
+      "STHALWJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:43:00",
+      "realtimeForecast": "2026-11-07T15:43:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "2",
+      "forecast": "2"
+     },
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0,
+     "allowances": {
+      "pathing": 60
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Southall",
+     "shortCodes": [
+      "STL"
+     ],
+     "longCodes": [
+      "STHALL"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:43:00",
+      "realtimeForecast": "2026-11-07T15:43:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Southall East Jn",
+     "longCodes": [
+      "STHALEJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:44:00",
+      "realtimeForecast": "2026-11-07T15:44:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Hanwell",
+     "shortCodes": [
+      "HAN"
+     ],
+     "longCodes": [
+      "HANWELL"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:44:15",
+      "realtimeForecast": "2026-11-07T15:44:15",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "West Ealing Junction",
+     "longCodes": [
+      "WEALJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:44:30",
+      "realtimeForecast": "2026-11-07T15:44:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "West Ealing",
+     "shortCodes": [
+      "WEA"
+     ],
+     "longCodes": [
+      "WEALING"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:45:00",
+      "realtimeForecast": "2026-11-07T15:45:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Ealing Broadway",
+     "shortCodes": [
+      "EAL"
+     ],
+     "longCodes": [
+      "EALINGB"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:45:30",
+      "realtimeForecast": "2026-11-07T15:45:30",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "path": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0,
+     "allowances": {
+      "engineering": 60
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Acton West",
+     "longCodes": [
+      "ACTONW"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:46:15",
+      "realtimeForecast": "2026-11-07T15:46:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Acton Main Line",
+     "shortCodes": [
+      "AML"
+     ],
+     "longCodes": [
+      "ACTONML"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:47:00",
+      "realtimeForecast": "2026-11-07T15:46:45",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Friars Jn",
+     "longCodes": [
+      "FRIARSJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:47:15",
+      "realtimeForecast": "2026-11-07T15:47:15",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Old Oak Common West",
+     "longCodes": [
+      "OLDOKCW"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:48:00",
+      "realtimeForecast": "2026-11-07T15:47:45",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Old Oak Common East",
+     "longCodes": [
+      "OLDOKCE"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:49:00",
+      "realtimeForecast": "2026-11-07T15:48:45",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "3",
+      "forecast": "3"
+     },
+     "path": {
+      "planned": "ML",
+      "forecast": "ML"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0,
+     "allowances": {
+      "pathing": 30
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Ladbroke Grove",
+     "longCodes": [
+      "LDBRKJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:50:00",
+      "realtimeForecast": "2026-11-07T15:50:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "3",
+      "forecast": "3"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Portobello Jn (London)",
+     "longCodes": [
+      "PRTOBJP"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:51:00",
+      "realtimeForecast": "2026-11-07T15:51:00",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "planned": "3",
+      "forecast": "3"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Royal Oak Junction",
+     "longCodes": [
+      "ROYAOJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T15:52:00",
+      "scheduleAdvertised": "2026-11-07T15:52:00",
+      "realtimeForecast": "2026-11-07T15:52:00",
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_SET_DOWN",
+     "realtimeCallType": "ADVERTISED_SET_DOWN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "5",
+      "forecast": "5"
+     },
+     "numberOfVehicles": 9,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "London Paddington",
+     "shortCodes": [
+      "PAD"
+     ],
+     "longCodes": [
+      "PADTON"
+     ]
+    }
+   }
+  ],
+  "origin": [
+   {
+    "location": {
+     "description": "Oxford",
+     "longCodes": [
+      "OXFD"
+     ]
+    },
+    "temporalData": {
+     "scheduleInternal": "2026-11-07T14:58:00",
+     "scheduleAdvertised": "2026-11-07T14:58:00"
+    }
+   }
+  ],
+  "destination": [
+   {
+    "location": {
+     "description": "London Paddington",
+     "longCodes": [
+      "PADTON"
+     ]
+    },
+    "temporalData": {
+     "scheduleInternal": "2026-11-07T15:52:00",
+     "scheduleAdvertised": "2026-11-07T15:52:00"
+    }
+   }
+  ],
+  "allocationData": [
+   {
+    "allocationIndex": 0,
+    "leadingClass": "800",
+    "passengerVehicles": 9,
+    "allocationItems": [
+     {
+      "stockType": "unit",
+      "identity": "800317",
+      "inReverse": false,
+      "identitySuppressed": false,
+      "numberOfVehicles": 9
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -21,13 +21,17 @@ LONDON = ZoneInfo("Europe/London")
 VERSION = "1"
 
 
+FRACTIONS = {15: "¼", 30: "½", 45: "¾"}
+
+
 def hm(dt: datetime | None, half: bool = False) -> str:
+    """14:31, or with `half`, 14:31½ / 14:31¼: the working timetable has half minutes, detailed actuals quarters."""
     if dt is None:
         return ""
     dt = dt.astimezone(LONDON)
     s = dt.strftime("%H:%M")
-    if half and dt.second >= 30:
-        s += "½"
+    if half and dt.second:
+        s += FRACTIONS.get(round(dt.second / 15) * 15, "")
     return s
 
 
@@ -91,6 +95,7 @@ def create_app(core: Realliferail) -> FastAPI:
         to: str = "",
         mode: str = "dep",
         window: int = 60,
+        all: int = 0,
     ):
         if not station.strip():
             return RedirectResponse("/", status_code=303)
@@ -105,12 +110,14 @@ def create_app(core: Realliferail) -> FastAPI:
         busy = False
         if error is None:
             try:
-                result = core.board(station, when, window, to or None, mode)
+                result = core.board(station, when, window, to or None, mode, show_all=bool(all))
             except BusyError as e:
                 error, busy = str(e), True
             except RttError as e:
                 error = str(e)
         base = {"station": station, "to": to, "mode": mode, "window": window}
+        if all:
+            base["all"] = 1
         nav = {}
         if result:
             t0 = result.board.time_from
@@ -119,6 +126,8 @@ def create_app(core: Realliferail) -> FastAPI:
                 nav[label] = "/board?" + urlencode({**base, "time": t.strftime("%H:%M"), "day": t.date().isoformat()})
             other = "arr" if mode == "dep" else "dep"
             nav["switch"] = "/board?" + urlencode({**base, "mode": other, "time": time, "day": day})
+            flip = {k: v for k, v in base.items() if k != "all"} | ({} if all else {"all": 1})
+            nav["all"] = "/board?" + urlencode({**flip, "time": time, "day": day})
         live = not time  # "now" boards refresh themselves
         return page(
             request,

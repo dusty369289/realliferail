@@ -130,6 +130,13 @@ def _unique(meta: dict) -> tuple[str, str, date]:
     return f"{identity}:{run_date.isoformat()}", identity, run_date
 
 
+def _pa(meta: dict, key: str) -> str | None:
+    v = meta.get(key)
+    if isinstance(v, dict):
+        return v.get("actual") or v.get("forecast") or v.get("planned")
+    return None
+
+
 def parse_point(raw: dict) -> Point:
     t = raw.get("temporalData") or {}
     meta = raw.get("locationMetadata") or {}
@@ -142,12 +149,6 @@ def parse_point(raw: dict) -> Point:
         is_pass = True
     platform, confirmed, changed = _platform(meta)
     allow = meta.get("allowances") if isinstance(meta.get("allowances"), dict) else {}
-
-    def pa(key: str) -> str | None:
-        v = meta.get(key)
-        if isinstance(v, dict):
-            return v.get("actual") or v.get("planned")
-        return None
 
     return Point(
         name=str(loc.get("description") or "Unknown"),
@@ -170,8 +171,8 @@ def parse_point(raw: dict) -> Point:
             pathing=int(allow.get("pathing") or 0),
             performance=int(allow.get("performance") or 0),
         ),
-        line=pa("line"),
-        path=pa("path"),
+        line=_pa(meta, "line"),
+        path=_pa(meta, "path"),
     )
 
 
@@ -219,6 +220,17 @@ def parse_service(body: dict) -> Service:
         vehicles=int(vehicles) if vehicles else None,
         units=tuple(units),
         leading_class=str(leading) if leading else None,
+        branding=next(
+            (
+                lm.get("stockBranding")
+                for p in s.get("locations") or []
+                if isinstance(p, dict)
+                for lm in [p.get("locationMetadata") or {}]
+                if lm.get("stockBranding")
+            ),
+            None,
+        ),
+        stp=meta.get("stpIndicator"),
     )
 
 
@@ -259,6 +271,10 @@ def parse_board(body: dict | None, *, fallback_name: str, time_from: datetime, t
                 status=t.get("status"),
                 vehicles=lm.get("numberOfVehicles"),
                 passenger=meta.get("inPassengerService") is not False,
+                call_type=t.get("realtimeCallType") or t.get("scheduledCallType"),
+                branding=lm.get("stockBranding"),
+                line=_pa(lm, "line"),
+                stp=meta.get("stpIndicator"),
                 reasons=_reasons(raw.get("reasons")),
             )
         )

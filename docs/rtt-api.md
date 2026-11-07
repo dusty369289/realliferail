@@ -104,6 +104,22 @@ appear without detailed mode. Whether *every* timing point appears on free token
 7. `realtimeAdvertisedLateness` can be negative (-1, early against the public time while on time against the working timetable).
 8. `query.detailed: false` is echoed back.
 
+## Observed with a real Hobbyist token (2026-11-07, recordings in `tests/fixtures/rtt/real_*.json`)
+
+9. The token from the portal is a **refresh token**. `/api/info` refuses it (401), and `/api/get_access_token` swaps it for
+   an access token. Entitlements: `allowAllocationsPassenger`, `allowDetailed`. History is limited to 14 days. Limits from the
+   headers are 10 a minute, 100 an hour and 1000 a day.
+10. **Detailed mode actuals have seconds, at quarter-minute steps** (`15:03:15`, `14:22:45`), on passes and on calls. These
+    come from berth steps. Non-detailed board actuals were whole minutes.
+11. Passes **are forecast** (`pass.realtimeForecast`), and some points have `isInterpolated: true`.
+12. `line` / `path` codes (`UML`, `URL`, `UA` …) are there, with planned, forecast and actual values.
+13. `allocationItems[].stockType` is **lowercase** (`"unit"`), against the spec's `UNIT`. It's tolerated in `tests/test_schema.py`.
+14. Detailed boards include empty stock and staff-only calls (`inPassengerService: false`, call type
+    `OPERATIONAL_ONLY`, operator `ZZ` with no name), and `BUS` rows (headcode `0B00`). We hide the first two by default.
+15. `stockBranding` (e.g. `Arterio`, `Voyager`), `stpIndicator` and `runsAsRequired` appear in detailed mode, and the
+    headcode (`trainReportingIdentity`) is present.
+16. Reading 15:26 to 16:26 on a Saturday: 57 board rows, about 88 kB. One long-distance service: 56 points, 53 of them passes, about 32 kB.
+
 ## Insights we draw from it
 
 - **Position between reports**: last reported timing point, plus elapsed time against the working-timetable section

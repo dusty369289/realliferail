@@ -137,6 +137,8 @@ class Service:
     vehicles: int | None = None
     units: tuple[str, ...] = ()
     leading_class: str | None = None
+    branding: str | None = None
+    stp: str | None = None
 
     @property
     def origin_name(self) -> str:
@@ -169,6 +171,10 @@ class BoardRow:
     status: str | None
     vehicles: int | None
     passenger: bool = True
+    call_type: str | None = None  # ADVERTISED_OPEN / _PICK_UP / _SET_DOWN / OPERATIONAL_ONLY
+    branding: str | None = None  # e.g. "Arterio", "Voyager"
+    line: str | None = None  # running line here, e.g. "UML"
+    stp: str | None = None  # WTT, VAR, STP (detailed mode)
     reasons: tuple[Reason, ...] = ()
 
     @property
@@ -176,6 +182,15 @@ class BoardRow:
         return self.display in (Display.CANCELLED, Display.DIVERTED) or (
             self.departure.cancelled if not self.departure.is_empty else self.arrival.cancelled
         )
+
+    @property
+    def for_passengers(self) -> bool:
+        """Something a passenger can board or leave here: not empty stock, not a staff-only stop."""
+        return self.passenger and self.call_type != "OPERATIONAL_ONLY"
+
+    @property
+    def is_bus(self) -> bool:
+        return "BUS" in self.mode
 
     @property
     def terminates_here(self) -> bool:

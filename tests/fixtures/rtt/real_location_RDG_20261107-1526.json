@@ -1,0 +1,3913 @@
+{
+ "systemStatus": {
+  "realtimeNetworkRail": "OK",
+  "rttCore": "OK"
+ },
+ "query": {
+  "location": {
+   "namespace": "gb-nr",
+   "description": "Reading",
+   "shortCodes": [
+    "RDG"
+   ],
+   "longCodes": [
+    "gb-nr:RDNGSTN",
+    "gb-nr:RDNG4AB",
+    "gb-nr:RDNGBUS"
+   ]
+  },
+  "timeFrom": "2026-11-07T15:26:05+00:00",
+  "timeTo": "2026-11-07T16:26:05+00:00",
+  "detailed": true
+ },
+ "services": [
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:24:00",
+     "scheduleAdvertised": "2026-11-07T15:24:00",
+     "realtimeActual": "2026-11-07T15:23:00",
+     "realtimeInternalLateness": 0,
+     "realtimeAdvertisedLateness": 0,
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:27:00",
+     "scheduleAdvertised": "2026-11-07T15:27:00",
+     "realtimeForecast": "2026-11-07T15:27:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false,
+    "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "10",
+     "actual": "10"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42245:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42245",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1D27",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Oxford",
+      "longCodes": [
+       "OXFD"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:58:00",
+      "scheduleAdvertised": "2026-11-07T14:58:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:52:00",
+      "scheduleAdvertised": "2026-11-07T15:52:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:27:00",
+     "scheduleAdvertised": "2026-11-07T15:27:00",
+     "realtimeForecast": "2026-11-07T15:27:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "5",
+     "forecast": "5"
+    },
+    "numberOfVehicles": 3,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42388:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42388",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1V51",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Gatwick Airport",
+      "longCodes": [
+       "GTWK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T13:59:00",
+      "scheduleAdvertised": "2026-11-07T13:59:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:27:00",
+      "scheduleAdvertised": "2026-11-07T15:27:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:29:00",
+     "scheduleAdvertised": "2026-11-07T15:29:00",
+     "realtimeForecast": "2026-11-07T15:29:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false,
+    "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "14",
+     "actual": "14"
+    },
+    "line": {
+     "planned": "URL"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C37455:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C37455",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "XR",
+     "name": "Elizabeth Line"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "9U15",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:29:00",
+      "scheduleAdvertised": "2026-11-07T15:29:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Abbey Wood",
+      "longCodes": [
+       "ABWDXR"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:56:00",
+      "scheduleAdvertised": "2026-11-07T16:57:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:26:30",
+     "scheduleAdvertised": "2026-11-07T15:27:00",
+     "realtimeActual": "2026-11-07T15:25:00",
+     "realtimeInternalLateness": -1,
+     "realtimeAdvertisedLateness": -1,
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:29:30",
+     "scheduleAdvertised": "2026-11-07T15:29:00",
+     "realtimeForecast": "2026-11-07T15:29:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false,
+    "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "11",
+     "actual": "11"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 4,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42287:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42287",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1K21",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Newbury",
+      "longCodes": [
+       "NEWBURY"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:03:00",
+      "scheduleAdvertised": "2026-11-07T15:03:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:55:00",
+      "scheduleAdvertised": "2026-11-07T15:55:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:26:00",
+     "scheduleAdvertised": "2026-11-07T15:26:00",
+     "realtimeActual": "2026-11-07T15:25:45",
+     "realtimeInternalLateness": 0,
+     "realtimeAdvertisedLateness": 0,
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:30:00",
+     "scheduleAdvertised": "2026-11-07T15:30:00",
+     "realtimeForecast": "2026-11-07T15:30:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false,
+    "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "7",
+     "actual": "7"
+    },
+    "line": {
+     "planned": "WL"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42228:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42228",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1C86",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:03:00",
+      "scheduleAdvertised": "2026-11-07T15:03:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Penzance",
+      "longCodes": [
+       "PENZNCE"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T20:10:00",
+      "scheduleAdvertised": "2026-11-07T20:10:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:31:00",
+     "scheduleAdvertised": "2026-11-07T15:31:00",
+     "realtimeForecast": "2026-11-07T15:33:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "15",
+     "forecast": "15"
+    },
+    "numberOfVehicles": 2,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:31357:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "31357",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2R21",
+    "stpIndicator": "STP",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Didcot Parkway",
+      "longCodes": [
+       "DIDCOTP"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:08:00",
+      "scheduleAdvertised": "2026-11-07T15:08:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:31:00",
+      "scheduleAdvertised": "2026-11-07T15:31:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:31:00",
+     "scheduleAdvertised": "2026-11-07T15:31:00",
+     "realtimeForecast": "2026-11-07T15:30:15",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:33:00",
+     "scheduleAdvertised": "2026-11-07T15:33:00",
+     "realtimeForecast": "2026-11-07T15:33:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "8",
+     "forecast": "8"
+    },
+    "line": {
+     "planned": "WL"
+    },
+    "numberOfVehicles": 4,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:W35132:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "W35132",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1K18",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:06:00",
+      "scheduleAdvertised": "2026-11-07T15:06:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Newbury",
+      "longCodes": [
+       "NEWBURY"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:54:00",
+      "scheduleAdvertised": "2026-11-07T15:54:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:33:30",
+     "scheduleAdvertised": "2026-11-07T15:34:00",
+     "realtimeForecast": "2026-11-07T15:38:00",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:35:30",
+     "scheduleAdvertised": "2026-11-07T15:35:00",
+     "realtimeForecast": "2026-11-07T15:39:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "11",
+     "forecast": "11"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 5,
+    "allocationIndex": 1
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42301:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42301",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1L78",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Cheltenham Spa",
+      "longCodes": [
+       "CHLTNHM"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:03:00",
+      "scheduleAdvertised": "2026-11-07T14:03:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:01:00",
+      "scheduleAdvertised": "2026-11-07T16:01:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:37:00",
+     "scheduleAdvertised": "2026-11-07T15:37:00",
+     "realtimeForecast": "2026-11-07T15:37:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "1",
+     "forecast": "1"
+    },
+    "line": {
+     "planned": "WL"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C48502:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C48502",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2J45",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:37:00",
+      "scheduleAdvertised": "2026-11-07T15:37:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Basingstoke",
+      "longCodes": [
+       "BSNGSTK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:04:00",
+      "scheduleAdvertised": "2026-11-07T16:04:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:39:00",
+     "scheduleAdvertised": "2026-11-07T15:39:00",
+     "realtimeForecast": "2026-11-07T15:39:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false,
+    "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "4",
+     "actual": "4"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:L80761:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "L80761",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "SW",
+     "name": "South Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2C50",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:39:00",
+      "scheduleAdvertised": "2026-11-07T15:39:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Waterloo",
+      "longCodes": [
+       "WATRLMN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:04:00",
+      "scheduleAdvertised": "2026-11-07T17:04:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:40:00",
+     "scheduleAdvertised": "2026-11-07T15:42:00",
+     "realtimeForecast": "2026-11-07T15:40:45",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "14",
+     "forecast": "14"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C37267:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C37267",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "XR",
+     "name": "Elizabeth Line"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "9R92",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Abbey Wood",
+      "longCodes": [
+       "ABWDXR"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:18:00",
+      "scheduleAdvertised": "2026-11-07T14:18:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:40:00",
+      "scheduleAdvertised": "2026-11-07T15:42:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:39:00",
+     "scheduleAdvertised": "2026-11-07T15:39:00",
+     "realtimeForecast": "2026-11-07T15:38:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:40:30",
+     "scheduleAdvertised": "2026-11-07T15:40:00",
+     "realtimeForecast": "2026-11-07T15:40:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "9",
+     "forecast": "9"
+    },
+    "line": {
+     "planned": "ML"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:Y15293:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "Y15293",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1U20",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:13:00",
+      "scheduleAdvertised": "2026-11-07T15:13:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Bristol Parkway",
+      "longCodes": [
+       "BRSTPWY"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:37:00",
+      "scheduleAdvertised": "2026-11-07T16:37:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:42:00",
+     "scheduleAdvertised": "2026-11-07T15:42:00",
+     "realtimeForecast": "2026-11-07T15:41:45",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "2",
+     "forecast": "2"
+    },
+    "numberOfVehicles": 4,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42563:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42563",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2K43",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Newbury",
+      "longCodes": [
+       "NEWBURY"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:15:00",
+      "scheduleAdvertised": "2026-11-07T15:15:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:42:00",
+      "scheduleAdvertised": "2026-11-07T15:42:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:40:30",
+     "scheduleAdvertised": "2026-11-07T15:41:00",
+     "realtimeForecast": "2026-11-07T15:40:15",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:42:30",
+     "scheduleAdvertised": "2026-11-07T15:42:00",
+     "realtimeForecast": "2026-11-07T15:42:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "10",
+     "forecast": "10"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:W34501:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "W34501",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1A24",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Weston-super-Mare",
+      "longCodes": [
+       "WSMARE"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:02:00",
+      "scheduleAdvertised": "2026-11-07T14:02:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:05:00",
+      "scheduleAdvertised": "2026-11-07T16:05:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:43:00",
+     "scheduleAdvertised": "2026-11-07T15:43:00",
+     "realtimeForecast": "2026-11-07T15:43:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false,
+    "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "15",
+     "actual": "15"
+    },
+    "line": {
+     "planned": "URL"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C47890:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C47890",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2P53",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:43:00",
+      "scheduleAdvertised": "2026-11-07T15:43:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:22:00",
+      "scheduleAdvertised": "2026-11-07T16:22:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:43:00",
+     "scheduleAdvertised": "2026-11-07T15:44:00",
+     "realtimeForecast": "2026-11-07T15:50:15",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "6",
+     "forecast": "6"
+    },
+    "numberOfVehicles": 10,
+    "allocationIndex": 0,
+    "stockBranding": "Arterio"
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:L80721:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "L80721",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "SW",
+     "name": "South Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2C41",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Waterloo",
+      "longCodes": [
+       "WATRLMN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:19:00",
+      "scheduleAdvertised": "2026-11-07T14:19:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:43:00",
+      "scheduleAdvertised": "2026-11-07T15:44:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:43:00",
+     "scheduleAdvertised": "2026-11-07T15:43:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "line": {
+     "planned": "BUS"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C27032:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C27032",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "BUS",
+    "inPassengerService": true,
+    "trainReportingIdentity": "0B00",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGBUS"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:43:00",
+      "scheduleAdvertised": "2026-11-07T15:43:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Heathrow Terminal 3 Bus",
+      "longCodes": [
+       "HTRBUS3"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:50:00",
+      "scheduleAdvertised": "2026-11-07T16:50:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:45:00",
+     "scheduleAdvertised": "2026-11-07T15:45:00",
+     "realtimeForecast": "2026-11-07T15:45:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "12",
+     "forecast": "12"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C48236:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C48236",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2N48",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:08:00",
+      "scheduleAdvertised": "2026-11-07T15:08:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:45:00",
+      "scheduleAdvertised": "2026-11-07T15:45:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:45:00",
+     "scheduleAdvertised": "2026-11-07T15:45:00",
+     "realtimeForecast": "2026-11-07T15:45:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false,
+    "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "3",
+     "actual": "3"
+    },
+    "line": {
+     "planned": "FVL"
+    },
+    "numberOfVehicles": 5,
+    "allocationIndex": 0,
+    "stockBranding": "Voyager"
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:G00719:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "G00719",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "XC",
+     "name": "CrossCountry"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1E56",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:45:00",
+      "scheduleAdvertised": "2026-11-07T15:45:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Birmingham New Street",
+      "longCodes": [
+       "BHAMNWS"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:17:00",
+      "scheduleAdvertised": "2026-11-07T17:17:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:45:00",
+     "scheduleAdvertised": "2026-11-07T15:45:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {},
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C27180:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C27180",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "BUS",
+    "inPassengerService": true,
+    "trainReportingIdentity": "0B00",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Heathrow Terminal 3 Bus",
+      "longCodes": [
+       "HTRBUS3"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:40:00",
+      "scheduleAdvertised": "2026-11-07T14:40:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGBUS"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:45:00",
+      "scheduleAdvertised": "2026-11-07T15:45:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:46:00",
+     "scheduleAdvertised": "2026-11-07T15:46:00",
+     "realtimeForecast": "2026-11-07T15:47:15",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:48:00",
+     "scheduleAdvertised": "2026-11-07T15:48:00",
+     "realtimeForecast": "2026-11-07T15:48:45",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "11",
+     "forecast": "11"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42164:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42164",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1A85",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Exeter St Davids",
+      "longCodes": [
+       "EXETRSD"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T13:45:00",
+      "scheduleAdvertised": "2026-11-07T13:45:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:12:00",
+      "scheduleAdvertised": "2026-11-07T16:12:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:46:00",
+     "scheduleAdvertised": "2026-11-07T15:46:00",
+     "realtimeForecast": "2026-11-07T15:45:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:48:00",
+     "scheduleAdvertised": "2026-11-07T15:48:00",
+     "realtimeForecast": "2026-11-07T15:48:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "9",
+     "forecast": "9"
+    },
+    "line": {
+     "planned": "ML"
+    },
+    "numberOfVehicles": 5,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:W34899:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "W34899",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1D30",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:23:00",
+      "scheduleAdvertised": "2026-11-07T15:23:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Oxford",
+      "longCodes": [
+       "OXFD"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:17:00",
+      "scheduleAdvertised": "2026-11-07T16:17:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:51:00",
+     "scheduleAdvertised": "2026-11-07T15:51:00",
+     "realtimeForecast": "2026-11-07T15:51:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "1",
+     "forecast": "1"
+    },
+    "numberOfVehicles": 2,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C03071:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C03071",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2J44",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Basingstoke",
+      "longCodes": [
+       "BSNGSTK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:24:00",
+      "scheduleAdvertised": "2026-11-07T15:24:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:51:00",
+      "scheduleAdvertised": "2026-11-07T15:51:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:48:00",
+     "scheduleAdvertised": "2026-11-07T15:48:00",
+     "realtimeForecast": "2026-11-07T15:48:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:51:00",
+     "scheduleAdvertised": "2026-11-07T15:51:00",
+     "realtimeForecast": "2026-11-07T15:51:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "10",
+     "forecast": "10"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42293:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42293",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1L22",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Swansea",
+      "longCodes": [
+       "SWANSEA"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T13:20:00",
+      "scheduleAdvertised": "2026-11-07T13:20:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:14:00",
+      "scheduleAdvertised": "2026-11-07T16:14:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:39:30",
+     "scheduleAdvertised": "2026-11-07T15:40:00",
+     "realtimeForecast": "2026-11-07T16:08:15",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:52:00",
+     "scheduleAdvertised": "2026-11-07T15:52:00",
+     "realtimeForecast": "2026-11-07T16:20:45",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "7",
+     "forecast": "7"
+    },
+    "line": {
+     "planned": "WL"
+    },
+    "numberOfVehicles": 5,
+    "allocationIndex": 1,
+    "stockBranding": "Voyager"
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:G01021:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "G01021",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "XC",
+     "name": "CrossCountry"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1O18",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Manchester Piccadilly",
+      "longCodes": [
+       "MNCRPIC"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T12:25:00",
+      "scheduleAdvertised": "2026-11-07T12:25:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Bournemouth",
+      "longCodes": [
+       "BOMO"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:15:00",
+      "scheduleAdvertised": "2026-11-07T17:15:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:53:00",
+     "scheduleAdvertised": "2026-11-07T15:53:00",
+     "realtimeForecast": "2026-11-07T15:53:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "12",
+     "forecast": "12"
+    },
+    "line": {
+     "planned": "RL"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:31329:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "31329",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2D69",
+    "stpIndicator": "STP",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:53:00",
+      "scheduleAdvertised": "2026-11-07T15:53:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Didcot Parkway",
+      "longCodes": [
+       "DIDCOTP"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:18:00",
+      "scheduleAdvertised": "2026-11-07T16:18:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:54:00",
+     "scheduleAdvertised": "2026-11-07T15:54:00",
+     "realtimeForecast": "2026-11-07T15:54:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "5",
+     "forecast": "5"
+    },
+    "numberOfVehicles": 3,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42356:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42356",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1O76",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:54:00",
+      "scheduleAdvertised": "2026-11-07T15:54:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Gatwick Airport",
+      "longCodes": [
+       "GTWK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:25:00",
+      "scheduleAdvertised": "2026-11-07T17:25:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:53:00",
+     "scheduleAdvertised": "2026-11-07T15:53:00",
+     "realtimeForecast": "2026-11-07T15:52:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:55:00",
+     "scheduleAdvertised": "2026-11-07T15:55:00",
+     "realtimeForecast": "2026-11-07T15:55:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "9",
+     "forecast": "9"
+    },
+    "line": {
+     "planned": "ML"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42194:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42194",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1C20",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:30:00",
+      "scheduleAdvertised": "2026-11-07T15:30:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Weston-super-Mare",
+      "longCodes": [
+       "WSMARE"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:42:00",
+      "scheduleAdvertised": "2026-11-07T17:42:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:55:00",
+     "scheduleAdvertised": "2026-11-07T15:55:00",
+     "realtimeForecast": "2026-11-07T15:54:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "3",
+     "forecast": "3"
+    },
+    "numberOfVehicles": 3,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:Q20056:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "Q20056",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "SW",
+     "name": "South Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1J50",
+    "stpIndicator": "STP",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Salisbury",
+      "longCodes": [
+       "SLSBRY"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:47:00",
+      "scheduleAdvertised": "2026-11-07T14:47:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:55:00",
+      "scheduleAdvertised": "2026-11-07T15:55:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:57:00",
+     "scheduleAdvertised": "2026-11-07T15:57:00",
+     "realtimeForecast": "2026-11-07T16:01:15",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "4",
+     "forecast": "4"
+    },
+    "numberOfVehicles": 3,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42389:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42389",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1V52",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Gatwick Airport",
+      "longCodes": [
+       "GTWK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:29:00",
+      "scheduleAdvertised": "2026-11-07T14:29:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:57:00",
+      "scheduleAdvertised": "2026-11-07T15:57:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:59:00",
+     "scheduleAdvertised": "2026-11-07T15:59:00",
+     "realtimeForecast": "2026-11-07T15:59:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "14",
+     "forecast": "14"
+    },
+    "line": {
+     "planned": "URL"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C37502:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C37502",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "XR",
+     "name": "Elizabeth Line"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "9U25",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:59:00",
+      "scheduleAdvertised": "2026-11-07T15:59:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Abbey Wood",
+      "longCodes": [
+       "ABWDXR"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:26:00",
+      "scheduleAdvertised": "2026-11-07T17:27:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:56:30",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:59:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "OPERATIONAL_ONLY",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "7",
+     "forecast": "7"
+    },
+    "line": {
+     "planned": "WL"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:L02774:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "L02774",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "ZZ"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": false,
+    "trainReportingIdentity": "6V24",
+    "stpIndicator": "WTT",
+    "runsAsRequired": true
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Willesden Dc Rail Sidings",
+      "longCodes": [
+       "WLSDDCR"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:46:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Bristol East Depot",
+      "longCodes": [
+       "BRSTLED"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T19:12:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:57:00",
+     "scheduleAdvertised": "2026-11-07T15:57:00",
+     "realtimeForecast": "2026-11-07T16:01:30",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T15:59:00",
+     "scheduleAdvertised": "2026-11-07T15:59:00",
+     "realtimeForecast": "2026-11-07T16:03:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "10",
+     "forecast": "10"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:W35375:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "W35375",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1P28",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Hereford",
+      "longCodes": [
+       "HEREFRD"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T13:20:00",
+      "scheduleAdvertised": "2026-11-07T13:20:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:24:00",
+      "scheduleAdvertised": "2026-11-07T16:24:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:00:00",
+     "scheduleAdvertised": "2026-11-07T16:00:00",
+     "realtimeForecast": "2026-11-07T15:59:45",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "15",
+     "forecast": "15"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:31358:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "31358",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2R22",
+    "stpIndicator": "STP",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Didcot Parkway",
+      "longCodes": [
+       "DIDCOTP"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:37:00",
+      "scheduleAdvertised": "2026-11-07T15:37:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:00:00",
+      "scheduleAdvertised": "2026-11-07T16:00:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:03:00",
+     "scheduleAdvertised": "2026-11-07T16:03:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "line": {
+     "planned": "BUS"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C27036:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C27036",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "BUS",
+    "inPassengerService": true,
+    "trainReportingIdentity": "0B00",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGBUS"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:03:00",
+      "scheduleAdvertised": "2026-11-07T16:03:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Heathrow Terminal 3 Bus",
+      "longCodes": [
+       "HTRBUS3"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:10:00",
+      "scheduleAdvertised": "2026-11-07T17:10:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T15:58:30",
+     "scheduleAdvertised": "2026-11-07T15:59:00",
+     "realtimeForecast": "2026-11-07T16:22:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:05:00",
+     "scheduleAdvertised": "2026-11-07T16:05:00",
+     "realtimeForecast": "2026-11-07T16:25:45",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "11",
+     "forecast": "11"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42166:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42166",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1A86",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Plymouth",
+      "longCodes": [
+       "PLYMTH"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T13:15:00",
+      "scheduleAdvertised": "2026-11-07T13:15:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:29:00",
+      "scheduleAdvertised": "2026-11-07T16:29:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:05:00",
+     "scheduleAdvertised": "2026-11-07T16:05:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {},
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C27184:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C27184",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "BUS",
+    "inPassengerService": true,
+    "trainReportingIdentity": "0B00",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Heathrow Terminal 3 Bus",
+      "longCodes": [
+       "HTRBUS3"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:00:00",
+      "scheduleAdvertised": "2026-11-07T15:00:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGBUS"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:05:00",
+      "scheduleAdvertised": "2026-11-07T16:05:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:07:00",
+     "scheduleAdvertised": "2026-11-07T16:07:00",
+     "realtimeForecast": "2026-11-07T16:07:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "1",
+     "forecast": "1"
+    },
+    "line": {
+     "planned": "WL"
+    },
+    "numberOfVehicles": 2,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C48504:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C48504",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2J47",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:07:00",
+      "scheduleAdvertised": "2026-11-07T16:07:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Basingstoke",
+      "longCodes": [
+       "BSNGSTK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:34:00",
+      "scheduleAdvertised": "2026-11-07T16:34:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:09:00",
+     "scheduleAdvertised": "2026-11-07T16:09:00",
+     "realtimeForecast": "2026-11-07T16:09:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "6",
+     "forecast": "6"
+    },
+    "numberOfVehicles": 10,
+    "allocationIndex": 0,
+    "stockBranding": "Arterio"
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:L80770:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "L80770",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "SW",
+     "name": "South Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2C52",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:09:00",
+      "scheduleAdvertised": "2026-11-07T16:09:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Waterloo",
+      "longCodes": [
+       "WATRLMN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:33:00",
+      "scheduleAdvertised": "2026-11-07T17:33:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:10:00",
+     "scheduleAdvertised": "2026-11-07T16:12:00",
+     "realtimeForecast": "2026-11-07T16:12:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "14",
+     "forecast": "14"
+    },
+    "numberOfVehicles": 9,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C37158:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C37158",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "XR",
+     "name": "Elizabeth Line"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "9R04",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Abbey Wood",
+      "longCodes": [
+       "ABWDXR"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:48:00",
+      "scheduleAdvertised": "2026-11-07T14:48:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:10:00",
+      "scheduleAdvertised": "2026-11-07T16:12:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:09:30",
+     "scheduleAdvertised": "2026-11-07T16:10:00",
+     "realtimeForecast": "2026-11-07T16:09:15",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:12:00",
+     "scheduleAdvertised": "2026-11-07T16:12:00",
+     "realtimeForecast": "2026-11-07T16:12:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "10",
+     "forecast": "10"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 10,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42151:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42151",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1A25",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Bristol Temple Meads",
+      "longCodes": [
+       "BRSTLTM"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:00:00",
+      "scheduleAdvertised": "2026-11-07T15:00:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:37:00",
+      "scheduleAdvertised": "2026-11-07T16:37:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:12:00",
+     "scheduleAdvertised": "2026-11-07T16:12:00",
+     "realtimeForecast": "2026-11-07T16:12:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "2",
+     "forecast": "2"
+    },
+    "line": {
+     "planned": "WL"
+    },
+    "numberOfVehicles": 4,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C48565:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C48565",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2K46",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:12:00",
+      "scheduleAdvertised": "2026-11-07T16:12:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Newbury",
+      "longCodes": [
+       "NEWBURY"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:39:00",
+      "scheduleAdvertised": "2026-11-07T16:39:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:13:00",
+     "scheduleAdvertised": "2026-11-07T16:13:00",
+     "realtimeForecast": "2026-11-07T16:13:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "15",
+     "forecast": "15"
+    },
+    "line": {
+     "planned": "URL"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C47893:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C47893",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2P55",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:13:00",
+      "scheduleAdvertised": "2026-11-07T16:13:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:52:00",
+      "scheduleAdvertised": "2026-11-07T16:52:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:11:00",
+     "scheduleAdvertised": "2026-11-07T16:11:00",
+     "realtimeForecast": "2026-11-07T16:10:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:13:00",
+     "scheduleAdvertised": "2026-11-07T16:13:00",
+     "realtimeForecast": "2026-11-07T16:13:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "9",
+     "forecast": "9"
+    },
+    "line": {
+     "planned": "ML"
+    },
+    "numberOfVehicles": 10,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:W34635:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "W34635",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1B21",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:48:00",
+      "scheduleAdvertised": "2026-11-07T15:48:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Swansea",
+      "longCodes": [
+       "SWANSEA"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T18:30:00",
+      "scheduleAdvertised": "2026-11-07T18:30:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:13:00",
+     "scheduleAdvertised": "2026-11-07T16:14:00",
+     "realtimeForecast": "2026-11-07T16:12:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "5",
+     "forecast": "5"
+    },
+    "numberOfVehicles": 10,
+    "allocationIndex": 0,
+    "stockBranding": "Arterio"
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:L80730:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "L80730",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "SW",
+     "name": "South Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2C43",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Waterloo",
+      "longCodes": [
+       "WATRLMN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:49:00",
+      "scheduleAdvertised": "2026-11-07T14:49:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:13:00",
+      "scheduleAdvertised": "2026-11-07T16:14:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:14:30",
+     "scheduleAdvertised": "2026-11-07T16:15:00",
+     "realtimeForecast": "2026-11-07T16:14:15",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "12",
+     "forecast": "12"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C48237:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C48237",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2N50",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:38:00",
+      "scheduleAdvertised": "2026-11-07T15:38:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:14:30",
+      "scheduleAdvertised": "2026-11-07T16:15:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:06:00",
+     "scheduleAdvertised": "2026-11-07T16:06:00",
+     "realtimeForecast": "2026-11-07T16:09:15",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:15:00",
+     "scheduleAdvertised": "2026-11-07T16:15:00",
+     "realtimeForecast": "2026-11-07T16:18:15",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "13",
+     "forecast": "13"
+    },
+    "line": {
+     "planned": "RL"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 1,
+    "stockBranding": "Voyager"
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:G00889:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "G00889",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "XC",
+     "name": "CrossCountry"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1M58",
+    "stpIndicator": "VAR",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Bournemouth",
+      "longCodes": [
+       "BOMO"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:45:00",
+      "scheduleAdvertised": "2026-11-07T14:45:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Manchester Piccadilly",
+      "longCodes": [
+       "MNCRPIC"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T19:29:00",
+      "scheduleAdvertised": "2026-11-07T19:29:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:19:00",
+     "scheduleAdvertised": "2026-11-07T16:19:00",
+     "realtimeForecast": "2026-11-07T16:19:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "realtimeCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "1",
+     "forecast": "1"
+    },
+    "numberOfVehicles": 3,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C03073:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C03073",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2J46",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Basingstoke",
+      "longCodes": [
+       "BSNGSTK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:53:00",
+      "scheduleAdvertised": "2026-11-07T15:53:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:19:00",
+      "scheduleAdvertised": "2026-11-07T16:19:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:15:00",
+     "scheduleAdvertised": "2026-11-07T16:15:00",
+     "realtimeForecast": "2026-11-07T16:14:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:19:00",
+     "scheduleAdvertised": "2026-11-07T16:19:00",
+     "realtimeForecast": "2026-11-07T16:19:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "8",
+     "forecast": "8"
+    },
+    "line": {
+     "planned": "ML"
+    },
+    "numberOfVehicles": 5,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:Y15429:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "Y15429",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1W31",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:52:00",
+      "scheduleAdvertised": "2026-11-07T15:52:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Great Malvern",
+      "longCodes": [
+       "GTMLVRN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T18:29:00",
+      "scheduleAdvertised": "2026-11-07T18:29:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:20:00",
+     "scheduleAdvertised": "2026-11-07T16:20:00",
+     "realtimeForecast": "2026-11-07T16:20:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "3",
+     "forecast": "3"
+    },
+    "line": {
+     "planned": "WL"
+    },
+    "numberOfVehicles": 3,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:Q20111:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "Q20111",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "SW",
+     "name": "South Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1J47",
+    "stpIndicator": "STP",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:20:00",
+      "scheduleAdvertised": "2026-11-07T16:20:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Salisbury",
+      "longCodes": [
+       "SLSBRY"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:21:00",
+      "scheduleAdvertised": "2026-11-07T17:21:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:18:00",
+     "scheduleAdvertised": "2026-11-07T16:18:00",
+     "realtimeForecast": "2026-11-07T16:17:15",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:20:00",
+     "scheduleAdvertised": "2026-11-07T16:20:00",
+     "realtimeForecast": "2026-11-07T16:20:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "10",
+     "forecast": "10"
+    },
+    "line": {
+     "planned": "UML"
+    },
+    "numberOfVehicles": 8,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:W35191:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "W35191",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1L23",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Cardiff Central",
+      "longCodes": [
+       "CRDFCEN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T14:41:00",
+      "scheduleAdvertised": "2026-11-07T14:41:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:44:00",
+      "scheduleAdvertised": "2026-11-07T16:44:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:23:00",
+     "scheduleAdvertised": "2026-11-07T16:23:00",
+     "realtimeForecast": "2026-11-07T16:23:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "12",
+     "forecast": "12"
+    },
+    "line": {
+     "planned": "RL"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:31330:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "31330",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "2D70",
+    "stpIndicator": "STP",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGSTN"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:23:00",
+      "scheduleAdvertised": "2026-11-07T16:23:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Didcot Parkway",
+      "longCodes": [
+       "DIDCOTP"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:48:00",
+      "scheduleAdvertised": "2026-11-07T16:48:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:20:30",
+     "realtimeForecast": "2026-11-07T16:18:00",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:23:00",
+     "realtimeForecast": "2026-11-07T16:20:30",
+     "isCancelled": false
+    },
+    "scheduledCallType": "OPERATIONAL_ONLY",
+    "realtimeCallType": "OPERATIONAL_ONLY",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "13",
+     "forecast": "13"
+    },
+    "numberOfVehicles": 4,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C49392:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C49392",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": false,
+    "trainReportingIdentity": "5R96",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:18:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading Traincare Depot",
+      "longCodes": [
+       "RDNGTCD"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:26:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:23:00",
+     "scheduleAdvertised": "2026-11-07T16:23:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "line": {
+     "planned": "BUS"
+    }
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C27040:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C27040",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "BUS",
+    "inPassengerService": true,
+    "trainReportingIdentity": "0B00",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGBUS"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:23:00",
+      "scheduleAdvertised": "2026-11-07T16:23:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Heathrow Terminal 3 Bus",
+      "longCodes": [
+       "HTRBUS3"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:30:00",
+      "scheduleAdvertised": "2026-11-07T17:30:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:24:00",
+     "scheduleAdvertised": "2026-11-07T16:24:00",
+     "realtimeForecast": "2026-11-07T16:24:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_PICK_UP",
+    "realtimeCallType": "ADVERTISED_PICK_UP",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "4",
+     "forecast": "4"
+    },
+    "numberOfVehicles": 3,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42357:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42357",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1O77",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNG4AB"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:24:00",
+      "scheduleAdvertised": "2026-11-07T16:24:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Gatwick Airport",
+      "longCodes": [
+       "GTWK"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:55:00",
+      "scheduleAdvertised": "2026-11-07T17:55:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:23:00",
+     "scheduleAdvertised": "2026-11-07T16:23:00",
+     "realtimeForecast": "2026-11-07T16:22:45",
+     "isCancelled": false
+    },
+    "departure": {
+     "scheduleInternal": "2026-11-07T16:25:00",
+     "scheduleAdvertised": "2026-11-07T16:25:00",
+     "realtimeForecast": "2026-11-07T16:25:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_OPEN",
+    "realtimeCallType": "ADVERTISED_OPEN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {
+    "platform": {
+     "planned": "9",
+     "forecast": "9"
+    },
+    "line": {
+     "planned": "ML"
+    },
+    "numberOfVehicles": 10,
+    "allocationIndex": 0
+   },
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C42195:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C42195",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "TRAIN",
+    "inPassengerService": true,
+    "trainReportingIdentity": "1C21",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "London Paddington",
+      "longCodes": [
+       "PADTON"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:00:00",
+      "scheduleAdvertised": "2026-11-07T16:00:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Bristol Temple Meads",
+      "longCodes": [
+       "BRSTLTM"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T17:36:00",
+      "scheduleAdvertised": "2026-11-07T17:36:00"
+     }
+    }
+   ]
+  },
+  {
+   "temporalData": {
+    "arrival": {
+     "scheduleInternal": "2026-11-07T16:25:00",
+     "scheduleAdvertised": "2026-11-07T16:25:00",
+     "isCancelled": false
+    },
+    "scheduledCallType": "ADVERTISED_SET_DOWN",
+    "displayAs": "CALL",
+    "isInterpolated": false
+   },
+   "locationMetadata": {},
+   "scheduleMetadata": {
+    "uniqueIdentity": "gb-nr:C27188:2026-11-07",
+    "namespace": "gb-nr",
+    "identity": "C27188",
+    "departureDate": "2026-11-07",
+    "operator": {
+     "code": "GW",
+     "name": "Great Western Railway"
+    },
+    "modeType": "BUS",
+    "inPassengerService": true,
+    "trainReportingIdentity": "0B00",
+    "stpIndicator": "WTT",
+    "runsAsRequired": false
+   },
+   "origin": [
+    {
+     "location": {
+      "description": "Heathrow Terminal 3 Bus",
+      "longCodes": [
+       "HTRBUS3"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T15:20:00",
+      "scheduleAdvertised": "2026-11-07T15:20:00"
+     }
+    }
+   ],
+   "destination": [
+    {
+     "location": {
+      "description": "Reading",
+      "longCodes": [
+       "RDNGBUS"
+      ]
+     },
+     "temporalData": {
+      "scheduleInternal": "2026-11-07T16:25:00",
+      "scheduleAdvertised": "2026-11-07T16:25:00"
+     }
+    }
+   ]
+  }
+ ]
+}

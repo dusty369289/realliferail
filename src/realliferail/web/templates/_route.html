@@ -65,7 +65,7 @@
         {%- if pt.cancelled %}
         {%- elif main.source == TimeSource.BOOKED %}
         {%- elif main.source == TimeSource.OUR_ESTIMATE and not main.changed %}
-        {%- else %}{{ main.time|hm }}{% if main.source == TimeSource.OUR_ESTIMATE %}<span class="est">est</span>{% endif %}
+        {%- else %}{{ main.time|hmh }}{% if main.source == TimeSource.OUR_ESTIMATE %}<span class="est">est</span>{% endif %}
           {%- if main.delay_min %}<span class="route__delay">{{ '+' if main.delay_min > 0 else '−' }}{{ main.delay_min|abs }}</span>{% endif %}
         {%- endif -%}
       </span>

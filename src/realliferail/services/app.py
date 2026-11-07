@@ -67,6 +67,8 @@ class BoardResult:
     fetched: Fetched
     mode: str  # dep or arr
     to: Station | None
+    hidden: int = 0  # empty stock and staff-only calls left out
+    show_all: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -118,6 +120,7 @@ class Realliferail:
         window: int = 60,
         to: str | None = None,
         mode: str = "dep",
+        show_all: bool = False,
     ) -> BoardResult:
         st = self.stations.resolve(station)
         code = st.crs if st else station.strip().upper()
@@ -135,10 +138,17 @@ class Realliferail:
             f.body, fallback_name=st.name if st else code, time_from=when, time_to=when + timedelta(minutes=window)
         )
         if mode == "arr":
-            rows = tuple(r for r in b.rows if not r.arrival.is_empty)
+            rows = [r for r in b.rows if not r.arrival.is_empty and r.call_type != "ADVERTISED_PICK_UP"]
         else:
-            rows = tuple(r for r in b.rows if not r.departure.is_empty)
-        return BoardResult(board=b, rows=rows, station=st, fetched=f, mode=mode, to=to_st)
+            rows = [r for r in b.rows if not r.departure.is_empty and r.call_type != "ADVERTISED_SET_DOWN"]
+        hidden = 0
+        if not show_all:
+            before = len(rows)
+            rows = [r for r in rows if r.for_passengers]
+            hidden = before - len(rows)
+        return BoardResult(
+            board=b, rows=tuple(rows), station=st, fetched=f, mode=mode, to=to_st, hidden=hidden, show_all=show_all
+        )
 
     def service(self, unique_id: str, background: bool = False) -> ServiceResult:
         uid = unique_id.strip()

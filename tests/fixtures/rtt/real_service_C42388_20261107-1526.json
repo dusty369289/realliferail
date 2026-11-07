@@ -1,0 +1,1109 @@
+{
+ "systemStatus": {
+  "realtimeNetworkRail": "OK",
+  "rttCore": "OK"
+ },
+ "query": {
+  "uniqueIdentity": "gb-nr:C42388:2026-11-07",
+  "detailed": true
+ },
+ "service": {
+  "scheduleMetadata": {
+   "uniqueIdentity": "gb-nr:C42388:2026-11-07",
+   "namespace": "gb-nr",
+   "identity": "C42388",
+   "departureDate": "2026-11-07",
+   "operator": {
+    "code": "GW",
+    "name": "Great Western Railway"
+   },
+   "modeType": "TRAIN",
+   "inPassengerService": true,
+   "trainReportingIdentity": "1V51",
+   "stpIndicator": "WTT",
+   "runsAsRequired": false
+  },
+  "locations": [
+   {
+    "temporalData": {
+     "departure": {
+      "scheduleInternal": "2026-11-07T13:59:00",
+      "scheduleAdvertised": "2026-11-07T13:59:00",
+      "realtimeActual": "2026-11-07T13:59:15",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_PICK_UP",
+     "realtimeCallType": "ADVERTISED_PICK_UP",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "2",
+      "actual": "2"
+     },
+     "line": {
+      "planned": "SL",
+      "actual": "US"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Gatwick Airport",
+     "shortCodes": [
+      "GTW"
+     ],
+     "longCodes": [
+      "GTWK"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:00:15",
+      "realtimeActual": "2026-11-07T14:00:45",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "1"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Horley",
+     "shortCodes": [
+      "HOR"
+     ],
+     "longCodes": [
+      "HORLEY"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:02:30",
+      "realtimeActual": "2026-11-07T14:02:45",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "1",
+      "actual": "1"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Salfords",
+     "shortCodes": [
+      "SAF"
+     ],
+     "longCodes": [
+      "SALFDS"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:04:00",
+      "realtimeActual": "2026-11-07T14:04:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "1",
+      "actual": "1"
+     },
+     "line": {
+      "actual": "URH"
+     },
+     "path": {
+      "actual": "US"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Earlswood (Surrey)",
+     "shortCodes": [
+      "ELD"
+     ],
+     "longCodes": [
+      "EARLSWD"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T14:07:00",
+      "scheduleAdvertised": "2026-11-07T14:07:00",
+      "realtimeActual": "2026-11-07T14:08:00",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T14:10:00",
+      "scheduleAdvertised": "2026-11-07T14:10:00",
+      "realtimeActual": "2026-11-07T14:10:30",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "2",
+      "actual": "2"
+     },
+     "line": {
+      "actual": "DRG"
+     },
+     "path": {
+      "actual": "UR"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Redhill",
+     "shortCodes": [
+      "RDH"
+     ],
+     "longCodes": [
+      "REDHILL"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T14:14:00",
+      "scheduleAdvertised": "2026-11-07T14:14:00",
+      "realtimeActual": "2026-11-07T14:14:30",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T14:15:00",
+      "scheduleAdvertised": "2026-11-07T14:15:00",
+      "realtimeActual": "2026-11-07T14:15:45",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "DPL",
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reigate",
+     "shortCodes": [
+      "REI"
+     ],
+     "longCodes": [
+      "REIGATE"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:18:30",
+      "realtimeActual": "2026-11-07T14:19:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Betchworth",
+     "shortCodes": [
+      "BTO"
+     ],
+     "longCodes": [
+      "BTCHWTH"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T14:21:30",
+      "scheduleAdvertised": "2026-11-07T14:22:00",
+      "realtimeActual": "2026-11-07T14:22:15",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T14:23:00",
+      "scheduleAdvertised": "2026-11-07T14:23:00",
+      "realtimeActual": "2026-11-07T14:23:00",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "2",
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Dorking Deepdene",
+     "shortCodes": [
+      "DPD"
+     ],
+     "longCodes": [
+      "DEPDENE"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:24:30",
+      "realtimeActual": "2026-11-07T14:24:00",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 3,
+     "allocationIndex": 0,
+     "allowances": {
+      "performance": 30
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Dorking West",
+     "shortCodes": [
+      "DKT"
+     ],
+     "longCodes": [
+      "DRKGW"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:30:00",
+      "realtimeActual": "2026-11-07T14:29:00",
+      "realtimeInternalLateness": -1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Gomshall",
+     "shortCodes": [
+      "GOM"
+     ],
+     "longCodes": [
+      "GOMSHAL"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:33:30",
+      "realtimeActual": "2026-11-07T14:32:45",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Chilworth",
+     "shortCodes": [
+      "CHL"
+     ],
+     "longCodes": [
+      "CHLWTH"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:35:30",
+      "realtimeActual": "2026-11-07T14:34:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0,
+     "allowances": {
+      "pathing": 60,
+      "performance": 30
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Shalford",
+     "shortCodes": [
+      "SFR"
+     ],
+     "longCodes": [
+      "SHALFD"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:38:00",
+      "realtimeActual": "2026-11-07T14:35:45",
+      "realtimeInternalLateness": -2,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "actual": "UM"
+     },
+     "path": {
+      "actual": "URD"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Shalford Jn",
+     "longCodes": [
+      "SHALFDJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T14:40:30",
+      "scheduleAdvertised": "2026-11-07T14:41:00",
+      "realtimeActual": "2026-11-07T14:40:00",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T14:42:30",
+      "scheduleAdvertised": "2026-11-07T14:42:00",
+      "realtimeActual": "2026-11-07T14:43:00",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "8",
+      "actual": "8"
+     },
+     "line": {
+      "actual": "DA"
+     },
+     "path": {
+      "actual": "UM"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Guildford",
+     "shortCodes": [
+      "GLD"
+     ],
+     "longCodes": [
+      "GUILDFD"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:48:00",
+      "realtimeActual": "2026-11-07T14:48:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Wanborough",
+     "shortCodes": [
+      "WAN"
+     ],
+     "longCodes": [
+      "WANBRO"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T14:51:00",
+      "scheduleAdvertised": "2026-11-07T14:51:00",
+      "realtimeActual": "2026-11-07T14:51:45",
+      "realtimeInternalLateness": 0,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T14:51:30",
+      "scheduleAdvertised": "2026-11-07T14:51:00",
+      "realtimeActual": "2026-11-07T14:53:15",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 2,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Ash",
+     "shortCodes": [
+      "ASH"
+     ],
+     "longCodes": [
+      "ASHH"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T14:53:00",
+      "realtimeActual": "2026-11-07T14:54:45",
+      "realtimeInternalLateness": 1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "line": {
+      "actual": "DBW"
+     },
+     "path": {
+      "actual": "DA"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0,
+     "allowances": {
+      "performance": 30
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Aldershot South Jn",
+     "longCodes": [
+      "ALDRSJS"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T14:55:30",
+      "scheduleAdvertised": "2026-11-07T14:56:00",
+      "realtimeActual": "2026-11-07T14:56:30",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T14:56:30",
+      "scheduleAdvertised": "2026-11-07T14:56:00",
+      "realtimeActual": "2026-11-07T14:57:45",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "North Camp",
+     "shortCodes": [
+      "NCM"
+     ],
+     "longCodes": [
+      "NTHCAMP"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T14:59:30",
+      "scheduleAdvertised": "2026-11-07T15:00:00",
+      "realtimeActual": "2026-11-07T15:01:00",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T15:00:00",
+      "scheduleAdvertised": "2026-11-07T15:00:00",
+      "realtimeActual": "2026-11-07T15:01:45",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Farnborough North",
+     "shortCodes": [
+      "FNN"
+     ],
+     "longCodes": [
+      "FRBRNTH"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T15:04:00",
+      "scheduleAdvertised": "2026-11-07T15:04:00",
+      "realtimeActual": "2026-11-07T15:05:45",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T15:05:00",
+      "scheduleAdvertised": "2026-11-07T15:05:00",
+      "realtimeActual": "2026-11-07T15:06:45",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Blackwater",
+     "shortCodes": [
+      "BAW"
+     ],
+     "longCodes": [
+      "BCKWATR"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:06:30",
+      "realtimeActual": "2026-11-07T15:07:45",
+      "realtimeInternalLateness": 1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Blackwater Signal Bef2979",
+     "longCodes": [
+      "BCKW979"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T15:08:00",
+      "scheduleAdvertised": "2026-11-07T15:08:00",
+      "realtimeActual": "2026-11-07T15:09:30",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T15:08:30",
+      "scheduleAdvertised": "2026-11-07T15:08:00",
+      "realtimeActual": "2026-11-07T15:10:00",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 2,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Sandhurst",
+     "shortCodes": [
+      "SND"
+     ],
+     "longCodes": [
+      "SNDHRST"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T15:11:30",
+      "scheduleAdvertised": "2026-11-07T15:12:00",
+      "realtimeActual": "2026-11-07T15:13:00",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 1,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T15:12:30",
+      "scheduleAdvertised": "2026-11-07T15:12:00",
+      "realtimeActual": "2026-11-07T15:14:15",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 2,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0,
+     "allowances": {
+      "performance": 30
+     }
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Crowthorne",
+     "shortCodes": [
+      "CRN"
+     ],
+     "longCodes": [
+      "CRWTHRN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T15:17:30",
+      "scheduleAdvertised": "2026-11-07T15:18:00",
+      "realtimeActual": "2026-11-07T15:18:30",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 0,
+      "isCancelled": false
+     },
+     "departure": {
+      "scheduleInternal": "2026-11-07T15:18:30",
+      "scheduleAdvertised": "2026-11-07T15:18:00",
+      "realtimeActual": "2026-11-07T15:20:00",
+      "realtimeInternalLateness": 1,
+      "realtimeAdvertisedLateness": 2,
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_OPEN",
+     "realtimeCallType": "ADVERTISED_OPEN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "2",
+      "actual": "2"
+     },
+     "line": {
+      "actual": "DS"
+     },
+     "path": {
+      "actual": "DBW"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Wokingham",
+     "shortCodes": [
+      "WKM"
+     ],
+     "longCodes": [
+      "WOKNGHM"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:21:00",
+      "realtimeActual": "2026-11-07T15:22:15",
+      "realtimeInternalLateness": 1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Winnersh",
+     "shortCodes": [
+      "WNS"
+     ],
+     "longCodes": [
+      "WINERSH"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:21:45",
+      "realtimeActual": "2026-11-07T15:23:00",
+      "realtimeInternalLateness": 1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "2"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Winnersh Triangle",
+     "shortCodes": [
+      "WTI"
+     ],
+     "longCodes": [
+      "WINETGL"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:23:00",
+      "realtimeActual": "2026-11-07T15:24:00",
+      "realtimeInternalLateness": 1,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "actual": "1"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Earley",
+     "shortCodes": [
+      "EAR"
+     ],
+     "longCodes": [
+      "ERLY"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:25:00",
+      "realtimeActual": "2026-11-07T15:25:30",
+      "realtimeInternalLateness": 0,
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reading Spur Jn",
+     "longCodes": [
+      "RDNGSJN"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "pass": {
+      "scheduleInternal": "2026-11-07T15:25:30",
+      "realtimeForecast": "2026-11-07T15:26:15",
+      "isCancelled": false
+     },
+     "displayAs": "PASS",
+     "isInterpolated": true
+    },
+    "locationMetadata": {
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reading Southern Jn",
+     "longCodes": [
+      "RDNGSTJ"
+     ]
+    }
+   },
+   {
+    "temporalData": {
+     "arrival": {
+      "scheduleInternal": "2026-11-07T15:27:00",
+      "scheduleAdvertised": "2026-11-07T15:27:00",
+      "realtimeForecast": "2026-11-07T15:27:30",
+      "isCancelled": false
+     },
+     "scheduledCallType": "ADVERTISED_SET_DOWN",
+     "realtimeCallType": "ADVERTISED_SET_DOWN",
+     "displayAs": "CALL",
+     "isInterpolated": false
+    },
+    "locationMetadata": {
+     "platform": {
+      "planned": "5",
+      "forecast": "5"
+     },
+     "numberOfVehicles": 3,
+     "allocationIndex": 0
+    },
+    "location": {
+     "namespace": "gb-nr",
+     "description": "Reading",
+     "shortCodes": [
+      "RDG"
+     ],
+     "longCodes": [
+      "RDNG4AB"
+     ]
+    }
+   }
+  ],
+  "origin": [
+   {
+    "location": {
+     "description": "Gatwick Airport",
+     "longCodes": [
+      "GTWK"
+     ]
+    },
+    "temporalData": {
+     "scheduleInternal": "2026-11-07T13:59:00",
+     "scheduleAdvertised": "2026-11-07T13:59:00"
+    }
+   }
+  ],
+  "destination": [
+   {
+    "location": {
+     "description": "Reading",
+     "longCodes": [
+      "RDNG4AB"
+     ]
+    },
+    "temporalData": {
+     "scheduleInternal": "2026-11-07T15:27:00",
+     "scheduleAdvertised": "2026-11-07T15:27:00"
+    }
+   }
+  ],
+  "allocationData": [
+   {
+    "allocationIndex": 0,
+    "leadingClass": "165",
+    "passengerVehicles": 3,
+    "allocationItems": [
+     {
+      "stockType": "unit",
+      "identity": "165111",
+      "inReverse": false,
+      "identitySuppressed": false,
+      "numberOfVehicles": 3
+     }
+    ]
+   }
+  ]
+ }
+}
