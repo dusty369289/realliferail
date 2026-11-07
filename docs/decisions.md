@@ -25,7 +25,7 @@ Newest last. Add to this whenever a choice is made, with the reason.
 - **Signals aren't claimed.** The API has timing points only. The UI says "passes" and "timing points".
 - **Our estimate only fills gaps.** RTT's forecast wins where it exists, since it uses more data than we have. Ours is
   used for points RTT hasn't forecast, and for the live position, and it's labelled.
-- **Colour means something.** Lights down stays greyscale. Amber for late, red for cancelled or problems, and one blue accent
+- **Colour means something** (superseded by the Platform look, below). Amber for late, red for cancelled or problems, and one accent
   for the live train marker. Same as uppYT's "colour only comes from content", with the content here being status.
 - **Work happens on a branch in a worktree.** The repo starts with the plan on `main`. The build is on
   `worktree-first-build` (in `.claude/worktrees/first-build`), for the owner to fast-forward `main` to.

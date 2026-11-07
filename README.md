@@ -140,4 +140,4 @@ is the API reference with what was observed.
 - Train data: [Realtime Trains](https://www.realtimetrains.co.uk/). Not affiliated. API spec in `docs/rtt-openapi.yml` (MIT).
 - Station list: [uk-railway-stations](https://github.com/davwheat/uk-railway-stations) by David Wheatley, from
   [Trainline EU](https://github.com/trainline-eu/stations), ODbL.
-- Typeface: IBM Plex Sans, SIL Open Font License.
+- Typeface: Barlow and Barlow Semi Condensed by Jeremy Tribby, SIL Open Font License.
