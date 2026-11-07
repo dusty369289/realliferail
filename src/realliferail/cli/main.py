@@ -73,7 +73,7 @@ def serve(
     if lan:
         host = "0.0.0.0"
     typer.echo(f"Real Life Rail on http://{'127.0.0.1' if host == '0.0.0.0' else host}:{port}")
-    if host == "0.0.0.0":
+    if host == "0.0.0.0" and not hosted:  # in a container the "phone" address would be meaningless
         ip = _lan_ip()
         if ip:
             typer.echo(f"On your phone (same Wi-Fi): http://{ip}:{port}")

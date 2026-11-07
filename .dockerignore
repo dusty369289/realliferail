@@ -1,0 +1,14 @@
+.env
+.env.*
+.venv
+.git
+.claude
+.test-review
+.ui-report
+.ui-report-previous
+.pytest_cache
+.ruff_cache
+**/__pycache__
+tests
+docs
+scripts

@@ -5,8 +5,9 @@ move along its route. It shows every call **and every timing point it passes** (
 booked, actual and estimated times. Between reports it places the train on the line rather than freezing at the last
 station. Data comes from the Realtime Trains (RTT) next-generation API at `data.rtt.io`.
 
-FastAPI, Jinja, plain JS, httpx, Pydantic, Typer, uv, Python 3.14. Plain CUBE CSS, no build step. Installable as a PWA
-on Android. The server holds the RTT token. The phone only ever talks to our server.
+FastAPI, Jinja, plain JS, httpx, cryptography, Typer, uv, Python 3.14+ (3.15 in the image). Plain CUBE CSS, no build step.
+Installable as a PWA on Android. Live at https://rail.3net.dev (hosted mode: each browser brings its own RTT key).
+The phone only ever talks to our server, never to RTT directly.
 
 **This file is the standing brief. Keep it current.** Whenever a choice is made, add it to `docs/decisions.md` with the
 date and the reason, and change this file if a rule changes. Check `docs/decisions.md` before re-opening a question.
@@ -17,8 +18,12 @@ date and the reason, and change this file if a rule changes. Check `docs/decisio
 - **Commits:** small, logical, short messages, explicit paths (never `git add -A`). **Never** an AI co-author trailer or
   a "Generated with" line. All work is attributed to the owner.
 - **Publishing:** GitHub (`dusty369289`) only, and only when the owner asks.
-- **The token never leaves the server.** RTT's terms: no token in a distributed app, or it gets revoked. It lives in
-  `.env` (gitignored) or the environment. Never logged, never sent to the browser, never in fixtures or screenshots.
+- **Keys never appear in code, logs, fixtures or screenshots.** RTT's terms: no token in a distributed app, or it's revoked.
+  Single-user mode keeps one key on the server (`~/.config/realliferail/settings.json` 0600, or `.env`). Hosted mode
+  (`serve --hosted`, the Docker image, rail.3net.dev) keeps none: each browser holds its own key in an AES-GCM-sealed
+  HttpOnly cookie (`services/hosted.py`). With no key, it's demo. Never the owner's key.
+- **Deployed on 3net** (Dusty's VPS): stack `stacks/realliferail` in 3net-infra, built from this repo at a pinned commit.
+  Read `~/CLAUDE.md` on the server (`ssh claude3net`) before touching it; its rules apply there.
 - **The RTT allowance is tiny and shared.** The free tier allows 10 a minute, 100 an hour and 1000 a day. Tests never call RTT. Local
   dev without a token runs the simulator. Every real call goes through one budget (`sources/budget.py`) that obeys
   `X-RateLimit-Remaining-*` and `Retry-After`. Polling slows down to fit the budget rather than run out.

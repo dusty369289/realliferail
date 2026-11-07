@@ -11,7 +11,7 @@ as if it had arrived.
 It's built on the [Realtime Trains](https://www.realtimetrains.co.uk/) API. RTT records every timing point, not only
 stations, so the train's position can be shown more precisely than in apps that only know about stations.
 
-- Runs on your PC. Your phone opens it in Chrome and can install it to the home screen.
+- Runs on a server (Docker) or your own computer. Your phone opens it in Chrome and installs it as an app.
 - Works without a token in **demo mode**, with simulated trains on two real routes.
 - Free-tier friendly: calls are cached, shared and paced to fit 100 an hour.
 
@@ -36,39 +36,36 @@ uv run realliferail serve            # http://127.0.0.1:8765, demo mode until yo
 3. Check it: `uv run realliferail token`. This costs 1 or 2 calls and shows entitlements and what's left this hour.
 4. Restart `serve`. The "Demo data" banner goes away.
 
-The token stays on the server. RTT's terms forbid putting it in an app, and it never reaches the browser (a test
-checks this).
+In single-user mode the key stays on the server and never reaches the browser. In hosted mode it reaches the browser only
+as an encrypted cookie that page scripts can't read. Tests check both.
 
-## On your Android phone (daily commuting)
+## Two ways to run it
 
-The app runs on your PC, and the phone opens it. To use it on the train, away from home Wi-Fi, the phone has to reach the
-PC from anywhere, safely. **Tailscale** (free for personal use) does this: a private network between your own devices,
-with a real HTTPS address, so Chrome installs it as a proper app. Nothing is opened to the internet.
+**Hosted (a server, for your phone and friends).** Everyone brings their own Realtime Trains key. It's pasted once
+in Settings, checked with RTT, then kept **in that browser only**, encrypted (AES-256-GCM, server secret), in an
+HttpOnly cookie that page scripts can't read. The server stores no key and no data. It decrypts the cookie for each request and keeps
+that person's short-life access token and allowance in memory. With no key you get demo trains, so a public server
+can't spend anyone's allowance. RTT's terms are kept: no key is ever built into an app, and each person uses their own.
 
-**Once, on the PC** (no sudo needed; Tailscale runs in userspace mode):
 ```sh
-cd ~/Projects/realliferail
-./scripts/phone-setup.sh
+docker build -t realliferail .
+docker run -d -p 8080:8080 --read-only --tmpfs /tmp --user 65534:65534 --cap-drop ALL \
+  -e REALLIFERAIL_SECRET="$(python3 -c 'import secrets; print(secrets.token_hex(32))')" realliferail
 ```
-It installs two systemd user services: the app, and Tailscale. They start at boot and restart if they stop. It then
-prints a Tailscale sign-in link. Open it and sign in (Google is fine). At the end it prints your app's address, e.g.
-`https://realliferail.tail1234.ts.net`.
+Put HTTPS in front (Caddy, for example). Keep `REALLIFERAIL_SECRET` the same across restarts, because changing it signs
+everyone out. They just paste their key again. The live copy is at **https://rail.3net.dev**.
 
-**Once, on the phone:**
-1. Install **Tailscale** from the Play Store and sign in with the same account. Leave it connected (it's light on battery).
-2. Open the printed `https://…ts.net` address in **Chrome**, then tap ⋮ and choose **Install app**.
-3. Open it from the home screen: its own window, icon and offline page. Save your commute (search with "Calling at",
-   then **Save this journey**). From then on it's one tap, and **Return** gives you the way home.
+**Single user (your own computer).** `uv run realliferail serve` keeps one key on the server
+(`~/.config/realliferail/settings.json`, or `RTT_TOKEN` in `.env`) and shares it between all your devices.
 
-**Every day:** tap your journey and tap your train. The big number counts down to your departure. The yellow panel shows the train
-on the line, junction by junction. If you leave the app and come back, it catches up at once. The home screen offers
-"Carry on tracking" for the train you were following.
+### On your Android phone
 
-The PC has to be on (or asleep with wake-on-LAN). Any always-on Linux box works the same way, e.g. a Raspberry Pi.
-
-**Just at home**, without Tailscale: `uv run realliferail serve --lan`, open the port once
-(`sudo firewall-cmd --permanent --add-port=8765/tcp && sudo firewall-cmd --reload`), and browse to the printed
-`http://192.168.…:8765`. Over plain http, Chrome only adds a home-screen shortcut, not a full app.
+Open **https://rail.3net.dev** in Chrome, tap ⋮ and choose **Install app**. Then:
+1. **Settings**: paste your key from api-portal.rtt.io (once per device).
+2. Search your commute with "Calling at", then **Save this journey**. From then on it's one tap, and **Return** gives the way
+   home.
+3. Tap your train. The big number counts down to your departure, and the yellow panel shows the train on the line, junction by
+   junction. If you leave and come back, it catches up at once. The home screen offers "Carry on tracking".
 
 ## How often it updates, and what refresh costs
 
@@ -84,7 +81,7 @@ between all your devices and tabs:
 
 ## Plans
 
-**Settings** in the app takes the key (it's checked with RTT before it's saved, and never shown again in full). It
+**Settings** in the app takes the key. It's checked with RTT before it's kept, and never shown again in full. It
 shows which plan it is, and the app adapts:
 
 | | Free | Hobbyist (£4/month) | Team and up |

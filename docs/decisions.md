@@ -73,7 +73,25 @@ Newest last. Add to this whenever a choice is made, with the reason.
 - **New look ("Platform")** from British rail signage, after the owner said the first one was boxy and AI-like. See
   `docs/design.md`.
 - **Our estimates round to the minute.** Only RTT's own times get quarter-minute fractions. Ours don't have that precision.
-- **Phones reach it through Tailscale in userspace mode** (no root, no firewall change, HTTPS so the PWA installs),
-  set up by `scripts/phone-setup.sh` as systemd user services. Chosen over opening a port to the internet (unsafe, and
-  the RTT allowance would be anyone's) and over a paid host (the owner said don't spend). Termux on the phone wasn't
-  tried, because the app needs Python 3.14.
+- ~~Phones reach it through Tailscale on the laptop.~~ Dropped the same evening: the owner found it messy, and it relied
+  on the laptop being on. Replaced by hosting on 3net (below).
+
+## 2026-11-07 evening: hosted on 3net, each browser brings its own key
+
+- **Hosted on the owner's 3net server, public at rail.3net.dev** (the owner chose public over VPN-only so the phone needs no
+  VPN and friends can use it). Built from this public GitHub repo at a pinned commit, deployed with 3net's own stack
+  pattern (Caddy, Komodo, sops). See `docs/apps/realliferail.md` in 3net-infra.
+- **Per-browser keys, server keeps none.** The key is sealed with AES-256-GCM (server secret `REALLIFERAIL_SECRET`, in
+  sops on 3net) into an HttpOnly, Secure, SameSite=Lax cookie. Page scripts can't read it, and a copied cookie is useless
+  without the secret. The server holds each key's client, access token and allowance in memory only (500 keys at most,
+  dropped after 12 h idle). Rejected:
+  - localStorage, sent with each request: readable by any script on the page.
+  - Storing keys server-side per user: needs accounts, and makes the server a store of other people's keys.
+  - Encrypting in the browser with a passphrase: the server needs the plain key to call RTT anyway.
+- **Lax, not Strict:** Strict withholds the cookie when the app is opened from a link in another app (Big Log found this),
+  which would show the demo. State changes are POSTs with an Origin check, so Lax is safe here.
+- **No key means demo, never the owner's key.** A public server must not let strangers spend anyone's allowance.
+- **Each key gets its own answers cache.** Sharing answers between people's keys would mean one person's allowance
+  serving another. Within one key, devices still share.
+- **Dependencies locked with `--exclude-newer`** a week back, to match 3net's 7-day release rule. The image installs from
+  `requirements.lock` with hashes. Python 3.15.1, the same base as igsent.
