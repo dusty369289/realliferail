@@ -234,3 +234,15 @@ def test_refresh_button_does_not_refetch_fresh_data(server, core, make_page, mom
         page.click("[data-refresh-now]")
     assert "Already up to date" in page.inner_text("[data-refresh-note]")
     assert hits == []
+
+
+def test_now_board_updates_in_place(server, make_page):
+    page = make_page()
+    page.goto(server + "/board?station=RDG")
+    page.evaluate("window.__same = 1; window.scrollTo(0, 300)")
+    with page.expect_response(lambda r: "/board" in r.url and r.request.resource_type == "fetch", timeout=5_000):
+        page.clock.run_for(61_000)
+    page.wait_for_timeout(200)
+    assert page.evaluate("window.__same") == 1  # no reload
+    assert page.locator(".trains__row").count() > 0
+    common_checks(page)

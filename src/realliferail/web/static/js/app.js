@@ -153,7 +153,20 @@ function liveBoard() {
   const board = document.querySelector("[data-live-board]");
   if (!board) return;
   const secs = Number(board.dataset.liveBoard) || 60;
-  setInterval(() => { if (document.visibilityState === "visible") location.reload(); }, secs * 1000);
+  // swap the list in place, so the page doesn't flash or jump back to the top while you're reading it
+  const update = async () => {
+    if (document.visibilityState !== "visible") return;
+    try {
+      const r = await fetch(location.href, { headers: { Accept: "text/html" } });
+      if (!r.ok) return;
+      const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+      for (const sel of [".trains", ".board__foot", ".empty"]) {
+        const now = document.querySelector(sel), fresh = doc.querySelector(sel);
+        if (now && fresh) now.replaceWith(fresh);
+      }
+    } catch { /* offline for a moment: keep what's shown */ }
+  };
+  setInterval(update, secs * 1000);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
