@@ -17,6 +17,79 @@ class Station:
     lon: float | None
 
 
+# Big stations people are most likely to mean when a short prefix fits several ("padd" is Paddington before
+# Paddock Wood). Hand-picked: London termini and the busiest interchanges outside London.
+MAJOR = frozenset(
+    [
+        "PAD",
+        "EUS",
+        "KGX",
+        "STP",
+        "LST",
+        "LBG",
+        "WAT",
+        "VIC",
+        "CHX",
+        "CST",
+        "FST",
+        "MYB",
+        "MOG",
+        "BFR",
+        "CLJ",
+        "SRA",
+        "ZFD",
+        "TCR",
+        "LIV",
+        "BHM",
+        "BHI",
+        "MAN",
+        "MCV",
+        "LDS",
+        "LIV",
+        "LPY",
+        "GLC",
+        "GLQ",
+        "EDB",
+        "HYM",
+        "NCL",
+        "YRK",
+        "SHF",
+        "NOT",
+        "DBY",
+        "LEI",
+        "BRI",
+        "BPW",
+        "CDF",
+        "RDG",
+        "OXF",
+        "CBG",
+        "MKC",
+        "PBO",
+        "DON",
+        "WKF",
+        "HUD",
+        "PRE",
+        "CRE",
+        "STP",
+        "GTW",
+        "SOU",
+        "BMH",
+        "EXD",
+        "PLY",
+        "SWI",
+        "BTN",
+        "ABD",
+        "INV",
+        "PER",
+        "STG",
+        "DEE",
+        "COV",
+        "WVH",
+        "NWP",
+    ]
+)
+
+
 def _norm(s: str) -> str:
     s = s.lower().replace("&", " and ").replace("st.", "st ").replace("'", "")
     return re.sub(r"[^a-z0-9]+", " ", s).strip()
@@ -39,7 +112,7 @@ class StationIndex:
         q = _norm(query)
         if not q:
             return []
-        scored: list[tuple[int, str, Station]] = []
+        scored: list[tuple[float, str, Station]] = []
         exact = self.by_crs(query) if len(query.strip()) == 3 else None
         for name, st in self._norm:
             if st is exact:
@@ -57,6 +130,8 @@ class StationIndex:
                 score = 5
             else:
                 continue
+            if st.crs in MAJOR and score > 1:
+                score -= 1.5
             scored.append((score, name, st))
         scored.sort(key=lambda t: (t[0], len(t[1]), t[1]))
         out = [exact] if exact else []
