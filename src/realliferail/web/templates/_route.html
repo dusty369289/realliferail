@@ -40,7 +40,10 @@
     {% set is_at = at and (pt.crs == at or pt.tiploc == at) %}
     {% set is_to = to and (pt.crs == to or pt.tiploc == to) %}
     <li class="route__pt {{ 'is-pass' if pt.kind == Kind.PASS else 'is-call' }}{% if v.reported %} is-reported{% endif %}{% if pt.cancelled %} is-cancelled{% endif %}{% if is_at %} is-at{% endif %}{% if is_to %} is-to{% endif %}{% if not pt.public and pt.kind == Kind.CALL %} is-operational{% endif %}"
-        data-index="{{ v.index }}" {% if is_at %}id="your-stop"{% endif %}>
+        {%- set tin = v.passing or v.arrival or v.departure %}{% set tout = v.passing or v.departure or v.arrival %}
+        data-index="{{ v.index }}" {% if is_at %}id="your-stop"{% endif %}
+        data-t-in="{{ (tin.time.timestamp() * 1000)|int if tin and tin.time else '' }}"
+        data-t-out="{{ (tout.time.timestamp() * 1000)|int if tout and tout.time else '' }}">
       <span class="route__mark" aria-hidden="true"></span>
       <span class="route__name">
         <span class="route__place">{{ pt.name }}</span>

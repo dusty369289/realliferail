@@ -3,7 +3,7 @@
 
 .live { display: grid; gap: var(--s-3); }
 .live__status {
-  position: sticky; top: 0; z-index: 3;
+  position: sticky; top: 0; z-index: 5;
   background: var(--page); padding-block: var(--s-3); border-bottom: 1px solid var(--line);
   box-shadow: 0 -1px 0 var(--page);
 }
@@ -28,7 +28,7 @@
 }
 .route__pt:first-child .route__mark::before { top: 50%; }
 .route__pt:last-child .route__mark::before { bottom: 50%; }
-.route__mark::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.route__mark::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; }
 .is-call .route__mark::after { width: .75rem; height: .75rem; background: var(--page); border: 2px solid var(--ink); }
 .is-pass .route__mark::after { width: .625rem; height: 2px; background: var(--rail); }
 .is-call.is-reported .route__mark::after { background: var(--ink); }
@@ -59,7 +59,7 @@
 .route__train {
   position: absolute; left: calc(.875rem - 7px); width: 14px; height: 24px; margin-top: -12px;
   background: var(--train); border-radius: 2px; box-shadow: 0 0 0 5px var(--train-glow);
-  transition: top .9s linear; z-index: 2; pointer-events: none;
+  transition: top .9s linear; z-index: 3; pointer-events: none;
 }
 .route__train::after { /* direction of travel */
   content: ""; position: absolute; left: 50%; bottom: -7px; transform: translateX(-50%);
@@ -68,6 +68,7 @@
 .route__done { position: absolute; left: calc(.875rem - 1px); width: 2px; top: 0; background: var(--ink); z-index: 1; pointer-events: none; transition: height .9s linear; }
 .route__train.is-waiting { animation: wait 2s ease-in-out infinite; }
 @keyframes wait { 50% { box-shadow: 0 0 0 9px var(--train-glow); } }
+.route-wrap.is-instant .route__train, .route-wrap.is-instant .route__done { transition: none; }
 @media (prefers-reduced-motion: reduce) { .route__train, .route__done { transition: none; } .route__train.is-waiting { animation: none; } }
 
 /* time states */

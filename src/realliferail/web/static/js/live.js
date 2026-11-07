@@ -19,10 +19,13 @@
     return r.top - w.top + r.height / 2;
   }
 
-  function place() {
+  // Layout changes (toggling passes, a refreshed list, resizing) jump straight to the new place. Only the train's own
+  // progress is animated, or the travelled line would visibly regrow from the top after every refresh.
+  function place(instant) {
     const live = region.querySelector(".live");
     if (!live) return;
     const wrap = live.querySelector(".route-wrap");
+    if (instant) wrap.classList.add("is-instant");
     const route = live.querySelector(".route");
     const marker = live.querySelector("[data-train-marker]");
     route.classList.toggle("hide-passes", !passes.checked);
@@ -37,11 +40,23 @@
     let y = null, waiting = false;
 
     if (state === "running" || state === "overdue") {
-      const a = rowCentre(from, wrap), b = rowCentre(to, wrap);
+      const hold = Number(d.hold) || 0.95;
+      let rowA = from, rowB = to;
+      let since = Number(d.since), expected = Number(d.expected);
+      if (!passes.checked) {
+        // Hidden rows have no height, so run between the nearest visible stops, by their times
+        const list = [...rows];
+        const ia = list.indexOf(from), ib = list.indexOf(to);
+        for (let i = ia; i >= 0; i--) if (!list[i].classList.contains("is-pass")) { rowA = list[i]; break; }
+        for (let i = ib; i < list.length; i++) if (!list[i].classList.contains("is-pass")) { rowB = list[i]; break; }
+        if (rowA !== from) since = Number(rowA.dataset.tOut) || since;
+        if (rowB !== to) expected = Number(rowB.dataset.tIn) || expected;
+      }
+      const a = rowCentre(rowA, wrap), b = rowCentre(rowB, wrap);
       let f = Number(d.fraction) || 0;
-      const since = Number(d.since), expected = Number(d.expected), hold = Number(d.hold) || 0.95;
       if (since && expected && expected > since) f = Math.min(Math.max((Date.now() - since) / (expected - since), 0), hold);
-      if (state === "overdue") { f = hold; waiting = true; }
+      if (state === "overdue" && rowB === to) { f = hold; }
+      if (state === "overdue") waiting = true;
       if (a !== null && b !== null) y = a + (b - a) * f;
     } else if (state === "at-station" || state === "at-origin") {
       y = rowCentre(from || to, wrap); waiting = true;
@@ -50,11 +65,12 @@
     } else if (state === "arrived") {
       y = rowCentre(from, wrap);
     }
-    if (y === null) { marker.hidden = true; done.style.height = "0"; return; }
+    if (y === null) { marker.hidden = true; done.style.height = "0"; wrap.classList.remove("is-instant"); return; }
     marker.hidden = false;
     marker.style.top = `${y}px`;
     marker.classList.toggle("is-waiting", waiting);
     done.style.height = `${Math.max(y, 0)}px`;
+    if (instant) { void wrap.offsetHeight; wrap.classList.remove("is-instant"); }
     if (!jumped) { jumped = true; jump(false); }
   }
 
@@ -84,7 +100,7 @@
       const fresh = tpl.content.querySelector(".live");
       if (fresh) region.replaceChildren(fresh);
       failures = 0;
-      place();
+      place(true);
     } catch {
       failures += 1;
       const el = region.querySelector("[data-age]");
@@ -97,13 +113,13 @@
 
   function schedule(secs) { clearTimeout(timer); timer = setTimeout(refresh, secs * 1000); }
 
-  passes.addEventListener("change", () => { store.set("rlr.passes", passes.checked); place(); });
+  passes.addEventListener("change", () => { store.set("rlr.passes", passes.checked); place(true); });
   page.querySelector("[data-jump]").addEventListener("click", () => jump(true));
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") refresh(); });
-  window.addEventListener("resize", place);
+  window.addEventListener("resize", () => place(true));
 
-  place();
-  setInterval(() => { place(); age(); }, 1000);
+  place(true);
+  setInterval(() => { place(false); age(); }, 1000);
   const first = region.querySelector(".live");
   schedule(first ? Number(first.dataset.refresh) || 30 : 30);
 })();

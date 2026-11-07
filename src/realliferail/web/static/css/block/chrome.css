@@ -3,14 +3,14 @@
 
 .topbar {
   display: flex; align-items: center; gap: var(--s-4);
-  padding: var(--s-3) var(--gutter);
-  padding-top: max(var(--s-3), env(safe-area-inset-top));
+  padding: var(--s-1) var(--gutter);
+  padding-top: max(var(--s-1), env(safe-area-inset-top));
   border-bottom: 1px solid var(--line);
   max-width: var(--measure); width: 100%; margin-inline: auto;
 }
 .topbar__logo { font-weight: 600; text-decoration: none; letter-spacing: -.01em; }
 .topbar__nav { display: flex; gap: var(--s-4); margin-left: auto; }
-.topbar__nav a { color: var(--muted); text-decoration: none; padding-block: var(--s-2); }
+.topbar__nav a { color: var(--muted); text-decoration: none; min-height: var(--tap); display: inline-flex; align-items: center; }
 .topbar__nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; }
 
 .banner {
