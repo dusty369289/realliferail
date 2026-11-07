@@ -1,0 +1,55 @@
+{
+ "_note": "Spec-derived, not a recording. Reproduces the quirks of a real board response (docs/rtt-api.md): naive times, namespaced query longCodes with an offset timeFrom, no shortCodes on origin/destination, platform.forecast, no headcode.",
+ "systemStatus": {"realtimeNetworkRail": "OK", "rttCore": "REALTIME_DEGRADED"},
+ "query": {
+  "location": {"namespace": "gb-nr", "description": "Reading", "shortCodes": ["RDG"], "longCodes": ["gb-nr:RDNGSTN", "gb-nr:RDNG4AB"]},
+  "timeFrom": "2026-07-06T15:00:00+01:00",
+  "timeTo": "2026-07-06T16:00:00+01:00",
+  "detailed": false
+ },
+ "services": [
+  {
+   "temporalData": {
+    "arrival": {"scheduleInternal": "2026-07-06T15:02:00", "scheduleAdvertised": "2026-07-06T15:03:00", "realtimeActual": "2026-07-06T15:03:00", "realtimeInternalLateness": 1, "realtimeAdvertisedLateness": 0, "isCancelled": false},
+    "departure": {"scheduleInternal": "2026-07-06T15:05:00", "scheduleAdvertised": "2026-07-06T15:05:00", "realtimeForecast": "2026-07-06T15:05:00", "isCancelled": false},
+    "scheduledCallType": "ADVERTISED_OPEN", "realtimeCallType": "ADVERTISED_OPEN", "displayAs": "CALL", "isInterpolated": false, "status": "AT_PLATFORM"
+   },
+   "locationMetadata": {"platform": {"planned": "9", "actual": "9"}, "numberOfVehicles": 9, "allocationIndex": 0},
+   "scheduleMetadata": {"uniqueIdentity": "gb-nr:C11111:2026-07-06", "namespace": "gb-nr", "identity": "C11111", "departureDate": "2026-07-06", "operator": {"code": "GW", "name": "Great Western Railway"}, "modeType": "TRAIN", "inPassengerService": true},
+   "origin": [{"location": {"description": "London Paddington", "longCodes": ["PADTON"]}, "temporalData": {"scheduleInternal": "2026-07-06T14:35:00", "scheduleAdvertised": "2026-07-06T14:35:00"}}],
+   "destination": [{"location": {"description": "Plymouth", "longCodes": ["PLYMTH"]}, "temporalData": {"scheduleInternal": "2026-07-06T17:50:00", "scheduleAdvertised": "2026-07-06T17:52:00"}}]
+  },
+  {
+   "temporalData": {
+    "arrival": {"scheduleInternal": "2026-07-06T15:10:00", "scheduleAdvertised": "2026-07-06T15:11:00", "realtimeForecast": "2026-07-06T15:18:00", "isCancelled": false},
+    "scheduledCallType": "ADVERTISED_SET_DOWN", "realtimeCallType": "ADVERTISED_SET_DOWN", "displayAs": "CALL", "isInterpolated": false
+   },
+   "locationMetadata": {"platform": {"planned": "14", "forecast": "14"}, "numberOfVehicles": 9, "allocationIndex": 0},
+   "scheduleMetadata": {"uniqueIdentity": "gb-nr:C22222:2026-07-06", "namespace": "gb-nr", "identity": "C22222", "departureDate": "2026-07-06", "operator": {"code": "XR", "name": "Elizabeth Line"}, "modeType": "TRAIN", "inPassengerService": true},
+   "origin": [{"location": {"description": "Abbey Wood", "longCodes": ["ABWDXR"]}, "temporalData": {"scheduleInternal": "2026-07-06T13:55:00", "scheduleAdvertised": "2026-07-06T13:55:00"}}],
+   "destination": [{"location": {"description": "Reading", "longCodes": ["RDNGSTN"]}, "temporalData": {"scheduleInternal": "2026-07-06T15:10:00", "scheduleAdvertised": "2026-07-06T15:11:00"}}]
+  },
+  {
+   "temporalData": {
+    "arrival": {"scheduleInternal": "2026-07-06T15:20:00", "scheduleAdvertised": "2026-07-06T15:20:00", "isCancelled": true},
+    "departure": {"scheduleInternal": "2026-07-06T15:21:00", "scheduleAdvertised": "2026-07-06T15:21:00", "isCancelled": true},
+    "scheduledCallType": "ADVERTISED_OPEN", "realtimeCallType": null, "displayAs": "CANCELLED", "isInterpolated": false
+   },
+   "locationMetadata": {"platform": {"planned": "7"}, "numberOfVehicles": 4, "allocationIndex": 0},
+   "scheduleMetadata": {"uniqueIdentity": "gb-nr:C33333:2026-07-06", "namespace": "gb-nr", "identity": "C33333", "departureDate": "2026-07-06", "operator": {"code": "GW", "name": "Great Western Railway"}, "modeType": "TRAIN", "inPassengerService": true},
+   "origin": [{"location": {"description": "Basingstoke", "longCodes": ["BSNGSTK"]}, "temporalData": {"scheduleInternal": "2026-07-06T14:55:00", "scheduleAdvertised": "2026-07-06T14:55:00"}}],
+   "destination": [{"location": {"description": "Oxford", "longCodes": ["OXFD"]}, "temporalData": {"scheduleInternal": "2026-07-06T15:59:00", "scheduleAdvertised": "2026-07-06T16:00:00"}}],
+   "reasons": [{"type": "CANCEL", "code": "M8", "system": "TRUST", "shortText": "A fault on this train", "longText": "A fault on this train."}]
+  },
+  {
+   "temporalData": {
+    "departure": {"scheduleInternal": "2026-07-06T15:30:00", "scheduleAdvertised": "2026-07-06T15:30:00", "isCancelled": false},
+    "scheduledCallType": "ADVERTISED_PICK_UP", "realtimeCallType": "ADVERTISED_PICK_UP", "displayAs": "CALL", "isInterpolated": false
+   },
+   "locationMetadata": {"platform": {"planned": "4"}, "allocationIndex": 0},
+   "scheduleMetadata": {"uniqueIdentity": "gb-nr:L44444:2026-07-06", "namespace": "gb-nr", "identity": "L44444", "departureDate": "2026-07-06", "operator": {"code": "SW", "name": "South Western Railway"}, "modeType": "REPLACEMENT_BUS", "inPassengerService": true},
+   "origin": [{"location": {"description": "Reading", "longCodes": ["RDNGSTN"]}, "temporalData": {"scheduleInternal": "2026-07-06T15:30:00", "scheduleAdvertised": "2026-07-06T15:30:00"}}],
+   "destination": [{"location": {"description": "London Waterloo", "longCodes": ["WATRLMN"]}, "temporalData": {"scheduleInternal": "2026-07-06T16:58:00", "scheduleAdvertised": "2026-07-06T16:58:00"}}]
+  }
+ ]
+}

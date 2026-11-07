@@ -1,0 +1,81 @@
+{
+ "_note": "Spec-derived, not a recording. Shape follows docs/rtt-openapi.yml and the quirks seen in a real response (docs/rtt-api.md). Replace with a real recording from `realliferail record`.",
+ "systemStatus": {"realtimeNetworkRail": "OK", "rttCore": "OK"},
+ "query": {"uniqueIdentity": "gb-nr:C12345:2026-11-07"},
+ "service": {
+  "scheduleMetadata": {
+   "uniqueIdentity": "gb-nr:C12345:2026-11-07",
+   "namespace": "gb-nr",
+   "identity": "C12345",
+   "departureDate": "2026-11-07",
+   "operator": {"code": "GW", "name": "Great Western Railway"},
+   "modeType": "TRAIN",
+   "inPassengerService": true,
+   "trainReportingIdentity": "1A23"
+  },
+  "locations": [
+   {
+    "location": {"namespace": "gb-nr", "description": "Reading", "shortCodes": ["RDG"], "longCodes": ["RDNGSTN"]},
+    "temporalData": {
+     "departure": {"scheduleInternal": "2026-11-07T10:00:00", "scheduleAdvertised": "2026-11-07T10:00:00", "realtimeActual": "2026-11-07T10:02:00", "realtimeInternalLateness": 2, "realtimeAdvertisedLateness": 2, "isCancelled": false},
+     "scheduledCallType": "ADVERTISED_OPEN", "realtimeCallType": "ADVERTISED_OPEN", "displayAs": "CALL", "isInterpolated": false
+    },
+    "locationMetadata": {"platform": {"planned": "9", "actual": "9"}, "numberOfVehicles": 5, "allocationIndex": 0, "allowances": {"engineering": null, "pathing": null, "performance": null}}
+   },
+   {
+    "location": {"namespace": "gb-nr", "description": "Reading East Main", "shortCodes": [], "longCodes": ["RDNGEMJ"]},
+    "temporalData": {
+     "pass": {"scheduleInternal": "2026-11-07T10:01:30", "realtimeActual": "2026-11-07T10:04:00", "realtimeInternalLateness": 3, "isCancelled": false},
+     "scheduledCallType": null, "realtimeCallType": null, "displayAs": null, "isInterpolated": false
+    },
+    "locationMetadata": {"allowances": {"engineering": null, "pathing": 30, "performance": null}}
+   },
+   {
+    "location": {"namespace": "gb-nr", "description": "Twyford", "shortCodes": ["TWY"], "longCodes": ["TWYFORD"]},
+    "temporalData": {
+     "pass": {"scheduleInternal": "2026-11-07T10:05:00", "isCancelled": false},
+     "scheduledCallType": null, "realtimeCallType": null, "displayAs": "PASS", "isInterpolated": false
+    },
+    "locationMetadata": {"allowances": {"engineering": 60, "pathing": null, "performance": 60}}
+   },
+   {
+    "location": {"namespace": "gb-nr", "description": "Maidenhead", "shortCodes": ["MAI"], "longCodes": ["MDNHEAD"]},
+    "temporalData": {
+     "arrival": {"scheduleInternal": "2026-11-07T10:08:30", "scheduleAdvertised": "2026-11-07T10:09:00", "realtimeForecast": "2026-11-07T10:11:00", "isCancelled": false},
+     "departure": {"scheduleInternal": "2026-11-07T10:10:00", "scheduleAdvertised": "2026-11-07T10:10:00", "realtimeForecast": "2026-11-07T10:12:00", "isCancelled": false},
+     "scheduledCallType": "ADVERTISED_OPEN", "realtimeCallType": "ADVERTISED_OPEN", "displayAs": "CALL", "isInterpolated": false
+    },
+    "locationMetadata": {"platform": {"planned": "4", "forecast": "5"}, "numberOfVehicles": 5}
+   },
+   {
+    "location": {"namespace": "gb-nr", "description": "Slough", "shortCodes": ["SLO"], "longCodes": ["SLOUGH"]},
+    "temporalData": {
+     "arrival": {"scheduleInternal": "2026-11-07T10:20:00", "scheduleAdvertised": "2026-11-07T10:20:00", "isCancelled": true, "cancellationReasonCode": "XA"},
+     "departure": {"scheduleInternal": "2026-11-07T10:21:00", "scheduleAdvertised": "2026-11-07T10:21:00", "isCancelled": true, "cancellationReasonCode": "XA"},
+     "scheduledCallType": "ADVERTISED_OPEN", "realtimeCallType": null, "displayAs": "CANCELLED", "isInterpolated": false
+    },
+    "locationMetadata": {"platform": {"planned": "2"}}
+   },
+   {
+    "location": {"namespace": "gb-nr", "description": "Southall", "shortCodes": ["STL"], "longCodes": ["STHALL"]},
+    "temporalData": {
+     "pass": {"scheduleInternal": "2026-11-07T10:30:00"},
+     "displayAs": "PASS"
+    },
+    "locationMetadata": {}
+   },
+   {
+    "location": {"namespace": "gb-nr", "description": "London Paddington", "shortCodes": ["PAD"], "longCodes": ["PADTON"]},
+    "temporalData": {
+     "arrival": {"scheduleInternal": "2026-11-07T10:40:00", "scheduleAdvertised": "2026-11-07T10:41:00", "isCancelled": false},
+     "scheduledCallType": "ADVERTISED_SET_DOWN", "realtimeCallType": "ADVERTISED_SET_DOWN", "displayAs": "CALL", "isInterpolated": false
+    },
+    "locationMetadata": {"platform": {"planned": "11"}}
+   }
+  ],
+  "allocationData": [{"allocationIndex": 0, "leadingClass": "387", "passengerVehicles": 5, "allocationItems": [{"stockType": "UNIT", "identity": "387131", "numberOfVehicles": 4}, {"stockType": "UNIT", "identity": "000000", "identitySuppressed": true}]}],
+  "origin": [{"location": {"description": "Reading", "longCodes": ["RDNGSTN"]}, "temporalData": {"scheduleInternal": "2026-11-07T10:00:00", "scheduleAdvertised": "2026-11-07T10:00:00"}}],
+  "destination": [{"location": {"description": "London Paddington", "longCodes": ["PADTON"]}, "temporalData": {"scheduleInternal": "2026-11-07T10:40:00", "scheduleAdvertised": "2026-11-07T10:41:00"}}],
+  "reasons": [{"type": "DELAY", "code": "TG", "system": "TRUST", "shortText": "A late-running train ahead", "longText": null}]
+ }
+}
