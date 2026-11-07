@@ -1,0 +1,17 @@
+# systemd user service: keeps Real Life Rail running on this PC so your phone can always reach it.
+#   cp scripts/realliferail.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload && systemctl --user enable --now realliferail
+#   loginctl enable-linger $USER     # keep it running when you're logged out
+# Logs: journalctl --user -u realliferail -f
+[Unit]
+Description=Real Life Rail (live train tracker)
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/Projects/realliferail
+ExecStart=%h/Projects/realliferail/.venv/bin/realliferail serve --lan --port 8765
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

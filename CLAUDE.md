@@ -59,8 +59,12 @@ No HTTP outside `sources/transport.py`. No raw colours outside `web/static/css/t
 - **Our estimate** carries the current delay forward. A late train can win back booked allowances (performance,
   engineering, pathing) and extra dwell time, but never leaves an advertised stop before its public time. Our estimate is used only
   where RTT gives no forecast, and it's labelled "est".
-- **Polling:** the page asks our server every 15 s and moves the marker every second. The server re-fetches a service
-  at most every 30 s, and less often when the hourly budget is low.
+- **Polling:** the page moves the marker every second, and asks our server again when the last answer says to
+  (`data-refresh`). That's every 15 to 120 s: `3600 / (hour left - 10)`, with a floor of 30 s, from `Budget.refresh_interval`. The server
+  re-fetches a train at most that often. Background refreshes never touch the last 10 calls of the hour, which are kept
+  for people searching.
+- **Your stop:** boards link to `/train/<id>?at=<CRS>&to=<CRS>`. The top panel then says when the train leaves your stop,
+  how many minutes and stops away it is, and the platform.
 
 ## UI
 - **Lights down**, taken from uppYT: black, white and grey, dark first, IBM Plex Sans with tabular figures. Colour is only
@@ -84,3 +88,10 @@ No HTTP outside `sources/transport.py`. No raw colours outside `web/static/css/t
 - `query.location.longCodes` come prefixed (`gb-nr:PADTON`), while origin/destination long codes don't. Origin and
   destination locations may have no `shortCodes`.
 - `platform.forecast` is populated in practice, though the spec says "not currently used".
+- **The spec contradicts itself on nullable enums** (`oneOf: [string, null]` with an enum that leaves out null).
+  `tests/test_schema.py` adds null to those enums. Don't "fix" real data to match the spec.
+- **UI tests share one frozen simulated minute**, so the real 10-a-minute budget trips a few tests in. The
+  `fresh_allowance` fixture resets it per test. A budget error in the app shows as a 503 "busy" page, never as "missing".
+- **A paused browser clock freezes debounces too.** Use `page.clock.install(time=...)` and `run_for()`, not `pause_at`.
+- **Jinja escapes apostrophes** (`isn&#39;t`). Web tests compare `text(r)`, which unescapes and collapses whitespace.
+- **The worktree guard rejects some compound shell commands.** Use the Edit tool, or split commands up.

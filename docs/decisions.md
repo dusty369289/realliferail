@@ -5,8 +5,9 @@ Newest last. Add to this whenever a choice is made, with the reason.
 ## 2026-11-07: planning, owner away
 
 - **Next-generation API only (`data.rtt.io`).** The old API answers 418 and is shut.
-- **Free tier, no spending.** The owner said don't spend. Detailed mode (£4 a month) stays off. The app asks for
-  `detailed=false` and copes with whatever fields come back.
+- **Free tier works. Detailed mode is used when it's allowed.** The owner first said not to spend, then asked about the paid
+  plan mid-build. So the app asks for `detailed=true` only when `/api/info` lists `allowDetailed`, and copes with
+  whatever fields come back either way.
 - **Server plus PWA, not a native Android app.** RTT forbids tokens in distributed apps, so a server is needed anyway.
   A PWA installs on Android from Chrome, and the same pages work on a desktop. No Android SDK, no store.
 - **Same stack as uppYT** (FastAPI, Jinja, plain CSS, Typer, uv, pytest + playwright), so the owner's habits and harness
@@ -26,5 +27,30 @@ Newest last. Add to this whenever a choice is made, with the reason.
   used for points RTT hasn't forecast, and for the live position, and it's labelled.
 - **Colour means something.** Lights down stays greyscale. Amber for late, red for cancelled or problems, and one blue accent
   for the live train marker. Same as uppYT's "colour only comes from content", with the content here being status.
-- **Work happens in place on a branch.** The folder wasn't a git repo, so worktree isolation was impossible. The repo
-  starts with the plan on `main`, and the build goes on `first-build` for the owner to fast-forward.
+- **Work happens on a branch in a worktree.** The repo starts with the plan on `main`. The build is on
+  `worktree-first-build` (in `.claude/worktrees/first-build`), for the owner to fast-forward `main` to.
+
+## 2026-11-07: building
+
+- **Estimate tuning is a guess, said so.** A late train wins back 75% of the booked allowance in each section, and a
+  minimum dwell is 30 s. No real data could be used to tune this. `record` collects what a backtest would need.
+- **Lateness is whole minutes, rounded toward zero**, as on the railway. 2.5 min late shows as 2.
+- **The marker never passes an unreported point.** It holds at 95% of the section. Once the section has taken 2 min longer
+  than expected, the page says "No report at X yet". That covers a train held at a signal, or a late report, and we
+  can't tell which. That's said plainly rather than guessed.
+- **Out of allowance is "busy", not "missing".** UI tests showed that once the budget ran out, a train page said
+  "Couldn't show that train" with a 404. Now it's a 503 that names the reason and retries every 30 s. Cached answers are
+  served, marked stale, whenever there are any.
+- **The simulator's rate-limit headers slide** like the real ones. They first counted every request since start, so a
+  demo server would have locked itself out after 100 calls.
+- **Big stations win short prefixes in search.** "padd" gave Paddock Wood before Paddington. A hand-picked list of
+  termini and big interchanges gets a boost. There's no usage data in the bundled list to do better.
+- **Layout changes jump, progress animates.** Every refresh made the travelled line regrow from the top (seen on the
+  contact sheet). Only the train's own movement animates now.
+- **With passing points hidden, the marker runs between the visible stops by time.** Hidden rows have no height, so
+  placing it between two hidden passes put it in the wrong spot.
+- **Phone targets are 44 px**, enforced by the browser matrix. The nav links were 37 px.
+- **The service worker caches only the app shell, never train data.** A stale time shown as current would be worse than
+  the offline page.
+- **Each UI test gets a fresh allowance.** All of them run in one frozen simulated minute, so the real 10-a-minute
+  limit would correctly trip a few tests in. Resetting it per test is a test fixture, not a looser limit.
