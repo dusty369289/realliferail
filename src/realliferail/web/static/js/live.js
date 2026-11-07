@@ -141,6 +141,8 @@
   window.addEventListener("resize", () => place(true));
 
   place(true);
+  // the web font changes row heights, so place it again once the font is in (no animation)
+  if (document.fonts) document.fonts.ready.then(() => place(true));
   setInterval(() => { place(false); age(); }, 1000);
   const first = region.querySelector(".live");
   schedule(first ? Number(first.dataset.refresh) || 30 : 30);

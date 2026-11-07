@@ -8,7 +8,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src" / "realliferail"
-THEME = SRC / "web/static/css/themes/lights-down.css"
+THEME = SRC / "web/static/css/themes/platform.css"
 
 
 def tokens(block: str) -> dict[str, str]:
@@ -17,9 +17,9 @@ def tokens(block: str) -> dict[str, str]:
 
 def themes() -> dict[str, dict[str, str]]:
     css = THEME.read_text()
-    dark = tokens(css.split("@media")[0])
-    light = tokens(css.split("@media")[1])
-    return {"dark": dark, "light": {**dark, **light}}
+    light = tokens(css.split("@media")[0])
+    dark = tokens(css.split("@media")[1])
+    return {"light": light, "dark": {**light, **dark}}
 
 
 def lum(hex_: str) -> float:
@@ -49,6 +49,10 @@ TEXT_ON = [
     ("demo-ink", "demo"),
     ("muted", "surface-2"),
     ("ink", "surface-2"),
+    ("on-sign", "sign"),
+    ("train-edge", "train"),
+    ("ink", "control"),
+    ("late", "surface"),
 ]
 
 
@@ -62,7 +66,10 @@ def test_text_contrast(scheme, fg, bg):
 @pytest.mark.parametrize("scheme", ["dark", "light"])
 def test_train_marker_stands_out(scheme):
     t = themes()[scheme]
-    assert contrast(t["train"], t["page"]) >= 3  # a graphic, so WCAG's 3:1 for non-text
+    # a graphic, so WCAG's 3:1 for non-text. The yellow panel always has its dark edge, and it's the edge that
+    # separates it from the page (yellow on paper alone is only about 1.4:1)
+    assert contrast(t["train-edge"], t["page"]) >= 3 or contrast(t["train"], t["page"]) >= 3
+    assert contrast(t["train-edge"], t["train"]) >= 3
 
 
 def test_no_raw_colours_outside_themes():

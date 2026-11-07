@@ -121,23 +121,24 @@ def open_train(server, core, make_page, moment, state=State.RUNNING, station="RD
 def test_marker_sits_between_its_two_points(server, core, make_page, moment):
     page = open_train(server, core, make_page, moment)
     page.wait_for_timeout(300)
-    live = page.locator(".live")
-    a, b = int(live.get_attribute("data-from")), int(live.get_attribute("data-to"))
-    rows = page.locator(".route__pt")
-    ya = rows.nth(a).bounding_box()
-    yb = rows.nth(b).bounding_box()
-    m = page.locator("[data-train-marker]").bounding_box()
-    centre = m["y"] + m["height"] / 2
-    assert ya["y"] + ya["height"] / 2 - 1 <= centre <= yb["y"] + yb["height"] / 2 + 1
+    # all in the route's own coordinates, so scrolling and the sticky panel don't matter
+    ya, yb, y = page.evaluate(
+        """() => {
+          const live = document.querySelector('.live'), rows = live.querySelectorAll('.route__pt');
+          const c = (r) => r.offsetTop + r.offsetHeight / 2;
+          return [c(rows[+live.dataset.from]), c(rows[+live.dataset.to]),
+                  parseFloat(live.querySelector('[data-train-marker]').style.top)];
+        }"""
+    )
+    assert ya - 1 <= y <= yb + 1
 
 
 def test_marker_moves_with_the_clock(server, core, make_page, moment):
     page = open_train(server, core, make_page, moment)
-    page.wait_for_timeout(1000)  # the marker eases into place over 0.9 s
-    y1 = page.locator("[data-train-marker]").bounding_box()["y"]
+    top = "parseFloat(document.querySelector('[data-train-marker]').style.top)"
+    y1 = page.evaluate(top)
     page.clock.run_for(20_000)
-    page.wait_for_timeout(1000)
-    y2 = page.locator("[data-train-marker]").bounding_box()["y"]
+    y2 = page.evaluate(top)
     assert y2 > y1
 
 

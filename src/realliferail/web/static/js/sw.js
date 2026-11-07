@@ -2,11 +2,11 @@
 // because a stale time shown as current would be worse than an offline message.
 "use strict";
 
-const SHELL = "rlr-shell-v1";
+const SHELL = "rlr-shell-v2";
 const ASSETS = [
   "/offline",
   "/static/css/app.css?v=1",
-  "/static/css/themes/lights-down.css",
+  "/static/css/themes/platform.css",
   "/static/css/base/elements.css",
   "/static/css/composition/layout.css",
   "/static/css/block/chrome.css",
@@ -16,9 +16,9 @@ const ASSETS = [
   "/static/css/utility/text.css",
   "/static/js/app.js?v=1",
   "/static/js/live.js?v=1",
-  "/static/fonts/ibm-plex-sans-400.woff2",
-  "/static/fonts/ibm-plex-sans-500.woff2",
-  "/static/fonts/ibm-plex-sans-600.woff2",
+  "/static/fonts/barlow-latin-400-normal.woff2",
+  "/static/fonts/barlow-latin-500-normal.woff2",
+  "/static/fonts/barlow-semi-condensed-latin-700-normal.woff2",
   "/static/icons/icon-192.png",
 ];
 

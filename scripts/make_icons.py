@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 OUT = Path(__file__).resolve().parents[1] / "src/realliferail/web/static/icons"
-PAGE, INK, RAIL, TRAIN = (14, 15, 17), (237, 237, 234), (74, 75, 80), (95, 168, 255)
+PAGE, INK, RAIL, TRAIN = (27, 42, 74), (243, 239, 230), (90, 108, 140), (255, 204, 0)
 
 
 def draw(size: int, safe: float) -> Image.Image:

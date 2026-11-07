@@ -12,8 +12,18 @@
   data-fetched="{{ (res.fetched.fetched_at.timestamp() * 1000)|int }}">
   <div class="live__status" role="status">
     <h2 id="live-h" class="visually-hidden">Where the train is</h2>
+    {%- set hs = stop if (stop and stop.status in ('ahead', 'here')) else (off if (off and off.status == 'ahead') else none) %}
+    {%- if hs %}
+    <p class="live__hero">
+      {%- if hs.status == 'here' %}<span class="live__hero-num">Now</span><span class="live__hero-what">at {{ hs.name }}{% if hs.platform %}, platform {{ hs.platform }}{% endif %}</span>
+      {%- elif hs.minutes is not none and hs.minutes < 1 %}<span class="live__hero-num">Due</span><span class="live__hero-what">at {{ hs.name }}{% if hs.platform and hs is sameas stop %}, platform {{ hs.platform }}{% endif %}</span>
+      {%- elif hs.minutes is not none %}<span class="live__hero-num">{{ hs.minutes }}</span><span class="live__hero-unit">min</span>
+        <span class="live__hero-what">until it {{ 'leaves' if hs is sameas stop else 'reaches' }} {{ hs.name }} · {{ hs.shown.time|hm }}{% if hs.platform and hs is sameas stop %} · platform {{ hs.platform }}{% endif %}</span>
+      {%- endif %}
+    </p>
+    {%- endif %}
     <p class="live__headline state-{{ p.state }}">{{ p.headline }}</p>
-    {% for sm, verb in ((stop, 'leaves'), (off, 'reaches')) if sm %}
+    {% for sm, verb in ((stop, "leaves"), (off, "reaches")) if sm and sm is not sameas hs %}
     <p class="live__stop">
       {%- if sm.status == 'cancelled' %}<span class="problem">It no longer stops at {{ sm.name }}.</span>
       {%- elif sm.status == 'here' %}<strong>It's at {{ sm.name }} now</strong>{% if sm.platform %}, platform {{ sm.platform }}{% endif %}.
@@ -65,7 +75,7 @@
         {%- if pt.cancelled %}
         {%- elif main.source == TimeSource.BOOKED %}
         {%- elif main.source == TimeSource.OUR_ESTIMATE and not main.changed %}
-        {%- else %}{{ main.time|hmh }}{% if main.source == TimeSource.OUR_ESTIMATE %}<span class="est">est</span>{% endif %}
+        {%- else %}{{ main.time|hm if main.source == TimeSource.OUR_ESTIMATE else main.time|hmh }}{% if main.source == TimeSource.OUR_ESTIMATE %}<span class="est">est</span>{% endif %}
           {%- if main.delay_min %}<span class="route__delay">{{ '+' if main.delay_min > 0 else '−' }}{{ main.delay_min|abs }}</span>{% endif %}
         {%- endif -%}
       </span>

@@ -60,15 +60,15 @@
           <span class="trains__place">{{ r.origin if arr else r.destination }}</span>
           <span class="trains__meta">{% if r.is_bus %}<strong>Bus</strong> · {% endif %}{% if not r.for_passengers %}<strong>Not in service</strong> · {% endif %}{{ r.operator_name or "No operator" }}{% if r.headcode and r.headcode != "0B00" %} · {{ r.headcode }}{% endif %}{% if r.branding %} · {{ r.branding }}{% endif %}{% if r.vehicles %} · {{ r.vehicles }} coaches{% endif %}{% if r.status == 'APPROACHING' %} · Approaching{% elif r.status in ('AT_PLATFORM', 'DEPART_PREPARING', 'DEPART_READY') %} · At platform{% endif %}</span>
         </span>
-        <span class="trains__plat tnum{% if r.platform_changed %} is-changed{% endif %}" {% if r.platform %}aria-label="Platform {{ r.platform }}{% if not r.platform_confirmed %}, not confirmed{% endif %}"{% endif %}>
-          {%- if r.platform %}<span class="trains__plat-label" aria-hidden="true">Plat</span>{{ r.platform }}{% if not r.platform_confirmed %}<span class="muted" aria-hidden="true">?</span>{% endif %}{% endif -%}
+        <span class="trains__plat tnum{% if r.platform_changed %} is-changed{% endif %}{% if r.platform and not r.platform_confirmed %} is-unconfirmed{% endif %}" {% if r.platform %}aria-label="Platform {{ r.platform }}{% if not r.platform_confirmed %}, not confirmed{% endif %}"{% endif %}>
+          {%- if r.platform %}<span class="trains__plat-label" aria-hidden="true">Plat</span>{{ r.platform }}{% endif -%}
         </span>
       </a>
     </li>
     {% endfor %}
   </ol>
   {% endif %}
-  <p class="hint board__foot">Updated {{ result.fetched.fetched_at|hm }}{% if live %}, refreshes every minute{% endif %}. Platform with a ? isn't confirmed yet.
+  <p class="hint board__foot">Updated {{ result.fetched.fetched_at|hm }}{% if live %}, refreshes every minute{% endif %}. An outlined platform isn't confirmed yet.
   {%- if result.hidden %} {{ result.hidden }} empty or staff-only train{{ "s" if result.hidden != 1 }} hidden: <a href="{{ nav.all }}">show all</a>.{% elif result.show_all %} <a href="{{ nav.all }}">Passenger trains only</a>.{% endif %}</p>
 </div>
 {% endif %}

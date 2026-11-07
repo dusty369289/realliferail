@@ -56,11 +56,14 @@ def serve(
         ip = _lan_ip()
         if ip:
             typer.echo(f"On your phone (same Wi-Fi): http://{ip}:{port}")
+    # uvicorn exits rather than raising when the port is taken, so check first and say it in a sentence
     try:
-        uvicorn.run(create_app(core), host=host, port=port, log_level="warning")
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind((host, port))
     except OSError as e:
         typer.secho(f"Couldn't listen on {host}:{port}: {e.strerror or e}. Try another --port.", fg="red", err=True)
         raise typer.Exit(1) from e
+    uvicorn.run(create_app(core), host=host, port=port, log_level="warning")
 
 
 @app.command()

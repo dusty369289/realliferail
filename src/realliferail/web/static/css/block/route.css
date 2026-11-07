@@ -1,95 +1,109 @@
 .train__head { display: grid; gap: var(--s-1); }
+.train__head h1 { font-size: 2rem; }
 .train__tools { justify-content: space-between; }
+.train__actions { gap: 0 var(--s-4); }
+.train__note:empty { display: none; }
 
 .live { display: grid; gap: var(--s-3); }
 .live__status {
   position: sticky; top: 0; z-index: 5;
-  background: var(--page); padding-block: var(--s-3); border-bottom: 1px solid var(--line);
-  box-shadow: 0 -1px 0 var(--page);
+  background: var(--page); padding-block: var(--s-3) var(--s-3);
+  box-shadow: 0 1px 0 var(--line);
 }
-.live__headline { font-weight: 500; padding-left: var(--s-3); border-left: 3px solid var(--train); }
-.live__headline.state-overdue { border-left-color: var(--very-late); }
-.live__headline.state-cancelled { border-left-color: var(--problem); }
-.live__headline.state-arrived, .live__headline.state-not-started { border-left-color: var(--rail); }
-.live__stop { padding-left: calc(var(--s-3) + 3px); margin-top: var(--s-1); }
-.live__age { padding-left: calc(var(--s-3) + 3px); margin-top: var(--s-1); }
+/* The one number you came for */
+.live__hero { display: flex; align-items: baseline; gap: .4rem; flex-wrap: wrap; font-family: var(--sign-font); }
+.live__hero-num { font-weight: 700; font-size: 3.25rem; line-height: .9; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.live__hero-unit { font-weight: 600; font-size: 1.25rem; }
+.live__hero-what { font-weight: 600; font-size: 1.25rem; color: var(--muted); flex-basis: 100%; margin-top: .15rem; }
+.live__headline { font-weight: 500; margin-top: var(--s-2); }
+.live__headline.state-overdue { color: var(--very-late); }
+.live__headline.state-cancelled { color: var(--problem); }
+.live__stop { margin-top: var(--s-1); }
+.live__age { margin-top: var(--s-1); }
 .reasons { color: var(--late); font-size: var(--t-sm); }
 
+/* The route: a thick line diagram with ringed stops, like a line map on a carriage wall */
 .route-wrap { position: relative; }
 .route__pt {
   position: relative;
-  display: grid; grid-template-columns: 1.75rem 1fr 3.5rem 4.75rem; gap: 0 var(--s-2);
-  align-items: center; min-height: 3.25rem; padding-block: var(--s-2);
+  display: grid; grid-template-columns: 2.25rem 1fr 3.75rem 5rem; gap: 0 var(--s-2);
+  align-items: center; min-height: 3.5rem; padding-block: var(--s-2);
 }
-.route__pt.is-pass { min-height: 2rem; padding-block: var(--s-1); font-size: var(--t-sm); color: var(--muted); }
+.route__pt.is-pass { min-height: 2rem; padding-block: .15rem; font-size: var(--t-sm); color: var(--muted); }
 .route__mark { align-self: stretch; position: relative; }
-.route__mark::before { /* the rail */
-  content: ""; position: absolute; left: calc(50% - 1px); top: 0; bottom: 0; width: 2px; background: var(--rail);
+.route__mark::before { /* the line */
+  content: ""; position: absolute; left: calc(50% - 3px); top: 0; bottom: 0; width: 6px; background: var(--rail);
 }
 .route__pt:first-child .route__mark::before { top: 50%; }
 .route__pt:last-child .route__mark::before { bottom: 50%; }
 .route__mark::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; }
-.is-call .route__mark::after { width: .75rem; height: .75rem; background: var(--page); border: 2px solid var(--ink); }
-.is-pass .route__mark::after { width: .625rem; height: 2px; background: var(--rail); }
-.is-call.is-reported .route__mark::after { background: var(--ink); }
-.is-call.is-operational .route__mark::after { border-style: dashed; }
+.is-call .route__mark::after { width: 1.05rem; height: 1.05rem; border-radius: 50%; background: var(--page); border: 3px solid var(--ink); }
+.is-pass .route__mark::after { width: .5rem; height: 3px; background: var(--rail); transform: translate(3px, -50%); }
+.is-pass.is-reported .route__mark::after { background: var(--ink); }
+.is-call.is-operational .route__mark::after { border-style: dotted; }
 .is-cancelled .route__mark::after { border-color: var(--problem); }
+.is-at .route__mark::after, .is-to .route__mark::after { width: 1.3rem; height: 1.3rem; border-width: 4px; }
 
 .route__name { display: grid; min-width: 0; }
 .route__place { overflow-wrap: anywhere; }
-.is-call .route__place { font-weight: 500; }
+.is-call .route__place { font: 600 var(--t-md)/1.15 var(--sign-font); }
 .route__meta { color: var(--muted); font-size: var(--t-xs); }
 .route__meta:empty { display: none; }
-.is-reported { color: var(--muted); }
-.is-reported .route__place { color: var(--muted); }
-.is-at .route__place, .is-to .route__place { color: var(--ink); font-weight: 600; }
-.is-at .route__place::after { content: "  · your stop"; font-weight: 400; color: var(--muted); font-size: var(--t-xs); white-space: pre; }
-.is-to .route__place::after { content: "  · getting off"; font-weight: 400; color: var(--muted); font-size: var(--t-xs); white-space: pre; }
+.is-reported .route__place, .is-reported .route__booked { color: var(--muted); }
+.is-at .route__place, .is-to .route__place { color: var(--ink); font-weight: 700; }
+.is-at .route__place::after, .is-to .route__place::after {
+  margin-left: .45rem; padding: .05rem .35rem; vertical-align: .15em;
+  font: 600 .625rem/1.4 var(--sign-font); letter-spacing: .1em; text-transform: uppercase;
+  background: var(--sign); color: var(--on-sign); border-radius: var(--radius);
+}
+.is-at .route__place::after { content: "Board"; }
+.is-to .route__place::after { content: "Alight"; }
 .is-cancelled .route__place, .is-cancelled .route__booked { text-decoration: line-through; color: var(--muted); }
 
-.route__booked { text-align: right; color: var(--muted); }
+.route__booked { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
 .is-call .route__booked { color: var(--ink); }
-.is-call.is-reported .route__booked { color: var(--muted); }
-.route__live { text-align: right; white-space: nowrap; }
+.route__live { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .route__delay { display: block; font-size: var(--t-xs); line-height: 1.1; }
 
 .route.hide-passes .is-pass { min-height: 0; height: 0; padding: 0; overflow: hidden; visibility: hidden; }
 
-/* the train */
+/* The train: the yellow warning panel on the front of every British train */
 .route__train {
-  position: absolute; left: calc(.875rem - 7px); width: 14px; height: 24px; margin-top: -12px;
-  background: var(--train); border-radius: 2px; box-shadow: 0 0 0 5px var(--train-glow);
+  position: absolute; left: calc(1.125rem - 10px); width: 20px; height: 28px; margin-top: -14px;
+  background: var(--train); border: 2px solid var(--train-edge); border-radius: 6px 6px 3px 3px;
   transition: top .9s linear; z-index: 3; pointer-events: none;
 }
-.route__train::after { /* direction of travel */
-  content: ""; position: absolute; left: 50%; bottom: -7px; transform: translateX(-50%);
-  border: 5px solid transparent; border-top-color: var(--train); border-bottom: 0;
+.route__train::before { /* windscreen */
+  content: ""; position: absolute; left: 2px; right: 2px; top: 3px; height: 7px; background: var(--train-edge); border-radius: 3px 3px 1px 1px;
 }
-.route__done { position: absolute; left: calc(.875rem - 1px); width: 2px; top: 0; background: var(--ink); z-index: 1; pointer-events: none; transition: height .9s linear; }
-.route__train.is-waiting { animation: wait 2s ease-in-out infinite; }
-@keyframes wait { 50% { box-shadow: 0 0 0 9px var(--train-glow); } }
+.route__train::after { /* direction of travel */
+  content: ""; position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--train-edge); border-bottom: 0;
+}
+.route__done { position: absolute; left: calc(1.125rem - 3px); width: 6px; top: 0; background: var(--ink); z-index: 1; pointer-events: none; transition: height .9s linear; }
+.route__train.is-waiting { animation: idle 2.4s ease-in-out infinite; }
+@keyframes idle { 50% { transform: translateY(-2px); } }
 .route-wrap.is-instant .route__train, .route-wrap.is-instant .route__done { transition: none; }
 @media (prefers-reduced-motion: reduce) { .route__train, .route__done { transition: none; } .route__train.is-waiting { animation: none; } }
 
 /* time states */
 .src-actual { font-weight: 600; }
 .src-forecast { font-weight: 400; }
-.src-est { font-weight: 400; color: var(--muted); }
-.est { font-size: .65em; margin-left: .2em; vertical-align: super; color: var(--muted); letter-spacing: .02em; }
+.src-est { font-weight: 400; color: var(--muted); font-style: italic; }
+.est { font-size: .65em; margin-left: .2em; vertical-align: super; color: var(--muted); font-style: normal; letter-spacing: .02em; }
 .is-late { color: var(--late); }
 .is-very-late { color: var(--very-late); }
 .is-early { color: var(--early); }
 .is-changed { color: var(--late); }
 .trains__live.is-cancelled { color: var(--problem); }
 
-.legend { font-size: var(--t-sm); color: var(--muted); border-top: 1px solid var(--line); padding-top: var(--s-3); }
+.legend { font-size: var(--t-sm); color: var(--muted); padding-top: var(--s-3); }
 .legend summary { min-height: var(--tap); display: flex; align-items: center; color: var(--ink); }
-.legend__list { display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--s-3) var(--s-3); margin-top: var(--s-2); }
+.legend__list { display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--s-3); margin-top: var(--s-2); }
 .legend__list dt { color: var(--ink); text-align: right; }
-.tick { display: inline-block; width: .625rem; height: 2px; background: var(--rail); vertical-align: middle; }
-.train-swatch { display: inline-block; width: 8px; height: 14px; background: var(--train); vertical-align: middle; border-radius: 1px; }
+.tick { display: inline-block; width: .75rem; height: 3px; background: var(--rail); vertical-align: middle; }
+.train-swatch { display: inline-block; width: 10px; height: 14px; background: var(--train); border: 2px solid var(--train-edge); vertical-align: middle; border-radius: 3px 3px 1px 1px; }
 
 @media (max-width: 380px) {
-  .route__pt { grid-template-columns: 1.5rem 1fr 3.25rem 4.25rem; }
+  .route__pt { grid-template-columns: 2rem 1fr 3.4rem 4.5rem; }
 }
-.train__note:empty { display: none; }

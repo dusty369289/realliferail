@@ -98,7 +98,7 @@ def test_train_page(web):
     assert 'class="route"' in r.text
     assert "data-train-marker" in r.text
     assert 'class="route__pt is-call' in r.text and " is-at" in r.text
-    assert 'class="live__stop"' in r.text
+    assert 'class="live__hero"' in r.text or 'class="live__stop"' in r.text
 
 
 def test_train_live_fragment(web):

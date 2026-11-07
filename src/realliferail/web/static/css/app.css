@@ -1,6 +1,6 @@
 /* CUBE layers, lowest first. Themes are tokens only. */
 @layer tokens, base, composition, block, utility, exception;
-@import url("/static/css/themes/lights-down.css") layer(tokens);
+@import url("/static/css/themes/platform.css") layer(tokens);
 @import url("/static/css/base/elements.css") layer(base);
 @import url("/static/css/composition/layout.css") layer(composition);
 @import url("/static/css/block/chrome.css") layer(block);

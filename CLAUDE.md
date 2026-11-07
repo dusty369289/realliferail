@@ -70,9 +70,11 @@ No HTTP outside `sources/transport.py`. No raw colours outside `web/static/css/t
   how many minutes and stops away it is, and the platform.
 
 ## UI
-- **Lights down**, taken from uppYT: black, white and grey, dark first, IBM Plex Sans with tabular figures. Colour is only
-  used to mean something. Amber for late, red for cancelled, and one accent for the live train.
-- No pills, no glow, near-square corners, ordinary controls. The owner rejected a stereotypical AI look.
+- **Platform** (`themes/platform.css`), from British rail signage, not uppYT. The owner found the uppYT look boxy and
+  too like their other apps. Warm paper and navy ink, with deep navy at night. Barlow and Barlow Semi Condensed. Navy sign
+  plates for platforms. A thick Beck-style line with ringed stops. The train is the yellow warning panel of a train
+  front. One giant "N min" number on the train page. References and rules are in `docs/design.md`.
+- No cards or boxes, no glow, no gradients, no pills. Hierarchy comes from type. The owner has rejected a stereotypical AI look twice.
 - CUBE layers: `tokens, base, composition, block, utility, exception`. Themes are token-only files.
 - Phone first (412 px wide). Big touch targets. Works one-handed.
 

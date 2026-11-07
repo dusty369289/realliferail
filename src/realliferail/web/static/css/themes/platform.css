@@ -1,0 +1,56 @@
+/* Platform: printed timetable paper, navy ink, signage plates. Night is a deep navy, not grey.
+   Colour means something: amber late, red cancelled, and the yellow warning panel of a train's front for the train.
+   A theme only sets tokens. Contrast is checked by tests/test_design.py. */
+:root {
+  --page: #f3efe6;
+  --surface: #fbf9f4;
+  --surface-2: #e8e2d4;
+  --ink: #1b2230;
+  --muted: #586070;
+  --faint: #868b95;
+  --line: #d8d1c2;
+  --rail: #b8b0a0;
+  --control: #fffdf8;
+  --control-line: #857f71;
+  --primary: #1b2a4a;
+  --on-primary: #f7f4ec;
+  --sign: #1b2a4a;
+  --on-sign: #ffffff;
+  --problem: #b3261e;
+  --late: #8a5600;
+  --very-late: #ad4209;
+  --early: #2c6a3c;
+  --train: #ffcc00;
+  --train-edge: #1b2230;
+  --demo: #f8e7b0;
+  --demo-ink: #4f3b00;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0f1420;
+    --surface: #161d2b;
+    --surface-2: #1e2636;
+    --ink: #ece7dc;
+    --muted: #a3a9b5;
+    --faint: #727a89;
+    --line: #283041;
+    --rail: #485169;
+    --control: #161d2b;
+    --control-line: #6f7788;
+    --primary: #ece7dc;
+    --on-primary: #0f1420;
+    --sign: #2f4f8f;
+    --on-sign: #ffffff;
+    --problem: #ff9b8f;
+    --late: #f2c46b;
+    --very-late: #ff9f66;
+    --early: #9ad5a6;
+    --train: #ffcc00;
+    --train-edge: #0f1420;
+    --demo: #2c2614;
+    --demo-ink: #f0d9a0;
+    color-scheme: dark;
+  }
+}
