@@ -25,6 +25,7 @@
       {%- endif -%}
     </p>
     {% endfor %}
+    {% if tl.worst %}<p class="live__stop hint">Lost most time between {{ tl.worst.from_name }} and {{ tl.worst.to_name }} ({{ tl.worst.minutes }} min).</p>{% endif %}
     <p class="live__age hint"><span data-age>Updated {{ ago((tl.now - res.fetched.fetched_at).total_seconds()) }}</span>{% if res.fetched.stale %} ({{ res.fetched.note }}){% endif %}</p>
   </div>
   {% if s.reasons %}

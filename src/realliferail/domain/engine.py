@@ -75,11 +75,21 @@ class Position:
 
 
 @dataclass(frozen=True, slots=True)
+class Lost:
+    """Where the train lost (or made up) time, between two consecutive reported points."""
+
+    from_name: str
+    to_name: str
+    minutes: int  # + lost, - gained
+
+
+@dataclass(frozen=True, slots=True)
 class Timeline:
     service: Service
     points: tuple[PointView, ...]
     position: Position
     now: datetime
+    worst: Lost | None = None  # the section that lost the most time, if it lost at least 2 minutes
 
 
 def _round_min(seconds: float) -> int:
@@ -87,16 +97,26 @@ def _round_min(seconds: float) -> int:
     return int(seconds // 60) if seconds >= 0 else -int((-seconds) // 60)
 
 
-def _shown(t: Times, ours: datetime | None) -> Shown | None:
+STALE = timedelta(seconds=60)
+
+
+def _fresh(t: datetime | None, floor: datetime) -> datetime | None:
+    """A forecast earlier than the train could possibly get there is stale (a minute's slack for rounding)."""
+    return t if t is not None and t >= floor - STALE else None
+
+
+def _shown(t: Times, ours: datetime | None, floor: datetime, ahead: bool) -> Shown | None:
     if t.is_empty and ours is None:
         return None
     booked = t.booked
+    forecast = _fresh(t.forecast, floor) if ahead and ours else t.forecast
+    estimate = _fresh(t.estimate, floor) if ahead and ours else t.estimate
     if t.actual:
         time, src = t.actual, TimeSource.ACTUAL
-    elif t.forecast:
-        time, src = t.forecast, TimeSource.FORECAST
-    elif t.estimate:
-        time, src = t.estimate, TimeSource.RTT_ESTIMATE
+    elif forecast:
+        time, src = forecast, TimeSource.FORECAST
+    elif estimate:
+        time, src = estimate, TimeSource.RTT_ESTIMATE
     elif ours:
         time, src = ours, TimeSource.OUR_ESTIMATE
     else:
@@ -125,8 +145,14 @@ def build(service: Service, now: datetime, cfg: EngineConfig | None = None) -> T
 
     # --- our estimates, propagated forward from the last report (or from the start if none) ---
     ours_arr: dict[int, datetime] = {}
+    planned_arr: dict[int, datetime] = {}  # what we'd expect if nothing had held it up since the last report
     ours_dep: dict[int, datetime] = {}
     cursor: datetime | None = None  # time the train leaves the previous usable point
+    # The earliest it could physically be anywhere: from where it is now, at its fastest booked running. A forecast
+    # earlier than this is stale (typically a train held since RTT last forecast), so ours is shown instead.
+    floor: datetime = now
+    floor_arr: dict[int, datetime] = {}
+    floor_dep: dict[int, datetime] = {}
     prev: int | None = None
     start = usable.index(last) if last is not None else 0
     for k in range(start, len(usable)):
@@ -145,8 +171,10 @@ def build(service: Service, now: datetime, cfg: EngineConfig | None = None) -> T
                     dep = max(dep, now) if not p.departure.actual else dep
                     ours_dep[i] = dep
                     cursor = dep
+                    floor = max(now, act + cfg.min_dwell)
                 else:
                     cursor = act
+                    floor = act
             prev = i
             continue
         if cursor is None or prev is None:
@@ -159,11 +187,16 @@ def build(service: Service, now: datetime, cfg: EngineConfig | None = None) -> T
         booked_run = (a_here - a_prev).total_seconds()
         slack = pts[prev].allowances.total * cfg.recovery_share
         min_run = max(booked_run - slack, booked_run * 0.5, 0)
-        arr = max(cursor + timedelta(seconds=min_run), a_here)
+        # it can't reach a point it hasn't been reported at before now, so a held train pushes everything back
+        fastest = max(booked_run - pts[prev].allowances.total, booked_run * 0.7, 0)  # every second of slack won back
+        floor = max(floor + timedelta(seconds=fastest), now)
+        floor_arr[i] = floor
+        planned_arr[i] = max(cursor + timedelta(seconds=min_run), a_here)
+        arr = max(planned_arr[i], floor)
         ours_arr[i] = arr
         # RTT knows more than we do, so where it has forecast a point, carry on from its time instead of ours
         first = p.first_event
-        anchor = first.forecast or first.estimate
+        anchor = _fresh(first.forecast, floor) or _fresh(first.estimate, floor)
         base = anchor or arr
         if p.kind is Kind.PASS:
             cursor = base
@@ -173,7 +206,9 @@ def build(service: Service, now: datetime, cfg: EngineConfig | None = None) -> T
                 dwell = min(cfg.min_dwell, max(dep_planned - (p.arrival.planned or dep_planned), timedelta(0)))
                 dep = max(base + dwell, dep_planned)
                 ours_dep[i] = dep
-                cursor = p.departure.forecast or p.departure.estimate or dep
+                floor = floor + dwell
+                floor_dep[i] = floor
+                cursor = _fresh(p.departure.forecast, floor) or _fresh(p.departure.estimate, floor) or dep
             else:
                 cursor = base
         prev = i
@@ -183,15 +218,28 @@ def build(service: Service, now: datetime, cfg: EngineConfig | None = None) -> T
         reported = last is not None and i <= last
         if p.kind is Kind.PASS:
             views.append(
-                PointView(i, p, None, None, _shown(p.passing, ours_arr.get(i)), reported, ours_arr.get(i), None)
+                PointView(
+                    i,
+                    p,
+                    None,
+                    None,
+                    _shown(p.passing, ours_arr.get(i), floor_arr.get(i, now), not reported),
+                    reported,
+                    ours_arr.get(i),
+                    None,
+                )
             )
         else:
             views.append(
                 PointView(
                     i,
                     p,
-                    _shown(p.arrival, ours_arr.get(i)) if not p.arrival.is_empty else None,
-                    _shown(p.departure, ours_dep.get(i)) if not p.departure.is_empty else None,
+                    _shown(p.arrival, ours_arr.get(i), floor_arr.get(i, now), not reported)
+                    if not p.arrival.is_empty
+                    else None,
+                    _shown(p.departure, ours_dep.get(i), floor_dep.get(i, now), not reported)
+                    if not p.departure.is_empty
+                    else None,
                     None,
                     reported,
                     ours_arr.get(i),
@@ -199,8 +247,31 @@ def build(service: Service, now: datetime, cfg: EngineConfig | None = None) -> T
                 )
             )
 
-    position = _position(service, tuple(views), usable, last, now, cfg)
-    return Timeline(service=service, points=tuple(views), position=position, now=now)
+    position = _position(service, tuple(views), usable, last, now, cfg, planned_arr)
+    return Timeline(service=service, points=tuple(views), position=position, now=now, worst=_worst(pts, usable, last))
+
+
+def _worst(pts, usable: list[int], last: int | None) -> Lost | None:
+    """The section where lateness grew most. Timing points make this finer than station-to-station."""
+    if last is None:
+        return None
+    prev = None  # (index, lateness in seconds)
+    best: tuple[float, int, int] | None = None
+    for i in usable:
+        if i > last:
+            break
+        act, ev = _actual_of(pts[i])
+        if act is None or ev is None or ev.planned is None:
+            continue
+        late = (act - ev.planned).total_seconds()
+        if prev is not None:
+            grew = late - prev[1]
+            if best is None or grew > best[0]:
+                best = (grew, prev[0], i)
+        prev = (i, late)
+    if best is None or best[0] < 120:
+        return None
+    return Lost(pts[best[1]].name, pts[best[2]].name, int(best[0] // 60))
 
 
 def _expected_at(v: PointView) -> datetime | None:
@@ -227,6 +298,7 @@ def _position(
     last: int | None,
     now: datetime,
     cfg: EngineConfig,
+    planned_arr: dict[int, datetime],
 ) -> Position:
     pts = service.points
     if not pts:
@@ -285,7 +357,10 @@ def _position(
             f"At {lp.name} since {act:%H:%M}{tail} ({late}).",
         )
 
-    expected = _expected_at(views[nxt]) or views[nxt].ours_arrival
+    # Judge progress against what was expected when it left, not against estimates already pushed back by the wait
+    nv = views[nxt]
+    first = nv.point.first_event
+    expected = first.forecast or first.estimate or planned_arr.get(nxt) or _expected_at(nv)
     np_ = pts[nxt]
     if expected is None or expected <= act:
         frac = cfg.hold_fraction

@@ -96,11 +96,7 @@ class RttClient:
         if r.status != 200 or not isinstance(r.body, dict) or not r.body.get("token"):
             raise AuthError("Realtime Trains didn't accept the token. Check it in api-portal.rtt.io.")
         self._access = r.body["token"]
-        until = r.body.get("validUntil")
-        try:
-            self._access_until = datetime.fromisoformat(until.replace("Z", "+00:00")) - timedelta(seconds=60)
-        except AttributeError, ValueError:
-            self._access_until = now + timedelta(minutes=10)
+        self._access_until = _until(r.body.get("validUntil"), now)
         return self._access
 
     def check_token(self) -> TokenInfo:
@@ -114,7 +110,7 @@ class RttClient:
         r2 = self._raw("/api/get_access_token", {}, self._token)
         if r2.status == 200 and isinstance(r2.body, dict) and r2.body.get("token"):
             self._access = r2.body["token"]
-            self._access_until = self._clock() + timedelta(minutes=10)
+            self._access_until = _until(r2.body.get("validUntil"), self._clock())
             r3 = self._raw("/api/info", {}, self._access)
             self.info = _info(r3.body if isinstance(r3.body, dict) else {}, "refresh")
             if not self.info.entitlements:
@@ -204,3 +200,11 @@ def _info(body: dict, kind: str) -> TokenInfo:
         history_days=cred.get("historyRestrictToDays") if cred.get("historyRestriction") else None,
         kind=kind,
     )
+
+
+def _until(valid_until, now: datetime) -> datetime:
+    """When to stop using a short-life access token: a minute before it expires, or in 10 minutes if we can't tell."""
+    try:
+        return datetime.fromisoformat(valid_until.replace("Z", "+00:00")) - timedelta(seconds=60)
+    except AttributeError, ValueError:
+        return now + timedelta(minutes=10)

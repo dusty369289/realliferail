@@ -171,3 +171,47 @@ def test_moving_forward_in_time_never_moves_backwards():
     s = svc()
     fractions = [build(s, at(10, 4) + timedelta(seconds=15 * k)).position.fraction for k in range(20)]
     assert fractions == sorted(fractions)
+
+
+def test_where_it_lost_time():
+    s = svc()
+    pts = list(s.points)
+    # 2 late at Reading, 3 at Reading East Main, then 7 at Twyford: the time went between those two
+    pts[2] = replace(pts[2], passing=replace(pts[2].passing, actual=at(10, 12)))
+    tl = build(replace(s, points=tuple(pts)), at(10, 13))
+    assert tl.worst is not None
+    assert (tl.worst.from_name, tl.worst.to_name, tl.worst.minutes) == ("Reading East Main", "Twyford", 4)
+
+
+def test_no_lost_time_line_for_small_slips():
+    assert build(svc(), at(10, 5)).worst is None  # only half a minute lost so far
+
+
+def test_a_held_train_pushes_later_times_back_and_never_shows_the_past():
+    tl = build(svc(), at(10, 20))  # no report at Twyford since 10:04
+    assert tl.position.state is State.OVERDUE
+    mai = tl.points[3]
+    # RTT's 10:11 forecast for Maidenhead is stale by now, so ours (labelled) takes over, and it's not in the past
+    assert mai.arrival.source is TimeSource.OUR_ESTIMATE
+    assert mai.arrival.time >= at(10, 20)
+    for v in tl.points[2:]:
+        for shown in (v.arrival, v.departure, v.passing):
+            if shown and shown.source is not TimeSource.ACTUAL and shown.source is not TimeSource.BOOKED:
+                assert shown.time >= at(10, 19), (v.point.name, shown)
+
+
+def test_fresh_rtt_forecasts_still_win():
+    tl = build(svc(), at(10, 6))
+    assert tl.points[3].arrival.source is TimeSource.FORECAST
+
+
+def test_rtt_forecasts_that_assume_more_recovery_than_ours_still_win():
+    s = svc()
+    pts = list(s.points)
+    m = pts[3]
+    # RTT thinks it'll make up nearly all the time; that's possible, so it isn't overruled
+    pts[3] = replace(
+        m, arrival=replace(m.arrival, forecast=at(10, 9)), departure=replace(m.departure, forecast=at(10, 10))
+    )
+    tl = build(replace(s, points=tuple(pts)), at(10, 5))
+    assert tl.points[3].arrival.source is TimeSource.FORECAST
