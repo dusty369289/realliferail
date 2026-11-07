@@ -9,5 +9,6 @@ __pycache__/
 .ui-report/
 .ui-report-previous/
 .ui-baselines/
-recordings/
-data/
+/recordings/
+/data/
+.claude/worktrees/
