@@ -385,21 +385,24 @@ class SimTransport:
         self.tt = timetable or Timetable()
         self.stations = stations  # optional StationIndex, for names of stations the routes don't cover
         self.requests: list[tuple[str, dict]] = []
+        self._times: list[datetime] = []
         self.limit_hour = limit_hour
 
     def _headers(self) -> dict[str, str]:
-        used = len(self.requests)
-        return {
-            "x-ratelimit-limit-minute": "10",
-            "x-ratelimit-remaining-minute": str(max(10 - used % 10, 0)),
-            "x-ratelimit-limit-hour": str(self.limit_hour),
-            "x-ratelimit-remaining-hour": str(max(self.limit_hour - used, 0)),
-            "x-ratelimit-limit-day": "1000",
-            "x-ratelimit-remaining-day": str(max(1000 - used, 0)),
-        }
+        """Rate-limit headers like the real API's: sliding windows of the free tier's limits."""
+        now = self.clock()
+        h = {}
+        for dim, secs, limit in (("minute", 60, 10), ("hour", 3600, self.limit_hour), ("day", 86400, 1000)):
+            used = sum(1 for t in self._times if (now - t).total_seconds() < secs)
+            h[f"x-ratelimit-limit-{dim}"] = str(limit)
+            h[f"x-ratelimit-remaining-{dim}"] = str(max(limit - used, 0))
+        return h
 
     def get(self, path: str, params: dict[str, str], token: str | None) -> Response:
         self.requests.append((path, dict(params)))
+        self._times.append(self.clock())
+        if len(self._times) > 2000:
+            del self._times[:1000]
         h = self._headers()
         if path == "/api/info":
             return Response(
