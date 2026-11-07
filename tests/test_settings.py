@@ -134,7 +134,7 @@ def test_cross_site_posts_refused(clock, home):
         ("127.0.0.1", True),
         ("192.168.0.20", True),
         ("10.1.2.3", True),
-        ("100.101.102.103", True),
+        ("100.101.102.103", False),
         ("::1", True),
         ("8.8.8.8", False),
         ("81.2.69.160", False),

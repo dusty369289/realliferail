@@ -28,13 +28,19 @@
         <input id="token" name="token" type="password" required minlength="20" spellcheck="false"
                autocapitalize="off" autocomplete="off" placeholder="eyJ…">
       </div>
+      {% if hosted %}
+      <p class="hint">It's checked with Realtime Trains first (1 to 3 calls), then kept <strong>in this browser only</strong>,
+        encrypted, in a cookie that page scripts can't read. This server doesn't store it. Each device needs it pasted once,
+        and it's used only for your own trains and your own allowance.</p>
+      {% else %}
       <p class="hint">It's checked with Realtime Trains before it's saved (1 to 3 calls). It's kept on this server only, never
         sent to your phone, and never shown again in full.</p>
+      {% endif %}
       <button class="button" type="submit">Check and save key</button>
     </form>
     {% if not demo %}
     <form method="post" action="/settings/token/remove">
-      <button class="linkish" type="submit">Remove key and use demo data</button>
+      <button class="linkish" type="submit">{{ "Forget my key on this device" if hosted else "Remove key and use demo data" }}</button>
     </form>
     {% endif %}
     {% else %}

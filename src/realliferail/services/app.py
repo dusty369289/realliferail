@@ -79,6 +79,16 @@ class ServiceResult:
     refresh_after: float  # seconds the page should wait before asking again
 
 
+def clean_token(token: str) -> str:
+    """What someone pasted, tidied: quotes and an `RTT_TOKEN=` prefix removed. Refuses what can't be a token."""
+    token = (token or "").strip().strip('"').strip("'")
+    if token.startswith("RTT_TOKEN="):
+        token = token.split("=", 1)[1]
+    if not 20 <= len(token) <= 2000 or any(c.isspace() for c in token):
+        raise AuthError("That doesn't look like a Realtime Trains token. Copy it again from api-portal.rtt.io.")
+    return token
+
+
 def default_home() -> Path:
     """Where settings and the cached access token live. Outside the project, so they're never committed."""
     return Path(os.environ.get("REALLIFERAIL_HOME") or Path.home() / ".config" / "realliferail")
@@ -160,11 +170,7 @@ class Realliferail:
 
     def set_token(self, token: str) -> TokenInfo:
         """Check a new token with RTT (1 to 3 calls), and only then use it and save it."""
-        token = token.strip().strip('"').strip("'")
-        if token.startswith("RTT_TOKEN="):
-            token = token.split("=", 1)[1]
-        if len(token) < 20 or any(c.isspace() for c in token):
-            raise AuthError("That doesn't look like a Realtime Trains token. Copy it again from api-portal.rtt.io.")
+        token = clean_token(token)
         probe = RttClient(self._real_transport(), token, self.budget, clock=self.clock)
         info = probe.check_token()
         self.client._t = self._real_transport()

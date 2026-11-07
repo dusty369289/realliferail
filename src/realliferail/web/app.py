@@ -16,6 +16,7 @@ from fastapi.templating import Jinja2Templates
 from ..domain.engine import Shown, State, stop_summary
 from ..domain.models import Kind, TimeSource
 from ..services.app import TIERS, BusyError, Realliferail, RttError
+from ..services.hosted import COOKIE, MAX_AGE, Hosted
 
 HERE = Path(__file__).parent
 LONDON = ZoneInfo("Europe/London")
@@ -57,21 +58,25 @@ def delay_class(shown: Shown | None) -> str:
     return "is-ontime"
 
 
-TAILNET = ipaddress.ip_network("100.64.0.0/10")  # Tailscale addresses
-
-
 def private_client(host: str | None) -> bool:
-    """Settings can only be changed from this machine, the home network or your tailnet: never from the internet."""
+    """Single-user mode: the server's key can only be changed from this machine or the home network."""
     try:
         ip = ipaddress.ip_address(host or "")
     except ValueError:
         return False
-    return ip.is_loopback or ip.is_private or (ip.version == 4 and ip in TAILNET)
+    return ip.is_loopback or ip.is_private
 
 
-def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
+def create_app(
+    core: Realliferail | None = None,
+    settings_allowed=private_client,
+    hosted: Hosted | None = None,
+    secure_cookies: bool = True,
+) -> FastAPI:
+    """Single-user (`core`: one key, kept on the server) or hosted (`hosted`: each browser brings its own key)."""
+    if (core is None) == (hosted is None):
+        raise ValueError("give exactly one of core or hosted")
     app = FastAPI(title="Real Life Rail", docs_url=None, redoc_url=None, openapi_url=None)
-    app.state.core = core
     templates = Jinja2Templates(directory=str(HERE / "templates"))
     env = templates.env
     env.filters["hm"] = hm
@@ -79,8 +84,17 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
     env.globals.update(Kind=Kind, TimeSource=TimeSource, State=State, delay_class=delay_class, ago=ago, VERSION=VERSION)
     app.mount("/static", StaticFiles(directory=str(HERE / "static")), name="static")
 
+    def cur(request: Request) -> Realliferail:
+        """This visitor's client: from their cookie when hosted, else the one server-wide client."""
+        c = getattr(request.state, "core", None)
+        if c is None:
+            c = hosted.for_cookie(request.cookies.get(COOKIE)) if hosted else core
+            request.state.core = c
+        return c
+
     def page(request: Request, name: str, status: int = 200, **ctx) -> HTMLResponse:
-        ctx.update(demo=core.demo, budget=core.budget.state(), now=core.now())
+        c = cur(request)
+        ctx.update(demo=c.demo, budget=c.budget.state(), now=c.now(), hosted=hosted is not None)
         return templates.TemplateResponse(request, name, ctx, status_code=status)
 
     @app.middleware("http")
@@ -111,6 +125,7 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
         all: int = 0,
         refresh: int = 0,
     ):
+        core = cur(request)
         if not station.strip():
             return RedirectResponse("/", status_code=303)
         mode = "arr" if mode == "arr" else "dep"
@@ -158,6 +173,7 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
 
     @app.get("/train/{uid}", response_class=HTMLResponse)
     def train(request: Request, uid: str, at: str = "", to: str = ""):
+        core = cur(request)
         try:
             res = core.service(uid)
         except BusyError as e:
@@ -178,6 +194,7 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
 
     @app.get("/train/{uid}/live", response_class=HTMLResponse)
     def train_live(request: Request, uid: str, at: str = "", to: str = "", force: int = 0):
+        core = cur(request)
         try:
             res = core.service(uid, background=not force, force=bool(force))
         except RttError as e:
@@ -194,16 +211,20 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
             off=stop_summary(res.timeline, to, boarding=False),
         )
 
+    index = hosted.stations if hosted else core.stations
+
     @app.get("/api/stations")
     def stations(q: str = Query("", max_length=60)):
-        return JSONResponse([{"name": s.name, "crs": s.crs} for s in core.search_stations(q)])
+        return JSONResponse([{"name": s.name, "crs": s.crs} for s in index.search(q)])
 
     @app.get("/about", response_class=HTMLResponse)
     def about(request: Request):
+        core = cur(request)
         info = core.token_info()
         return page(request, "about.html", info=info, token_error=core.token_error)
 
     def settings_page(request: Request, status: int = 200, **ctx) -> HTMLResponse:
+        core = cur(request)
         return page(
             request,
             "settings.html",
@@ -213,7 +234,7 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
             info=None if core.demo else core.token_info(),
             hint=None if core.demo else core.client.token_hint,
             token_error=core.token_error,
-            can_edit=settings_allowed(request.client.host if request.client else None),
+            can_edit=hosted is not None or settings_allowed(request.client.host if request.client else None),
             **ctx,
         )
 
@@ -221,7 +242,7 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
         origin = request.headers.get("origin")
         if origin and urlsplit(origin).netloc != request.headers.get("host"):
             return HTMLResponse("Refused: that request came from another site.", status_code=403)
-        if not settings_allowed(request.client.host if request.client else None):
+        if hosted is None and not settings_allowed(request.client.host if request.client else None):
             return settings_page(request, status=403, error="Settings can only be changed from your own network.")
         return None
 
@@ -234,20 +255,41 @@ def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
     async def settings_token(request: Request):
         if (refused := guard(request)) is not None:
             return refused
-        form = parse_qs((await request.body()).decode("utf-8", "replace"))
+        body = await request.body()
+        if len(body) > 8192:
+            return settings_page(request, status=413, error="That's far too long to be a key.")
+        form = parse_qs(body.decode("utf-8", "replace"))
         token = (form.get("token") or [""])[0]
         try:
-            core.set_token(token)
+            if hosted:
+                token, _ = hosted.check(token)
+            else:
+                cur(request).set_token(token)
         except RttError as e:
             return settings_page(request, status=400, error=str(e))
-        return RedirectResponse("/settings?saved=1", status_code=303)
+        resp = RedirectResponse("/settings?saved=1", status_code=303)
+        if hosted:
+            resp.set_cookie(
+                COOKIE,
+                hosted.box.seal(token),
+                max_age=MAX_AGE,
+                httponly=True,
+                secure=secure_cookies,
+                samesite="lax",
+                path="/",
+            )
+        return resp
 
     @app.post("/settings/token/remove", response_class=HTMLResponse)
     async def settings_remove(request: Request):
         if (refused := guard(request)) is not None:
             return refused
-        core.remove_token()
-        return RedirectResponse("/settings?removed=1", status_code=303)
+        resp = RedirectResponse("/settings?removed=1", status_code=303)
+        if hosted:
+            resp.delete_cookie(COOKIE, path="/", secure=secure_cookies, httponly=True, samesite="lax")
+        else:
+            cur(request).remove_token()
+        return resp
 
     @app.get("/manifest.webmanifest")
     def manifest():

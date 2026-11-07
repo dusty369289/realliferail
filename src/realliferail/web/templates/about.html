@@ -11,8 +11,7 @@
   <p>To see real trains:</p>
   <ol class="steps">
     <li>Sign in at <a href="https://api-portal.rtt.io">api-portal.rtt.io</a> and request a token. The free plan is enough.</li>
-    <li>On the computer running this server, put <code>RTT_TOKEN=your-token</code> in a file called <code>.env</code> in the project folder.</li>
-    <li>Restart the server.</li>
+    <li>Paste it in <a href="/settings">Settings</a>.{% if hosted %} It stays in your browser, encrypted. This server doesn't keep it.{% endif %}</li>
   </ol>
   {% else %}
   <dl class="facts">
@@ -27,7 +26,7 @@
   {% endif %}
 
   <h2>Allowance</h2>
-  <p>Realtime Trains limits how often this server can ask. Answers are shared by everyone using this server and kept for a minute (boards) or 30 seconds (trains).</p>
+  <p>Realtime Trains limits how often your key can ask. Answers are kept for a minute (boards) or 30 seconds (trains){% if hosted %}, per key: your allowance is yours alone{% else %} and shared by every device using this server{% endif %}.</p>
   <dl class="facts tnum">
     <dt>This minute</dt><dd>{{ budget.remaining.minute }} of {{ budget.limits.minute }} left</dd>
     <dt>This hour</dt><dd>{{ budget.remaining.hour }} of {{ budget.limits.hour }} left</dd>

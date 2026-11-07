@@ -42,13 +42,34 @@ def serve(
         False, "--lan", help="Listen on every interface so a phone on the same network can open it."
     ),
     demo: bool = typer.Option(False, "--demo", help="Use simulated trains even if a token is set."),
+    hosted: bool = typer.Option(
+        False,
+        "--hosted",
+        help="For a public server: each visitor brings their own key, kept encrypted in their browser. "
+        "Needs REALLIFERAIL_SECRET (64 hex characters). The server stores no key.",
+    ),
+    insecure_cookies: bool = typer.Option(
+        False, "--insecure-cookies", help="Hosted mode over plain http, for local testing only."
+    ),
 ):
     """Start the web app."""
+    import os
+
     import uvicorn
 
+    from ..services.hosted import Hosted, load_secret
     from ..web.app import create_app
 
-    core = _core(demo)
+    if hosted:
+        try:
+            secret = load_secret(os.environ.get("REALLIFERAIL_SECRET"))
+        except ValueError as e:
+            typer.secho(str(e), fg="red", err=True)
+            raise typer.Exit(2) from e
+        web = create_app(hosted=Hosted(secret), secure_cookies=not insecure_cookies)
+        typer.echo("Hosted mode: visitors bring their own keys. No key is stored here.")
+    else:
+        web = create_app(_core(demo))
     if lan:
         host = "0.0.0.0"
     typer.echo(f"Real Life Rail on http://{'127.0.0.1' if host == '0.0.0.0' else host}:{port}")
@@ -63,7 +84,15 @@ def serve(
     except OSError as e:
         typer.secho(f"Couldn't listen on {host}:{port}: {e.strerror or e}. Try another --port.", fg="red", err=True)
         raise typer.Exit(1) from e
-    uvicorn.run(create_app(core), host=host, port=port, log_level="warning")
+    # behind a reverse proxy (Caddy) in hosted mode; uvicorn's own access log stays off, the proxy logs
+    uvicorn.run(
+        web,
+        host=host,
+        port=port,
+        log_level="warning",
+        proxy_headers=hosted,
+        forwarded_allow_ips="*" if hosted else None,
+    )
 
 
 @app.command()
