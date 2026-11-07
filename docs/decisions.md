@@ -95,3 +95,16 @@ Newest last. Add to this whenever a choice is made, with the reason.
   serving another. Within one key, devices still share.
 - **Dependencies locked with `--exclude-newer`** a week back, to match 3net's 7-day release rule. The image installs from
   `requirements.lock` with hashes. Python 3.15.1, the same base as igsent.
+
+## 2026-11-07 late: making the public server safe
+
+- **The demo can't be used up.** It's the simulator, so its budget is unlimited (`Budget.unlimited`). Before this, all
+  no-key visitors shared one 10-a-minute allowance, and one busy visitor could make the demo "busy" for everyone.
+- **Key checks are throttled**: 5 per IP and 30 in total per 10 minutes. Checking a key calls RTT from the server, and
+  unthrottled, anyone could make 3net hammer RTT with junk keys and get its IP rate-limited. Junk that can't be a key is
+  refused before the throttle and costs nothing. The client IP comes from Caddy's X-Forwarded-For, which Caddy sets
+  itself (it ignores an incoming one), so it can't be spoofed.
+- **Memory is bounded**: at most 200 keys in memory (12 h idle expiry), 30 cached answers per key, per-answer locks
+  pruned with the cache, and the simulator keeps only its last 1000 requests. Seen live: 72 MB of a 512 MB limit.
+- **Search inputs over 80 characters are refused.** uvicorn's Server header is off.
+- Checked live: Caddy redacts the Cookie header in its access logs (19 of 19 logged), so the sealed key never reaches a log.
