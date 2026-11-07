@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -78,6 +79,38 @@ class ServiceResult:
     refresh_after: float  # seconds the page should wait before asking again
 
 
+def default_home() -> Path:
+    """Where settings and the cached access token live. Outside the project, so they're never committed."""
+    return Path(os.environ.get("REALLIFERAIL_HOME") or Path.home() / ".config" / "realliferail")
+
+
+@dataclass(frozen=True, slots=True)
+class Tier:
+    """What this token can do, worked out from its entitlements and the limits RTT reports."""
+
+    name: str  # Demo, Free, Hobbyist, Team or above
+    detailed: bool
+    allocations: bool
+    per_minute: int
+    per_hour: int
+
+    @property
+    def precision(self) -> str:
+        return "to the quarter minute" if self.detailed else "to the minute"
+
+
+TIERS = [
+    # name, what it adds, cost. Shown on the settings page. The app decides from entitlements, not from this table.
+    ("Free", "Live times to the minute, boards and trains, 10 calls a minute and 100 an hour.", "£0"),
+    (
+        "Hobbyist",
+        "Detailed mode: reports to the quarter minute, headcodes, running lines, unit numbers and class, empty stock.",
+        "£4 a month",
+    ),
+    ("Team", "As Hobbyist, with 40 calls a minute and 1200 an hour, so trains update more often.", "£29 a month"),
+]
+
+
 class Realliferail:
     def __init__(
         self,
@@ -86,15 +119,83 @@ class Realliferail:
         clock: Callable[[], datetime] = lambda: datetime.now(UTC),
         stations: StationIndex | None = None,
         demo: bool | None = None,
+        home: Path | None = None,
     ):
         self.clock = clock
         self.stations = stations or StationIndex.bundled()
+        self.home = home
         self.demo = (token is None and transport is None) if demo is None else demo
+        self._sim = SimTransport(clock=clock, stations=self.stations)
+        self._real = transport if (transport is not None and not isinstance(transport, SimTransport)) else None
         if transport is None:
-            transport = SimTransport(clock=clock, stations=self.stations) if self.demo else HttpTransport()
+            transport = self._sim if self.demo else self._real_transport()
         self.budget = Budget(clock=clock)
-        self.client = RttClient(transport, token if not self.demo else "demo", self.budget, clock=clock)
+        state = home / "access.json" if home else None
+        self.client = RttClient(
+            transport, token if not self.demo else "demo", self.budget, clock=clock, state_file=state
+        )
         self.token_error: str | None = None
+
+    def _real_transport(self) -> Transport:
+        if self._real is None:
+            self._real = HttpTransport()
+        return self._real
+
+    # ---- settings ----
+    def tier(self) -> Tier:
+        lim = self.budget.limits
+        if self.demo:
+            return Tier("Demo", False, False, lim["minute"], lim["hour"])
+        info = self.token_info()
+        ents = set(info.entitlements) if info else set()
+        detailed = "allowDetailed" in ents
+        allocations = bool(ents & {"allowAllocations", "allowAllocationsPassenger"})
+        if ents & {"allowFullAllocationListing", "allowFullAllocationListingPassenger"} or lim["hour"] > 100:
+            name = "Team or above"
+        elif detailed:
+            name = "Hobbyist"
+        else:
+            name = "Free"
+        return Tier(name, detailed, allocations, lim["minute"], lim["hour"])
+
+    def set_token(self, token: str) -> TokenInfo:
+        """Check a new token with RTT (1 to 3 calls), and only then use it and save it."""
+        token = token.strip().strip('"').strip("'")
+        if token.startswith("RTT_TOKEN="):
+            token = token.split("=", 1)[1]
+        if len(token) < 20 or any(c.isspace() for c in token):
+            raise AuthError("That doesn't look like a Realtime Trains token. Copy it again from api-portal.rtt.io.")
+        probe = RttClient(self._real_transport(), token, self.budget, clock=self.clock)
+        info = probe.check_token()
+        self.client._t = self._real_transport()
+        self.client.set_token(token)
+        self.client.info = info
+        self.client._access, self.client._access_until = probe._access, probe._access_until
+        self.client._save_state()
+        self.demo = False
+        self.token_error = None
+        self._save_settings({"rtt_token": token})
+        return info
+
+    def remove_token(self) -> None:
+        self.client._t = self._sim
+        self.client.set_token("demo")
+        self.demo = True
+        self.token_error = None
+        self._save_settings({"rtt_token": None})
+
+    def _save_settings(self, changes: dict) -> None:
+        if not self.home:
+            return
+        path = self.home / "settings.json"
+        data = load_settings(self.home)
+        data.update(changes)
+        data = {k: v for k, v in data.items() if v is not None}
+        self.home.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(data, indent=1))
+        tmp.chmod(0o600)
+        tmp.replace(path)
 
     def now(self) -> datetime:
         return self.clock().astimezone(LONDON)
@@ -121,6 +222,7 @@ class Realliferail:
         to: str | None = None,
         mode: str = "dep",
         show_all: bool = False,
+        force: bool = False,
     ) -> BoardResult:
         st = self.stations.resolve(station)
         code = st.crs if st else station.strip().upper()
@@ -133,7 +235,7 @@ class Realliferail:
             raise RttError("The time window must be between 1 and 240 minutes.")
         self.token_info()
         when = (when or self.now()).astimezone(LONDON)
-        f = self.client.location(code, when, window, to_st.crs if to_st else None)
+        f = self.client.location(code, when, window, to_st.crs if to_st else None, force=force)
         b = parse_board(
             f.body, fallback_name=st.name if st else code, time_from=when, time_to=when + timedelta(minutes=window)
         )
@@ -150,7 +252,7 @@ class Realliferail:
             board=b, rows=tuple(rows), station=st, fetched=f, mode=mode, to=to_st, hidden=hidden, show_all=show_all
         )
 
-    def service(self, unique_id: str, background: bool = False) -> ServiceResult:
+    def service(self, unique_id: str, background: bool = False, force: bool = False) -> ServiceResult:
         uid = unique_id.strip()
         if ":" not in uid:
             raise RttError("That isn't a train identity (it should look like C05986:2026-09-06).")
@@ -161,7 +263,7 @@ class Realliferail:
             raise RttError("That train's date isn't valid.") from e
         self.token_info()
         ttl = self.budget.refresh_interval() if background else None
-        f = self.client.service(f"{ident}:{day}", interactive=not background, ttl=ttl)
+        f = self.client.service(f"{ident}:{day}", interactive=not background or force, ttl=ttl, force=force)
         if not f.body:
             raise RttError("Realtime Trains has no details for that train.")
         svc = parse_service(f.body)
@@ -171,11 +273,31 @@ class Realliferail:
         )
 
 
-def from_environment(demo: bool | None = None) -> Realliferail:
+def load_settings(home: Path) -> dict:
+    try:
+        d = json.loads((home / "settings.json").read_text("utf-8"))
+        return d if isinstance(d, dict) else {}
+    except OSError, ValueError:
+        return {}
+
+
+def from_environment(demo: bool | None = None, home: Path | None = None) -> Realliferail:
+    """Token from the settings page first, then RTT_TOKEN in the environment or a .env file."""
+    home = home or default_home()
     if demo is None:
         demo = os.environ.get("REALLIFERAIL_DEMO", "").lower() in ("1", "true", "yes")
-    token = None if demo else find_token()
-    return Realliferail(token=token, demo=demo or token is None)
+    token = None if demo else (load_settings(home).get("rtt_token") or find_token())
+    return Realliferail(token=token, demo=demo or token is None, home=home)
 
 
-__all__ = ["AuthError", "BoardResult", "BusyError", "Realliferail", "RttError", "ServiceResult", "from_environment"]
+__all__ = [
+    "TIERS",
+    "AuthError",
+    "BoardResult",
+    "BusyError",
+    "Realliferail",
+    "RttError",
+    "ServiceResult",
+    "Tier",
+    "from_environment",
+]

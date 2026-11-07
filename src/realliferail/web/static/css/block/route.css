@@ -92,3 +92,4 @@
 @media (max-width: 380px) {
   .route__pt { grid-template-columns: 1.5rem 1fr 3.25rem 4.25rem; }
 }
+.train__note:empty { display: none; }

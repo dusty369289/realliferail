@@ -18,12 +18,13 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 @pytest.fixture(autouse=True)
-def no_network(monkeypatch, request):
+def no_network(monkeypatch, request, tmp_path):
     """Tests never touch the network, and never see a real token. Live tests (-m live) are the one exception."""
     if request.node.get_closest_marker("live"):
         return
     monkeypatch.delenv("RTT_TOKEN", raising=False)
     monkeypatch.delenv("REALLIFERAIL_DEMO", raising=False)
+    monkeypatch.setenv("REALLIFERAIL_HOME", str(tmp_path / "home"))  # never the real settings or cached token
     monkeypatch.setattr("realliferail.services.app.default_env_files", lambda: [])
 
     def refuse(*a, **k):

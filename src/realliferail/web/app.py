@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+import ipaddress
 from datetime import datetime, timedelta
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import parse_qs, urlencode, urlsplit
 from zoneinfo import ZoneInfo
 
 from fastapi import FastAPI, Query, Request
@@ -14,7 +15,7 @@ from fastapi.templating import Jinja2Templates
 
 from ..domain.engine import Shown, State, stop_summary
 from ..domain.models import Kind, TimeSource
-from ..services.app import BusyError, Realliferail, RttError
+from ..services.app import TIERS, BusyError, Realliferail, RttError
 
 HERE = Path(__file__).parent
 LONDON = ZoneInfo("Europe/London")
@@ -56,7 +57,19 @@ def delay_class(shown: Shown | None) -> str:
     return "is-ontime"
 
 
-def create_app(core: Realliferail) -> FastAPI:
+TAILNET = ipaddress.ip_network("100.64.0.0/10")  # Tailscale addresses
+
+
+def private_client(host: str | None) -> bool:
+    """Settings can only be changed from this machine, the home network or your tailnet: never from the internet."""
+    try:
+        ip = ipaddress.ip_address(host or "")
+    except ValueError:
+        return False
+    return ip.is_loopback or ip.is_private or (ip.version == 4 and ip in TAILNET)
+
+
+def create_app(core: Realliferail, settings_allowed=private_client) -> FastAPI:
     app = FastAPI(title="Real Life Rail", docs_url=None, redoc_url=None, openapi_url=None)
     app.state.core = core
     templates = Jinja2Templates(directory=str(HERE / "templates"))
@@ -96,6 +109,7 @@ def create_app(core: Realliferail) -> FastAPI:
         mode: str = "dep",
         window: int = 60,
         all: int = 0,
+        refresh: int = 0,
     ):
         if not station.strip():
             return RedirectResponse("/", status_code=303)
@@ -110,7 +124,7 @@ def create_app(core: Realliferail) -> FastAPI:
         busy = False
         if error is None:
             try:
-                result = core.board(station, when, window, to or None, mode, show_all=bool(all))
+                result = core.board(station, when, window, to or None, mode, show_all=bool(all), force=bool(refresh))
             except BusyError as e:
                 error, busy = str(e), True
             except RttError as e:
@@ -126,6 +140,7 @@ def create_app(core: Realliferail) -> FastAPI:
                 nav[label] = "/board?" + urlencode({**base, "time": t.strftime("%H:%M"), "day": t.date().isoformat()})
             other = "arr" if mode == "dep" else "dep"
             nav["switch"] = "/board?" + urlencode({**base, "mode": other, "time": time, "day": day})
+            nav["refresh"] = "/board?" + urlencode({**base, "time": time, "day": day, "refresh": 1})
             flip = {k: v for k, v in base.items() if k != "all"} | ({} if all else {"all": 1})
             nav["all"] = "/board?" + urlencode({**flip, "time": time, "day": day})
         live = not time  # "now" boards refresh themselves
@@ -162,9 +177,9 @@ def create_app(core: Realliferail) -> FastAPI:
         )
 
     @app.get("/train/{uid}/live", response_class=HTMLResponse)
-    def train_live(request: Request, uid: str, at: str = "", to: str = ""):
+    def train_live(request: Request, uid: str, at: str = "", to: str = "", force: int = 0):
         try:
-            res = core.service(uid, background=True)
+            res = core.service(uid, background=not force, force=bool(force))
         except RttError as e:
             return HTMLResponse(f'<p class="problem" data-error>{_esc(str(e))}</p>', status_code=503)
         return page(
@@ -187,6 +202,52 @@ def create_app(core: Realliferail) -> FastAPI:
     def about(request: Request):
         info = core.token_info()
         return page(request, "about.html", info=info, token_error=core.token_error)
+
+    def settings_page(request: Request, status: int = 200, **ctx) -> HTMLResponse:
+        return page(
+            request,
+            "settings.html",
+            status=status,
+            tier=core.tier(),
+            tiers=TIERS,
+            info=None if core.demo else core.token_info(),
+            hint=None if core.demo else core.client.token_hint,
+            token_error=core.token_error,
+            can_edit=settings_allowed(request.client.host if request.client else None),
+            **ctx,
+        )
+
+    def guard(request: Request) -> HTMLResponse | None:
+        origin = request.headers.get("origin")
+        if origin and urlsplit(origin).netloc != request.headers.get("host"):
+            return HTMLResponse("Refused: that request came from another site.", status_code=403)
+        if not settings_allowed(request.client.host if request.client else None):
+            return settings_page(request, status=403, error="Settings can only be changed from your own network.")
+        return None
+
+    @app.get("/settings", response_class=HTMLResponse)
+    def settings(request: Request, saved: int = 0, removed: int = 0):
+        msg = "Token saved and working." if saved else ("Token removed. Showing demo data." if removed else None)
+        return settings_page(request, message=msg)
+
+    @app.post("/settings/token", response_class=HTMLResponse)
+    async def settings_token(request: Request):
+        if (refused := guard(request)) is not None:
+            return refused
+        form = parse_qs((await request.body()).decode("utf-8", "replace"))
+        token = (form.get("token") or [""])[0]
+        try:
+            core.set_token(token)
+        except RttError as e:
+            return settings_page(request, status=400, error=str(e))
+        return RedirectResponse("/settings?saved=1", status_code=303)
+
+    @app.post("/settings/token/remove", response_class=HTMLResponse)
+    async def settings_remove(request: Request):
+        if (refused := guard(request)) is not None:
+            return refused
+        core.remove_token()
+        return RedirectResponse("/settings?removed=1", status_code=303)
 
     @app.get("/manifest.webmanifest")
     def manifest():

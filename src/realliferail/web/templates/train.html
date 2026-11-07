@@ -5,14 +5,18 @@
 {% block main %}
 <article class="stack train" data-train data-uid="{{ uid }}" data-at="{{ at }}" data-to="{{ to }}">
   <header class="train__head">
-    <p class="label">{{ s.operator_name }}{% if s.headcode %} · {{ s.headcode }}{% endif %}{% if s.vehicles %} · {{ s.vehicles }} coaches{% endif %}{% if s.leading_class %} · Class {{ s.leading_class }}{% endif %}</p>
+    <p class="label">{{ s.operator_name }}{% if s.headcode %} · {{ s.headcode }}{% endif %}{% if s.vehicles %} · {{ s.vehicles }} coaches{% endif %}{% if s.leading_class %} · Class {{ s.leading_class }}{% endif %}{% if s.branding %} · {{ s.branding }}{% endif %}</p>
     <h1>{% if s.origins and s.origins[0].time %}<span class="tnum">{{ s.origins[0].time|hm }}</span> {% endif %}{{ s.origin_name }} to {{ s.destination_name }}</h1>
     {% if s.units %}<p class="hint">Units {{ s.units|join(', ') }}</p>{% endif %}
     {% if s.mode != 'TRAIN' %}<p class="banner" role="note">This is a {{ s.mode|replace('_', ' ')|lower }}, not a train.</p>{% endif %}
   </header>
   <div class="cluster train__tools">
     <label class="check"><input type="checkbox" data-toggle-passes checked> Passing points</label>
-    <button type="button" class="linkish" data-jump>Jump to train</button>
+    <span class="cluster train__actions">
+      <button type="button" class="linkish" data-refresh-now>Refresh</button>
+      <button type="button" class="linkish" data-jump>Jump to train</button>
+    </span>
+    <p class="hint train__note" data-refresh-note role="status" aria-live="polite"></p>
   </div>
   <div data-live-region>
     {% include "_route.html" %}
@@ -20,7 +24,7 @@
   <details class="legend">
     <summary>How to read this</summary>
     <dl class="legend__list">
-      <dt><span class="src-actual tnum">14:41</span></dt><dd>Reported by Realtime Trains. Reports are to the minute.</dd>
+      <dt><span class="src-actual tnum">14:41</span></dt><dd>Reported by Realtime Trains, to the minute on the free plan and to the quarter minute (¼ ½ ¾) with detailed mode.</dd>
       <dt><span class="src-forecast tnum">14:41</span></dt><dd>Realtime Trains’ forecast.</dd>
       <dt><span class="src-est tnum">14:41<span class="est">est</span></span></dt><dd>Our estimate, where Realtime Trains gives none. It carries the delay forward and allows for booked recovery time.</dd>
       <dt><span class="tick" aria-hidden="true"></span> Small rows</dt><dd>Timing points the train passes without stopping: junctions and stations it runs through. Booked times there are working-timetable times, which can be on the half minute (½). Signals aren't in Realtime Trains' data.</dd>

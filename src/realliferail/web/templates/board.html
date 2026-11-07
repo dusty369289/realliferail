@@ -24,6 +24,7 @@
     <p class="cluster board__nav">
       <a href="{{ nav.earlier }}">Earlier</a>
       <a href="{{ nav.later }}">Later</a>
+      <a href="{{ nav.refresh }}" data-board-refresh>Refresh</a>
       <a href="{{ nav.switch }}">{{ 'Departures' if arr else 'Arrivals' }}</a>
       <a href="/?{{ 'station=' ~ (q.station|urlencode) }}">Change</a>
     </p>

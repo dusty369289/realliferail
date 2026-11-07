@@ -8,7 +8,8 @@
   const params = new URLSearchParams({ at: page.dataset.at || "", to: page.dataset.to || "" });
   const liveUrl = `/train/${encodeURIComponent(page.dataset.uid)}/live?${params}`;
   const passes = page.querySelector("[data-toggle-passes]");
-  let jumped = false, timer = null, failures = 0;
+  let jumped = false, timer = null, failures = 0, busy = false;
+  const MIN_AGE = 15000;  // the server won't refetch anything younger either, so pressing again costs nothing
 
   const store = window.rlrStore || { get: (_, f) => f, set() {} };
   passes.checked = store.get("rlr.passes", true);
@@ -89,10 +90,12 @@
     el.textContent = s < 60 ? `Updated ${s} s ago` : `Updated ${Math.floor(s / 60)} min ago`;
   }
 
-  async function refresh() {
-    if (document.visibilityState !== "visible") { schedule(15); return; }
+  async function refresh(force) {
+    if (!force && document.visibilityState !== "visible") { schedule(15); return; }
+    if (busy) return;
+    busy = true;
     try {
-      const r = await fetch(liveUrl, { headers: { Accept: "text/html" } });
+      const r = await fetch(force ? `${liveUrl}&force=1` : liveUrl, { headers: { Accept: "text/html" } });
       const html = await r.text();
       if (!r.ok) throw new Error(html);
       const tpl = document.createElement("template");
@@ -106,16 +109,35 @@
       const el = region.querySelector("[data-age]");
       if (el) el.textContent = "Couldn't update. Trying again soon.";
     }
+    busy = false;
     const live = region.querySelector(".live");
     const next = live ? Number(live.dataset.refresh) || 30 : 30;
     schedule(Math.min(next * (1 + failures), 300));
+  }
+
+  function refreshNow() {
+    const live = region.querySelector(".live");
+    const age = live ? Date.now() - Number(live.dataset.fetched) : Infinity;
+    const note = page.querySelector("[data-refresh-note]");
+    if (age < MIN_AGE || busy) {
+      note.textContent = busy ? "Checking…" : `Already up to date (${Math.round(age / 1000)} s old).`;
+      return;
+    }
+    note.textContent = "Checking…";
+    refresh(true).then(() => { note.textContent = ""; });
   }
 
   function schedule(secs) { clearTimeout(timer); timer = setTimeout(refresh, secs * 1000); }
 
   passes.addEventListener("change", () => { store.set("rlr.passes", passes.checked); place(true); });
   page.querySelector("[data-jump]").addEventListener("click", () => jump(true));
-  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") refresh(); });
+  page.querySelector("[data-refresh-now]").addEventListener("click", refreshNow);
+  document.addEventListener("visibilitychange", () => {
+    // back to the app after a while: catch up at once, unless the last answer is still fresh
+    const live = region.querySelector(".live");
+    const age = live ? Date.now() - Number(live.dataset.fetched) : Infinity;
+    if (document.visibilityState === "visible" && age > MIN_AGE * 2) refresh(false);
+  });
   window.addEventListener("resize", () => place(true));
 
   place(true);

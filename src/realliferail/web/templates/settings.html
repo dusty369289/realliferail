@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Settings · Real Life Rail{% endblock %}
+{% block main %}
+<div class="stack prose settings">
+  <h1>Settings</h1>
+  {% if message %}<p class="banner" role="status">{{ message }}</p>{% endif %}
+  {% if error %}<p class="problem" role="alert">{{ error }}</p>{% endif %}
+
+  <section class="stack" aria-labelledby="key-h">
+    <h2 id="key-h">Realtime Trains key</h2>
+    {% if demo %}
+    <p>No key yet, so the trains you see are <strong>simulated</strong>. Get a free key at
+      <a href="https://api-portal.rtt.io">api-portal.rtt.io</a>, then paste it here.</p>
+    {% else %}
+    <dl class="facts">
+      <dt>Plan</dt><dd><strong>{{ tier.name }}</strong></dd>
+      <dt>Key</dt><dd class="tnum">{{ hint or 'set' }}{% if info %} ({{ info.kind }} token){% endif %}</dd>
+      {% if token_error %}<dt>Problem</dt><dd class="problem">{{ token_error }}</dd>{% endif %}
+      <dt>Times</dt><dd>Reported {{ tier.precision }}</dd>
+      <dt>Allowance</dt><dd class="tnum">{{ budget.remaining.minute }} of {{ tier.per_minute }} left this minute, {{ budget.remaining.hour }} of {{ tier.per_hour }} this hour</dd>
+      {% if info and info.history_days %}<dt>History</dt><dd>Trains from the last {{ info.history_days }} days</dd>{% endif %}
+    </dl>
+    {% endif %}
+    {% if can_edit %}
+    <form class="stack" method="post" action="/settings/token" autocomplete="off">
+      <div class="field">
+        <label for="token">{{ 'Replace key' if not demo else 'Paste your key' }}</label>
+        <input id="token" name="token" type="password" required minlength="20" spellcheck="false"
+               autocapitalize="off" autocomplete="off" placeholder="eyJ…">
+      </div>
+      <p class="hint">It's checked with Realtime Trains before it's saved (1 to 3 calls). It's kept on this server only, never
+        sent to your phone, and never shown again in full.</p>
+      <button class="button" type="submit">Check and save key</button>
+    </form>
+    {% if not demo %}
+    <form method="post" action="/settings/token/remove">
+      <button class="linkish" type="submit">Remove key and use demo data</button>
+    </form>
+    {% endif %}
+    {% else %}
+    <p class="hint">You can change the key from this computer or your home network, not from here.</p>
+    {% endif %}
+  </section>
+
+  <section class="stack" aria-labelledby="tier-h">
+    <h2 id="tier-h">What each plan gives you here</h2>
+    <table class="tiers">
+      <thead><tr><th scope="col">Plan</th><th scope="col">In this app</th><th scope="col">Cost</th></tr></thead>
+      <tbody>
+      {% for name, what, cost in tiers %}
+        <tr{% if tier.name == name or (name == 'Team' and tier.name == 'Team or above') %} class="is-current" aria-current="true"{% endif %}>
+          <th scope="row">{{ name }}{% if tier.name == name or (name == 'Team' and tier.name == 'Team or above') %} <span class="hint">(yours)</span>{% endif %}</th>
+          <td>{{ what }}</td>
+          <td class="tnum">{{ cost }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p class="hint">The app switches features on from what your key is actually allowed, as Realtime Trains reports it.
+      A higher plan's bigger allowance means trains refresh more often, worked out from the limits each answer reports.</p>
+  </section>
+</div>
+{% endblock %}

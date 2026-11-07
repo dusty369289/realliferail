@@ -20,11 +20,12 @@
     <a class="topbar__logo" href="/">Real Life Rail</a>
     <nav class="topbar__nav" aria-label="Main">
       <a href="/" {% if request.url.path == "/" %}aria-current="page"{% endif %}>Search</a>
+      <a href="/settings" {% if request.url.path == "/settings" %}aria-current="page"{% endif %}>Settings</a>
       <a href="/about" {% if request.url.path == "/about" %}aria-current="page"{% endif %}>About</a>
     </nav>
   </header>
   {% if demo %}
-  <p class="banner banner--demo" role="note"><strong>Demo data.</strong> These trains are simulated. Add your Realtime Trains token to see real ones. <a href="/about">How</a></p>
+  <p class="banner banner--demo" role="note"><strong>Demo data.</strong> These trains are simulated. Add your Realtime Trains key in <a href="/settings">Settings</a> to see real ones.</p>
   {% endif %}
   {% if budget.remaining.hour <= 15 and not demo %}
   <p class="banner" role="note">Only {{ budget.remaining.hour }} Realtime Trains calls left this hour, so pages update less often.</p>

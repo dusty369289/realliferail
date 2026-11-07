@@ -35,3 +35,8 @@ main .banner { width: 100%; margin: 0; }
 .bullets { list-style: disc; padding-left: 1.2em; display: grid; gap: var(--s-2); }
 .facts { display: grid; grid-template-columns: max-content 1fr; gap: var(--s-1) var(--s-4); }
 .facts dt { color: var(--muted); }
+.tiers { width: 100%; border-collapse: collapse; font-size: var(--t-sm); }
+.tiers th, .tiers td { text-align: left; vertical-align: top; padding: var(--s-2); border-bottom: 1px solid var(--line); }
+.tiers thead th { color: var(--muted); font-weight: 400; }
+.tiers .is-current { background: var(--surface); }
+.tiers .is-current th { border-left: 3px solid var(--train); }
