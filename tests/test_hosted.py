@@ -154,3 +154,55 @@ def test_key_count_is_capped(clock):
 def test_create_app_needs_exactly_one_mode(hosted):
     with pytest.raises(ValueError):
         create_app()
+
+
+# ---- public-server protections ----
+def test_demo_never_runs_out(clock):
+    h = Hosted(SECRET, clock=clock, transport=FakeRtt())
+    web = TestClient(create_app(hosted=h, secure_cookies=False))
+    for i in range(40):  # far past 10 a minute, all in the same minute
+        r = web.get("/board", params={"station": "RDG", "time": f"{6 + i % 12:02d}:{i:02d}"})
+        assert r.status_code == 200, (i, r.status_code)
+
+
+def test_key_checks_are_throttled_per_address(clock):
+    fake = FakeRtt()
+    h = Hosted(SECRET, clock=clock, transport=fake, checks_per_ip=3)
+    web = TestClient(create_app(hosted=h, secure_cookies=False))
+    for _ in range(3):
+        assert save_key(web, "plausible-but-wrong-token-000000").status_code == 400
+    calls = len(fake.calls)
+    r = save_key(web, "plausible-but-wrong-token-000000")
+    assert r.status_code == 429 and "Too many key checks" in text(r)
+    assert len(fake.calls) == calls  # refused without calling RTT
+    assert save_key(web, "short").status_code == 400  # junk is refused before the throttle, costs nothing
+
+
+def test_key_checks_have_a_global_cap(clock):
+    h = Hosted(SECRET, clock=clock, transport=FakeRtt(), checks_per_ip=100, checks_total=4)
+    for i in range(4):
+        assert h.allow_check(f"10.0.0.{i}")
+    assert not h.allow_check("10.0.0.99")
+
+
+def test_each_key_keeps_a_bounded_cache(clock):
+    h = Hosted(SECRET, clock=clock, transport=FakeRtt(), cached_per_key=5)
+    core = h.for_key(GOOD)
+    for i in range(40):
+        core.client.service(f"X{i}:2026-11-07")
+        clock.advance(seconds=15)  # stay inside 10 a minute, counting the 3-call token exchange at the start
+    assert len(core.client._cache) <= 5
+    assert len(core.client._key_locks) <= 6
+
+
+def test_simulator_forgets_old_requests(clock):
+    from realliferail.sources.simulator import SimTransport
+
+    sim = SimTransport(clock=clock)
+    for _ in range(1500):
+        sim.get("/api/info", {}, None)
+    assert len(sim.requests) == 1000
+
+
+def test_overlong_search_refused(web):
+    assert web.get("/board", params={"station": "x" * 200}).status_code == 400

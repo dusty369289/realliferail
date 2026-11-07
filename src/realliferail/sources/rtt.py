@@ -58,6 +58,7 @@ class RttClient:
         service_ttl: float = 30.0,
         state_file: Path | None = None,
         min_refresh_age: float = 15.0,
+        max_cached: int = 500,
     ):
         self._t = transport
         self._token = token
@@ -73,6 +74,7 @@ class RttClient:
         self.info: TokenInfo | None = None
         self.state_file = state_file
         self.min_refresh_age = min_refresh_age  # a forced refresh never refetches anything younger than this
+        self.max_cached = max_cached  # answers kept; the oldest go first
         self._load_state()
 
     @property
@@ -243,10 +245,14 @@ class RttClient:
                     return Fetched(cached.body, cached.fetched_at, stale=True, note=f"Realtime Trains error {r.status}")
                 raise BusyError(f"Realtime Trains had a problem (HTTP {r.status}).")
             self._cache[key] = f
-            if len(self._cache) > 500:
-                oldest = sorted(self._cache.items(), key=lambda kv: kv[1].fetched_at)[:100]
+            if len(self._cache) > self.max_cached:
+                drop = len(self._cache) - self.max_cached + max(self.max_cached // 5, 1)
+                oldest = sorted(self._cache.items(), key=lambda kv: kv[1].fetched_at)[:drop]
                 for k, _ in oldest:
                     self._cache.pop(k, None)
+                with self._lock:  # and the per-answer locks, or they'd pile up for every board ever asked for
+                    for k in [k for k, lk in self._key_locks.items() if k not in self._cache and not lk.locked()]:
+                        del self._key_locks[k]
             return f
 
     def location(

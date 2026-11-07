@@ -128,6 +128,8 @@ def create_app(
         core = cur(request)
         if not station.strip():
             return RedirectResponse("/", status_code=303)
+        if max(len(station), len(to), len(time), len(day)) > 80:
+            return HTMLResponse("That search is too long.", status_code=400)
         mode = "arr" if mode == "arr" else "dep"
         error = None
         when = None
@@ -262,9 +264,11 @@ def create_app(
         token = (form.get("token") or [""])[0]
         try:
             if hosted:
-                token, _ = hosted.check(token)
+                token, _ = hosted.check(token, request.client.host if request.client else "?")
             else:
                 cur(request).set_token(token)
+        except BusyError as e:
+            return settings_page(request, status=429, error=str(e))
         except RttError as e:
             return settings_page(request, status=400, error=str(e))
         resp = RedirectResponse("/settings?saved=1", status_code=303)

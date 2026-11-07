@@ -13,6 +13,7 @@ on time, late and recovering, late and getting later, held at a signal in one se
 from __future__ import annotations
 
 import hashlib
+from collections import deque
 from dataclasses import dataclass
 from datetime import UTC, date, datetime, time, timedelta
 from typing import Any
@@ -384,7 +385,7 @@ class SimTransport:
         self.clock = clock
         self.tt = timetable or Timetable()
         self.stations = stations  # optional StationIndex, for names of stations the routes don't cover
-        self.requests: list[tuple[str, dict]] = []
+        self.requests: deque[tuple[str, dict]] = deque(maxlen=1000)  # recent only: a public demo runs for weeks
         self._times: list[datetime] = []
         self.limit_hour = limit_hour
 

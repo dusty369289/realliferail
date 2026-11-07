@@ -130,6 +130,8 @@ class Realliferail:
         stations: StationIndex | None = None,
         demo: bool | None = None,
         home: Path | None = None,
+        budget: Budget | None = None,
+        max_cached: int = 500,
     ):
         self.clock = clock
         self.stations = stations or StationIndex.bundled()
@@ -139,10 +141,15 @@ class Realliferail:
         self._real = transport if (transport is not None and not isinstance(transport, SimTransport)) else None
         if transport is None:
             transport = self._sim if self.demo else self._real_transport()
-        self.budget = Budget(clock=clock)
+        self.budget = budget or Budget(clock=clock)
         state = home / "access.json" if home else None
         self.client = RttClient(
-            transport, token if not self.demo else "demo", self.budget, clock=clock, state_file=state
+            transport,
+            token if not self.demo else "demo",
+            self.budget,
+            clock=clock,
+            state_file=state,
+            max_cached=max_cached,
         )
         self.token_error: str | None = None
 

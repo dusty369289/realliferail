@@ -58,6 +58,16 @@ class Budget:
                 ours = min(ours, value - since)
         return max(ours, 0)
 
+    @classmethod
+    def unlimited(cls, clock: Callable[[], datetime] = lambda: datetime.now(UTC)) -> Budget:
+        """For the simulator: it costs nothing, so a public demo can't be "used up" by one busy visitor."""
+        b = cls(clock=clock, reserve=0)
+        b.limits = {d: 10**9 for d in b.limits}
+        b._unlimited = True
+        return b
+
+    _unlimited = False
+
     def can_spend(self, interactive: bool) -> bool:
         with self._lock:
             now = self._clock()
@@ -70,6 +80,8 @@ class Budget:
             return hour >= need and day >= need and self.remaining("week", now) >= 1
 
     def spend(self) -> None:
+        if self._unlimited:
+            return
         with self._lock:
             now = self._clock()
             self._prune(now)
@@ -77,6 +89,8 @@ class Budget:
             self.total += 1
 
     def observe(self, status: int, headers: dict[str, str]) -> None:
+        if self._unlimited:
+            return  # the simulator's pretend limits don't apply to the demo
         with self._lock:
             now = self._clock()
             for dim in DIMENSIONS:
