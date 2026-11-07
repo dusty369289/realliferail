@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+.test-review/
+.ui-report/
+.ui-report-previous/
+.ui-baselines/
+recordings/
+data/
